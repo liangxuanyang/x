@@ -1,18 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/x.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Antd Next X</title>
     <script>
       (function () {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        const setting = localStorage.getItem('antdv-color-scheme') || 'auto'
-        const isDark = setting === 'dark' || (prefersDark && setting !== 'light')
-        document.documentElement.style.colorScheme = isDark ? 'dark' : 'light'
-        document.documentElement.classList.toggle('dark', isDark)
-      })()
+        const prefersDark =
+          window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const setting = localStorage.getItem("antdv-color-scheme") || "auto";
+        const isDark = setting === "dark" || (prefersDark && setting !== "light");
+        document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+        document.documentElement.classList.toggle("dark", isDark);
+      })();
     </script>
   </head>
   <body>

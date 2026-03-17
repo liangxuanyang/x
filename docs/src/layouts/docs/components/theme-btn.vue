@@ -1,64 +1,65 @@
 <script setup lang="ts">
-import type { MenuProps } from 'antdv-next'
-import { MoonOutlined, SunOutlined, SyncOutlined } from '@antdv-next/icons'
-import { computed, h } from 'vue'
-import ThemeIcon from '@/components/icons/theme.vue'
-import type { DarkMode } from '@/composables/use-dark-mode'
-import { useDarkMode } from '@/composables/use-dark-mode'
-import { useLocale } from '@/composables/use-locale'
+import type { MenuProps } from "antdv-next";
+
+import { MoonOutlined, SunOutlined, SyncOutlined } from "@antdv-next/icons";
+import { computed, h } from "vue";
+
+import type { DarkMode } from "@/composables/use-dark-mode";
+
+import ThemeIcon from "@/components/icons/theme.vue";
+import { useDarkMode } from "@/composables/use-dark-mode";
+import { useLocale } from "@/composables/use-locale";
 
 defineOptions({
-  name: 'ThemeBtn',
-})
+  name: "ThemeBtn",
+});
 
-const { darkMode } = useDarkMode()
-const { t } = useLocale()
+const { darkMode } = useDarkMode();
+const { t } = useLocale();
 
-const blueDot = h('span', {
+const blueDot = h("span", {
   style: {
-    display: 'inline-block',
-    width: '6px',
-    height: '6px',
-    borderRadius: '50%',
-    backgroundColor: '#1677ff',
+    display: "inline-block",
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    backgroundColor: "#1677ff",
   },
-})
+});
 
-function isActive(key: 'system' | 'light' | 'dark') {
-  if (key === 'system')
-    return darkMode.value === 'auto'
-  return darkMode.value === key
+function isActive(key: "system" | "light" | "dark") {
+  if (key === "system") return darkMode.value === "auto";
+  return darkMode.value === key;
 }
 
-const themeMenuItems = computed<MenuProps['items']>(() => [
+const themeMenuItems = computed<MenuProps["items"]>(() => [
   {
-    key: 'system',
-    label: t('ui.themeBtn.system'),
+    key: "system",
+    label: t("ui.themeBtn.system"),
     icon: h(SyncOutlined),
-    extra: isActive('system') ? blueDot : undefined,
+    extra: isActive("system") ? blueDot : undefined,
   },
   {
-    key: 'light',
-    label: t('ui.themeBtn.light'),
+    key: "light",
+    label: t("ui.themeBtn.light"),
     icon: h(SunOutlined),
-    extra: isActive('light') ? blueDot : undefined,
+    extra: isActive("light") ? blueDot : undefined,
   },
   {
-    key: 'dark',
-    label: t('ui.themeBtn.dark'),
+    key: "dark",
+    label: t("ui.themeBtn.dark"),
     icon: h(MoonOutlined),
-    extra: isActive('dark') ? blueDot : undefined,
+    extra: isActive("dark") ? blueDot : undefined,
   },
-])
+]);
 
 function handleMenuClick(info: { key: string }) {
-  const key = info.key
-  if (key === 'system') {
-    darkMode.value = 'auto'
-    return
+  const key = info.key;
+  if (key === "system") {
+    darkMode.value = "auto";
+    return;
   }
-  if (key === 'light' || key === 'dark')
-    darkMode.value = key as DarkMode
+  if (key === "light" || key === "dark") darkMode.value = key as DarkMode;
 }
 </script>
 

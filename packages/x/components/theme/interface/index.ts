@@ -1,15 +1,16 @@
-import type { CSSInterpolation, DerivativeFunc } from '@antdv-next/cssinjs'
-import type { AliasToken } from './alias'
-import type { MapToken } from './maps'
-import type { SeedToken } from './seeds'
+import type { CSSInterpolation, DerivativeFunc } from "@antdv-next/cssinjs";
 
-type AnyObject = Record<string, any>
+import type { AliasToken } from "./alias";
+import type { MapToken } from "./maps";
+import type { SeedToken } from "./seeds";
 
-export type { AliasToken } from './alias'
+type AnyObject = Record<string, any>;
 
-export type MappingAlgorithm = DerivativeFunc<SeedToken, MapToken>
+export type { AliasToken } from "./alias";
 
-export type { ComponentTokenMap } from './components'
+export type MappingAlgorithm = DerivativeFunc<SeedToken, MapToken>;
+
+export type { ComponentTokenMap } from "./components";
 export type {
   FullToken,
   GenStyleFn,
@@ -17,7 +18,7 @@ export type {
   GlobalToken,
   OverrideComponent,
   OverrideToken,
-} from './cssinjs-utils'
+} from "./cssinjs-utils";
 export type {
   ColorMapToken,
   ColorNeutralMapToken,
@@ -27,20 +28,20 @@ export type {
   MapToken,
   SizeMapToken,
   StyleMapToken,
-} from './maps'
+} from "./maps";
 export type {
   ColorPalettes,
   LegacyColorPalettes,
   PresetColorKey,
   PresetColorType,
-} from './presetColors'
-export { PresetColors } from './presetColors'
-export type { SeedToken } from './seeds'
-export type { TokenWithCommonCls } from '@antdv-next/cssinjs/cssinjs-utils'
+} from "./presetColors";
+export { PresetColors } from "./presetColors";
+export type { SeedToken } from "./seeds";
+export type { TokenWithCommonCls } from "@antdv-next/cssinjs/cssinjs-utils";
 
-export type UseComponentStyleResult = [(node: any) => any, string]
+export type UseComponentStyleResult = [(node: any) => any, string];
 
 export type GenerateStyle<
   ComponentToken extends AnyObject = AliasToken,
   ReturnType = CSSInterpolation,
-> = (token: ComponentToken) => ReturnType
+> = (token: ComponentToken) => ReturnType;

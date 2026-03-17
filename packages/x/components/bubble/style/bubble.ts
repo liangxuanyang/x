@@ -1,48 +1,49 @@
-import type { FullToken, GenerateStyle } from '../../theme/interface'
-import { Keyframes, unit } from '@antdv-next/cssinjs'
+import { Keyframes, unit } from "@antdv-next/cssinjs";
 
-const loadingMove = new Keyframes('loadingMove', {
-  '0%': {
-    transform: 'translateY(0)',
-  },
-  '10%': {
-    transform: 'translateY(4px)',
-  },
-  '20%': {
-    transform: 'translateY(0)',
-  },
-  '30%': {
-    transform: 'translateY(-4px)',
-  },
-  '40%': {
-    transform: 'translateY(0)',
-  },
-})
+import type { FullToken, GenerateStyle } from "../../theme/interface";
 
-const cursorBlink = new Keyframes('cursorBlink', {
-  '0%': {
+const loadingMove = new Keyframes("loadingMove", {
+  "0%": {
+    transform: "translateY(0)",
+  },
+  "10%": {
+    transform: "translateY(4px)",
+  },
+  "20%": {
+    transform: "translateY(0)",
+  },
+  "30%": {
+    transform: "translateY(-4px)",
+  },
+  "40%": {
+    transform: "translateY(0)",
+  },
+});
+
+const cursorBlink = new Keyframes("cursorBlink", {
+  "0%": {
     opacity: 1,
   },
-  '50%': {
+  "50%": {
     opacity: 0,
   },
-  '100%': {
+  "100%": {
     opacity: 1,
   },
-})
+});
 
-const fadeIn = new Keyframes('fadeIn', {
-  '0%': {
+const fadeIn = new Keyframes("fadeIn", {
+  "0%": {
     opacity: 0,
   },
-  '100%': {
+  "100%": {
     opacity: 1,
   },
-})
+});
 
-export interface BubbleToken extends FullToken<'Bubble'> {}
+export interface BubbleToken extends FullToken<"Bubble"> {}
 
-const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
+const genBubbleStyle: GenerateStyle<BubbleToken> = token => {
   const {
     componentCls,
     fontSize,
@@ -53,117 +54,120 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
     paddingSM,
     colorText,
     calc,
-  } = token
+  } = token;
 
   return [
     {
       [componentCls]: {
-        display: 'flex',
+        display: "flex",
         columnGap: paddingSM,
 
         [`&${componentCls}-rtl`]: {
-          direction: 'rtl',
+          direction: "rtl",
         },
         [`&${componentCls}-loading`]: {
-          alignItems: 'center',
+          alignItems: "center",
         },
 
         [`${componentCls}-body`]: {
-          display: 'flex',
-          flexDirection: 'column',
-          maxWidth: '100%',
+          display: "flex",
+          flexDirection: "column",
+          maxWidth: "100%",
         },
 
         // =========================== Content =============================
         [`${componentCls}-content`]: {
-          position: 'relative',
-          boxSizing: 'border-box',
+          position: "relative",
+          boxSizing: "border-box",
           minWidth: 0,
-          maxWidth: '100%',
-          minHeight: calc(paddingSM).mul(2).add(calc(lineHeight).mul(fontSize)).equal(),
+          maxWidth: "100%",
+          minHeight: calc(paddingSM)
+            .mul(2)
+            .add(calc(lineHeight).mul(fontSize))
+            .equal(),
           paddingInline: `${unit(token.padding)}`,
           paddingBlock: `${unit(paddingSM)}`,
           color: colorText,
           fontSize: token.fontSize,
           lineHeight: token.lineHeight,
-          wordBreak: 'break-word',
-          '&-string': {
-            whiteSpace: 'pre-wrap',
+          wordBreak: "break-word",
+          "&-string": {
+            whiteSpace: "pre-wrap",
           },
         },
         [`${componentCls}-typing:last-child::after`]: {
           content: typingContent,
           fontWeight: 900,
-          userSelect: 'none',
+          userSelect: "none",
           opacity: 1,
-          marginInlineStart: '0.1em',
+          marginInlineStart: "0.1em",
           animationName: typingAnimationName,
           animationDuration: unit(typingAnimationDuration),
-          animationIterationCount: 'infinite',
-          animationTimingFunction: 'linear',
+          animationIterationCount: "infinite",
+          animationTimingFunction: "linear",
         },
         [`${componentCls}-fade-in .fade-in`]: {
-          display: 'inline',
+          display: "inline",
           animationName: fadeIn,
-          animationDuration: '1s',
-          animationTimingFunction: 'linear',
+          animationDuration: "1s",
+          animationTimingFunction: "linear",
         },
 
         [`${componentCls}-dot`]: {
-          position: 'relative',
+          position: "relative",
           height: token.controlHeight,
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
           columnGap: token.marginXS,
           padding: `0 ${unit(token.paddingXXS)}`,
-          alignSelf: 'center',
-          '&-item': {
+          alignSelf: "center",
+          "&-item": {
             backgroundColor: token.colorPrimary,
-            borderRadius: '100%',
+            borderRadius: "100%",
             width: 4,
             height: 4,
             animationName: loadingMove,
-            animationDuration: '2s',
-            animationIterationCount: 'infinite',
-            animationTimingFunction: 'linear',
-            '&:nth-child(1)': {
-              animationDelay: '0s',
+            animationDuration: "2s",
+            animationIterationCount: "infinite",
+            animationTimingFunction: "linear",
+            "&:nth-child(1)": {
+              animationDelay: "0s",
             },
-            '&:nth-child(2)': {
-              animationDelay: '0.2s',
+            "&:nth-child(2)": {
+              animationDelay: "0.2s",
             },
-            '&:nth-child(3)': {
-              animationDelay: '0.4s',
+            "&:nth-child(3)": {
+              animationDelay: "0.4s",
             },
           },
         },
 
         // ======================== placement ============================
         [`&${componentCls}-start`]: {
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
+          flexDirection: "row",
+          alignSelf: "flex-start",
 
           [`& ${componentCls}-header`]: {
-            flexDirection: 'row',
+            flexDirection: "row",
           },
         },
 
         [`&${componentCls}-end`]: {
-          flexDirection: 'row-reverse',
-          alignSelf: 'flex-end',
+          flexDirection: "row-reverse",
+          alignSelf: "flex-end",
 
           [`& ${componentCls}-header`]: {
-            flexDirection: 'row-reverse',
+            flexDirection: "row-reverse",
           },
 
           [`& ${componentCls}-editing-opts`]: {
-            flexDirection: 'row-reverse',
+            flexDirection: "row-reverse",
           },
         },
       },
     },
     cursorBlink,
-  ]
-}
+  ];
+};
 
-export default genBubbleStyle
+export default genBubbleStyle;

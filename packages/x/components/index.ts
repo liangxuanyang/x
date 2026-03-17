@@ -1,23 +1,24 @@
-import type { App } from 'vue'
-import { version } from '../package.json'
+import type { App } from "vue";
+
+import { version } from "../package.json";
 import Actions, {
   ActionsAudio,
   ActionsCopy,
   ActionsFeedback,
   ActionsItem,
   XActions,
-} from './actions'
+} from "./actions";
 import Bubble, {
   XBubble,
   XBubbleDivider,
   XBubbleList,
   XBubbleSystem,
-} from './bubble'
+} from "./bubble";
 import Conversations, {
   ConversationsCreation,
   XConversations,
-} from './conversations'
-import XProvider from './x-provider'
+} from "./conversations";
+import XProvider from "./x-provider";
 
 const components = [
   XBubble,
@@ -32,17 +33,16 @@ const components = [
   ActionsCopy,
   ActionsFeedback,
   ActionsItem,
-]
+];
 
 export default {
   install(app: App) {
-    components.forEach((component) => {
-      if (component.name)
-        app.component(component.name, component)
-    })
+    components.forEach(component => {
+      if (component.name) app.component(component.name, component);
+    });
   },
   version,
-}
+};
 
 export {
   Actions,
@@ -61,7 +61,7 @@ export {
   XBubbleList,
   XBubbleSystem,
   XConversations,
-}
+};
 
 export type {
   ActionsAudioProps,
@@ -72,7 +72,7 @@ export type {
   ActionsProps,
   ActionsRef,
   ItemType,
-} from './actions'
+} from "./actions";
 
 export type {
   BubbleItemType,
@@ -80,7 +80,7 @@ export type {
   BubbleListRef,
   BubbleProps,
   BubbleRef,
-} from './bubble'
+} from "./bubble";
 
 export type {
   ConversationItemType,
@@ -90,6 +90,6 @@ export type {
   DividerItemType,
   GroupableProps,
   ShortcutKeys,
-} from './conversations'
+} from "./conversations";
 
-export type { XProviderProps } from './x-provider'
+export type { XProviderProps } from "./x-provider";

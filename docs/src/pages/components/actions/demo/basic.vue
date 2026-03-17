@@ -7,28 +7,29 @@ Basic usage.
 </docs>
 
 <script setup lang="ts">
-import type { ActionsProps } from '@antdv-next/x'
-import { EditOutlined, RedoOutlined } from '@antdv-next/icons'
-import { Actions } from '@antdv-next/x'
-import { message } from 'antdv-next'
-import { h } from 'vue'
+import type { ActionsProps } from "@antdv-next/x";
 
-const items: ActionsProps['items'] = [
+import { EditOutlined, RedoOutlined } from "@antdv-next/icons";
+import { Actions } from "@antdv-next/x";
+import { message } from "antdv-next";
+import { h } from "vue";
+
+const items: ActionsProps["items"] = [
   {
-    key: 'retry',
+    key: "retry",
     icon: h(RedoOutlined),
-    label: 'Retry',
+    label: "Retry",
   },
   {
-    key: 'edit',
+    key: "edit",
     icon: h(EditOutlined),
-    label: 'Edit',
+    label: "Edit",
   },
-]
+];
 
-const onClick: ActionsProps['onClick'] = ({ keyPath }) => {
-  message.success(`you clicked ${keyPath.join(',')}`)
-}
+const onClick: ActionsProps["onClick"] = ({ keyPath }) => {
+  message.success(`you clicked ${keyPath.join(",")}`);
+};
 </script>
 
 <template>

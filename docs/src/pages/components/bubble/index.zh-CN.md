@@ -33,34 +33,35 @@ description: 用于聊天消息展示的气泡组件。
 <demo src="./demo/list-extra.vue">列表扩展参数</demo>
 
 ## API
+
 ### Bubble
 
-| 属性 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| `content` | 气泡内容 | `string \| number \| VNode \| object` | - |
-| `placement` | 气泡位置 | `'start' \| 'end'` | `'start'` |
-| `variant` | 气泡样式变体 | `'filled' \| 'outlined' \| 'shadow' \| 'borderless'` | `'filled'` |
-| `shape` | 气泡形状 | `'default' \| 'round' \| 'corner'` | `'default'` |
-| `loading` | 加载状态 | `boolean` | `false` |
-| `typing` | 打字动画配置 | `boolean \| BubbleAnimationOption \| ((content, info) => ...)` | `false` |
-| `streaming` | 流式传输标记 | `boolean` | `false` |
-| `editable` | 是否可编辑 | `boolean \| EditableBubbleOption` | `false` |
-| `contentRender` | 自定义内容渲染 | `(content, info) => VNodeChild` | - |
-| `header/footer/avatar/extra` | 插槽属性（支持函数） | `BubbleSlot` | - |
-| `footerPlacement` | 底部插槽位置 | `'outer-start' \| 'outer-end' \| 'inner-start' \| 'inner-end'` | 跟随 `placement` |
-| `onTyping` | 动画过程回调 | `(renderedContent, currentContent) => void` | - |
-| `onTypingComplete` | 动画结束回调 | `(content) => void` | - |
-| `onEditConfirm` | 编辑确认回调 | `(content) => void` | - |
-| `onEditCancel` | 编辑取消回调 | `() => void` | - |
+| 属性                         | 说明                 | 类型                                                           | 默认值           |
+| ---------------------------- | -------------------- | -------------------------------------------------------------- | ---------------- |
+| `content`                    | 气泡内容             | `string \| number \| VNode \| object`                          | -                |
+| `placement`                  | 气泡位置             | `'start' \| 'end'`                                             | `'start'`        |
+| `variant`                    | 气泡样式变体         | `'filled' \| 'outlined' \| 'shadow' \| 'borderless'`           | `'filled'`       |
+| `shape`                      | 气泡形状             | `'default' \| 'round' \| 'corner'`                             | `'default'`      |
+| `loading`                    | 加载状态             | `boolean`                                                      | `false`          |
+| `typing`                     | 打字动画配置         | `boolean \| BubbleAnimationOption \| ((content, info) => ...)` | `false`          |
+| `streaming`                  | 流式传输标记         | `boolean`                                                      | `false`          |
+| `editable`                   | 是否可编辑           | `boolean \| EditableBubbleOption`                              | `false`          |
+| `contentRender`              | 自定义内容渲染       | `(content, info) => VNodeChild`                                | -                |
+| `header/footer/avatar/extra` | 插槽属性（支持函数） | `BubbleSlot`                                                   | -                |
+| `footerPlacement`            | 底部插槽位置         | `'outer-start' \| 'outer-end' \| 'inner-start' \| 'inner-end'` | 跟随 `placement` |
+| `onTyping`                   | 动画过程回调         | `(renderedContent, currentContent) => void`                    | -                |
+| `onTypingComplete`           | 动画结束回调         | `(content) => void`                                            | -                |
+| `onEditConfirm`              | 编辑确认回调         | `(content) => void`                                            | -                |
+| `onEditCancel`               | 编辑取消回调         | `() => void`                                                   | -                |
 
 ### Bubble.List
 
-| 属性 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| `items` | 列表数据，`key`/`role` 必填 | `BubbleItemType[]` | - |
-| `autoScroll` | 新消息时自动滚动到底部 | `boolean` | `true` |
-| `role` | 不同角色默认配置 | `RoleType` | - |
-| `onScroll` | 滚动事件回调 | `(event) => void` | - |
+| 属性         | 说明                        | 类型               | 默认值 |
+| ------------ | --------------------------- | ------------------ | ------ |
+| `items`      | 列表数据，`key`/`role` 必填 | `BubbleItemType[]` | -      |
+| `autoScroll` | 新消息时自动滚动到底部      | `boolean`          | `true` |
+| `role`       | 不同角色默认配置            | `RoleType`         | -      |
+| `onScroll`   | 滚动事件回调                | `(event) => void`  | -      |
 
 `Bubble.List` 暴露 `scrollTo`：
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Bubble } from '@antdv-next/x'
-import { Space } from 'antdv-next'
+import { Bubble } from "@antdv-next/x";
+import { Space } from "antdv-next";
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;" :size="10">
+  <Space direction="vertical" style="display: flex; width: 100%" :size="10">
     <Bubble content="message 1" />
     <Bubble.Divider content="Solid" />
     <Bubble content="message 2" placement="end" />

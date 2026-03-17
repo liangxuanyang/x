@@ -1,81 +1,86 @@
-import type { GenerateStyle } from '../../theme/interface'
-import type { BubbleToken } from './bubble'
+import type { GenerateStyle } from "../../theme/interface";
+import type { BubbleToken } from "./bubble";
 
-export const genVariantStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls } = token
+export const genVariantStyle: GenerateStyle<BubbleToken> = token => {
+  const { componentCls } = token;
   return {
     [componentCls]: {
       [`${componentCls}-content`]: {
         // Filled:
-        '&-filled': {
+        "&-filled": {
           backgroundColor: token.colorFillContent,
         },
 
         // Outlined:
-        '&-outlined': {
+        "&-outlined": {
           border: `1px solid ${token.colorBorderSecondary}`,
         },
 
         // Shadow:
-        '&-shadow': {
+        "&-shadow": {
           boxShadow: token.boxShadowTertiary,
         },
 
-        '&-borderless': {
-          backgroundColor: 'transparent',
+        "&-borderless": {
+          backgroundColor: "transparent",
           padding: 0,
           minHeight: 0,
         },
       },
     },
-  }
-}
+  };
+};
 
-export const genShapeStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, fontSize, lineHeight, paddingSM, borderRadius, calc } = token
+export const genShapeStyle: GenerateStyle<BubbleToken> = token => {
+  const { componentCls, fontSize, lineHeight, paddingSM, borderRadius, calc } =
+    token;
 
-  const halfRadius = calc(fontSize).mul(lineHeight).div(2).add(paddingSM).equal()
+  const halfRadius = calc(fontSize)
+    .mul(lineHeight)
+    .div(2)
+    .add(paddingSM)
+    .equal();
   // 12px
-  const defaultRadius = calc(borderRadius).mul(2).equal()
+  const defaultRadius = calc(borderRadius).mul(2).equal();
 
-  const contentCls = `${componentCls}-content`
+  const contentCls = `${componentCls}-content`;
 
   return {
     [componentCls]: {
       [contentCls]: {
-        '&-default': {
+        "&-default": {
           borderRadius: {
             _skip_check_: true,
             value: defaultRadius,
           },
         },
 
-        '&-round': {
+        "&-round": {
           borderRadius: {
             _skip_check_: true,
             value: halfRadius,
           },
         },
 
-        '&-corner': {
+        "&-corner": {
           borderRadius: {
             _skip_check_: true,
             value: defaultRadius,
           },
         },
 
-        '&-editing': {
-          'div:first-child': {
-            outline: 'none',
+        "&-editing": {
+          "div:first-child": {
+            outline: "none",
           },
 
           [`${componentCls}-editing-opts`]: {
             marginBlockStart: token.marginSM,
 
-            'button:last-child': {
+            "button:last-child": {
               backgroundColor: token.colorBgContainer,
 
-              '&:hover': {
+              "&:hover": {
                 backgroundColor: token.colorBgLayout,
               },
             },
@@ -91,5 +96,5 @@ export const genShapeStyle: GenerateStyle<BubbleToken> = (token) => {
         borderStartEndRadius: token.borderRadiusXS,
       },
     },
-  }
-}
+  };
+};

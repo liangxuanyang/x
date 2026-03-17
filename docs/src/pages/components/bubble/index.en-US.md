@@ -35,32 +35,32 @@ Use this component for chat, Q&A, and message stream UIs.
 
 ### Bubble
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| `content` | Bubble content | `string \| number \| VNode \| object` | - |
-| `placement` | Bubble placement | `'start' \| 'end'` | `'start'` |
-| `variant` | Visual variant | `'filled' \| 'outlined' \| 'shadow' \| 'borderless'` | `'filled'` |
-| `shape` | Bubble shape | `'default' \| 'round' \| 'corner'` | `'default'` |
-| `loading` | Loading state | `boolean` | `false` |
-| `typing` | Typing animation config | `boolean \| BubbleAnimationOption \| ((content, info) => ...)` | `false` |
-| `streaming` | Streaming flag | `boolean` | `false` |
-| `editable` | Editable mode | `boolean \| EditableBubbleOption` | `false` |
-| `contentRender` | Custom content render | `(content, info) => VNodeChild` | - |
-| `header/footer/avatar/extra` | Slot props (supports function form) | `BubbleSlot` | - |
-| `footerPlacement` | Footer render position | `'outer-start' \| 'outer-end' \| 'inner-start' \| 'inner-end'` | derived from `placement` |
-| `onTyping` | Typing callback | `(renderedContent, currentContent) => void` | - |
-| `onTypingComplete` | Typing complete callback | `(content) => void` | - |
-| `onEditConfirm` | Edit confirm callback | `(content) => void` | - |
-| `onEditCancel` | Edit cancel callback | `() => void` | - |
+| Property                     | Description                         | Type                                                           | Default                  |
+| ---------------------------- | ----------------------------------- | -------------------------------------------------------------- | ------------------------ |
+| `content`                    | Bubble content                      | `string \| number \| VNode \| object`                          | -                        |
+| `placement`                  | Bubble placement                    | `'start' \| 'end'`                                             | `'start'`                |
+| `variant`                    | Visual variant                      | `'filled' \| 'outlined' \| 'shadow' \| 'borderless'`           | `'filled'`               |
+| `shape`                      | Bubble shape                        | `'default' \| 'round' \| 'corner'`                             | `'default'`              |
+| `loading`                    | Loading state                       | `boolean`                                                      | `false`                  |
+| `typing`                     | Typing animation config             | `boolean \| BubbleAnimationOption \| ((content, info) => ...)` | `false`                  |
+| `streaming`                  | Streaming flag                      | `boolean`                                                      | `false`                  |
+| `editable`                   | Editable mode                       | `boolean \| EditableBubbleOption`                              | `false`                  |
+| `contentRender`              | Custom content render               | `(content, info) => VNodeChild`                                | -                        |
+| `header/footer/avatar/extra` | Slot props (supports function form) | `BubbleSlot`                                                   | -                        |
+| `footerPlacement`            | Footer render position              | `'outer-start' \| 'outer-end' \| 'inner-start' \| 'inner-end'` | derived from `placement` |
+| `onTyping`                   | Typing callback                     | `(renderedContent, currentContent) => void`                    | -                        |
+| `onTypingComplete`           | Typing complete callback            | `(content) => void`                                            | -                        |
+| `onEditConfirm`              | Edit confirm callback               | `(content) => void`                                            | -                        |
+| `onEditCancel`               | Edit cancel callback                | `() => void`                                                   | -                        |
 
 ### Bubble.List
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| `items` | Bubble data list, `key`/`role` required | `BubbleItemType[]` | - |
-| `autoScroll` | Auto scroll to bottom on new messages | `boolean` | `true` |
-| `role` | Default role config map | `RoleType` | - |
-| `onScroll` | Scroll callback | `(event) => void` | - |
+| Property     | Description                             | Type               | Default |
+| ------------ | --------------------------------------- | ------------------ | ------- |
+| `items`      | Bubble data list, `key`/`role` required | `BubbleItemType[]` | -       |
+| `autoScroll` | Auto scroll to bottom on new messages   | `boolean`          | `true`  |
+| `role`       | Default role config map                 | `RoleType`         | -       |
+| `onScroll`   | Scroll callback                         | `(event) => void`  | -       |
 
 `Bubble.List` exposes:
 

@@ -1,31 +1,37 @@
 <script setup lang="ts">
-import { AntDesignOutlined, CopyOutlined, RedoOutlined } from '@antdv-next/icons'
-import { Actions, Bubble } from '@antdv-next/x'
-import { Avatar, Button, Divider, Space, Switch, Typography } from 'antdv-next'
-import { computed, h, ref } from 'vue'
+import {
+  AntDesignOutlined,
+  CopyOutlined,
+  RedoOutlined,
+} from "@antdv-next/icons";
+import { Actions, Bubble } from "@antdv-next/x";
+import { Avatar, Button, Divider, Space, Switch, Typography } from "antdv-next";
+import { computed, h, ref } from "vue";
 
-const textA = 'Ant Design X - Better UI toolkit for your AI Chat WebApp. '.repeat(5)
-const textB = 'Ant Design X - Build your AI Chat WebApp with an easier way. '.repeat(5)
+const textA =
+  "Ant Design X - Better UI toolkit for your AI Chat WebApp. ".repeat(5);
+const textB =
+  "Ant Design X - Build your AI Chat WebApp with an easier way. ".repeat(5);
 
-const loading = ref(true)
-const content = ref('')
-const effect = ref<'fade-in' | 'typing'>('fade-in')
-const keepPrefix = ref(false)
-const count = ref(0)
+const loading = ref(true);
+const content = ref("");
+const effect = ref<"fade-in" | "typing">("fade-in");
+const keepPrefix = ref(false);
+const count = ref(0);
 const actionItems = [
   {
-    key: 'retry',
+    key: "retry",
     icon: h(RedoOutlined),
-    label: 'Retry',
+    label: "Retry",
   },
   {
-    key: 'copy',
+    key: "copy",
     icon: h(CopyOutlined),
-    label: 'Copy',
+    label: "Copy",
   },
-]
+];
 function footer() {
-  return h(Actions, { items: actionItems })
+  return h(Actions, { items: actionItems });
 }
 
 const typingConfig = computed(() => ({
@@ -33,23 +39,23 @@ const typingConfig = computed(() => ({
   interval: 50,
   step: 3,
   keepPrefix: keepPrefix.value,
-}))
+}));
 
 function loadA() {
-  loading.value = false
-  count.value = 0
-  content.value = textA
+  loading.value = false;
+  count.value = 0;
+  content.value = textA;
 }
 
 function loadB() {
-  loading.value = false
-  count.value = 0
-  content.value = textB
+  loading.value = false;
+  count.value = 0;
+  content.value = textB;
 }
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;" :size="10">
+  <Space direction="vertical" style="display: flex; width: 100%" :size="10">
     <Space align="center" wrap>
       <span>Non-streaming data:</span>
       <Button type="primary" @click="loadA">
@@ -65,12 +71,8 @@ function loadB() {
     <Space align="center" wrap>
       <span>Animation effects:</span>
       <a-radio-group v-model:value="effect">
-        <a-radio value="fade-in">
-          fade-in
-        </a-radio>
-        <a-radio value="typing">
-          typing
-        </a-radio>
+        <a-radio value="fade-in"> fade-in </a-radio>
+        <a-radio value="typing"> typing </a-radio>
       </a-radio-group>
     </Space>
 
@@ -86,7 +88,7 @@ function loadB() {
       </Typography.Text>
     </Space>
 
-    <Divider style="margin: 4px 0;" />
+    <Divider style="margin: 4px 0" />
 
     <Bubble
       :loading="loading"
@@ -96,7 +98,12 @@ function loadB() {
       :footer="footer"
       :avatar="h(Avatar, { size: 'small', icon: h(AntDesignOutlined) })"
       :on-typing="() => console.log('typing')"
-      :on-typing-complete="() => { count += 1; console.log('typing complete') }"
+      :on-typing-complete="
+        () => {
+          count += 1;
+          console.log('typing complete');
+        }
+      "
     />
   </Space>
 </template>

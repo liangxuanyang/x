@@ -1,29 +1,37 @@
 <script setup lang="ts">
-import type { ConversationsProps } from '@antdv-next/x'
-import { Conversations } from '@antdv-next/x'
-import { theme } from 'antdv-next'
-import { computed } from 'vue'
+import type { ConversationsProps } from "@antdv-next/x";
 
-const { token } = theme.useToken()
+import { Conversations } from "@antdv-next/x";
+import { theme } from "antdv-next";
+import { computed } from "vue";
+
+const { token } = theme.useToken();
 
 const style = computed(() => ({
-  width: '256px',
+  width: "256px",
   background: token.value.colorBgContainer,
   borderRadius: `${token.value.borderRadius}px`,
-}))
+}));
 
-const items: ConversationsProps['items'] = Array.from({ length: 6 }).map((_, index) => ({
-  key: `item${index + 1}`,
-  label:
-    index === 0
-      ? "This's Conversation Item 1, you can click me!"
-      : `Conversation Item ${index + 1}`,
-  group: index < 3 ? 'Today' : 'Yesterday',
-}))
+const items: ConversationsProps["items"] = Array.from({ length: 6 }).map(
+  (_, index) => ({
+    key: `item${index + 1}`,
+    label:
+      index === 0
+        ? "This's Conversation Item 1, you can click me!"
+        : `Conversation Item ${index + 1}`,
+    group: index < 3 ? "Today" : "Yesterday",
+  }),
+);
 </script>
 
 <template>
-  <Conversations :items="items" default-active-key="item1" :style="style" groupable />
+  <Conversations
+    :items="items"
+    default-active-key="item1"
+    :style="style"
+    groupable
+  />
 </template>
 
 <docs lang="zh-CN">

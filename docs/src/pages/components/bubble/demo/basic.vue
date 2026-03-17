@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { AntDesignOutlined, RedoOutlined } from '@antdv-next/icons'
-import { Actions, Bubble } from '@antdv-next/x'
-import { Avatar } from 'antdv-next'
-import { h } from 'vue'
+import { AntDesignOutlined, RedoOutlined } from "@antdv-next/icons";
+import { Actions, Bubble } from "@antdv-next/x";
+import { Avatar } from "antdv-next";
+import { h } from "vue";
 
-const avatarNode = h(Avatar, { size: 'small', icon: h(AntDesignOutlined) })
+const avatarNode = h(Avatar, { size: "small", icon: h(AntDesignOutlined) });
 
 function actionItems(content: string) {
   return [
     {
-      key: 'copy',
-      label: 'copy',
+      key: "copy",
+      label: "copy",
       actionRender: () => h(Actions.Copy, { text: content }),
     },
     {
-      key: 'retry',
+      key: "retry",
       icon: h(RedoOutlined),
-      label: 'Retry',
+      label: "Retry",
     },
-  ]
+  ];
 }
 
 function footerRenderer(content: string) {
-  return h(Actions, { items: actionItems(content) })
+  return h(Actions, { items: actionItems(content) });
 }
 
-const text = 'Hello World\nNext line\nTab\tindent'
+const text = "Hello World\nNext line\nTab\tindent";
 </script>
 
 <template>

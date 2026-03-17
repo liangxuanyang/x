@@ -1,101 +1,101 @@
 <script setup lang="ts">
-import type { MenuEmits } from 'antdv-next'
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { componentOverviewItems } from '@/components/component-overview/data'
-import { useDocPage } from '@/composables/use-doc-page'
-import { headerLocales } from '@/config/header'
-import { docsRoutes, LOCALE_EN_US, LOCALE_ZH_CN } from '@/router/docs'
-import { useAppStore } from '@/stores/app'
-import DocHeader from './components/doc-header.vue'
+import type { MenuEmits } from "antdv-next";
 
-const route = useRoute()
-const router = useRouter()
-const appStore = useAppStore()
-const { pageData, anchorItems } = useDocPage()
+import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+import { componentOverviewItems } from "@/components/component-overview/data";
+import { useDocPage } from "@/composables/use-doc-page";
+import { headerLocales } from "@/config/header";
+import { docsRoutes, LOCALE_EN_US, LOCALE_ZH_CN } from "@/router/docs";
+import { useAppStore } from "@/stores/app";
+
+import DocHeader from "./components/doc-header.vue";
+
+const route = useRoute();
+const router = useRouter();
+const appStore = useAppStore();
+const { pageData, anchorItems } = useDocPage();
 
 function normalizePath(path: string) {
-  if (path === '/')
-    return '/'
-  return path.replace(/\/+$/, '') || '/'
+  if (path === "/") return "/";
+  return path.replace(/\/+$/, "") || "/";
 }
 
 function stripLocaleSuffix(path: string) {
-  if (path.endsWith('-en'))
-    return path.slice(0, -3) || '/'
-  if (path.endsWith('-cn'))
-    return path.slice(0, -3) || '/'
-  return path
+  if (path.endsWith("-en")) return path.slice(0, -3) || "/";
+  if (path.endsWith("-cn")) return path.slice(0, -3) || "/";
+  return path;
 }
 
 function formatSegmentLabel(segment: string) {
   return segment
-    .split('-')
+    .split("-")
     .filter(Boolean)
-    .map(word => word[0] ? word[0].toUpperCase() + word.slice(1) : word)
-    .join(' ')
+    .map(word => (word[0] ? word[0].toUpperCase() + word.slice(1) : word))
+    .join(" ");
 }
 
 interface SiderLeafItem {
-  key: string
-  label: string
+  key: string;
+  label: string;
 }
 
 interface SiderGroupItem {
-  key: string
-  type: 'group'
-  label: string
-  children: SiderLeafItem[]
+  key: string;
+  type: "group";
+  label: string;
+  children: SiderLeafItem[];
 }
 
-type SiderItem = SiderLeafItem | SiderGroupItem
+type SiderItem = SiderLeafItem | SiderGroupItem;
 
-const normalizedCurrentPath = computed(() => normalizePath(route.path))
-const currentPathWithoutLocale = computed(() => stripLocaleSuffix(normalizedCurrentPath.value))
+const normalizedCurrentPath = computed(() => normalizePath(route.path));
+const currentPathWithoutLocale = computed(() =>
+  stripLocaleSuffix(normalizedCurrentPath.value),
+);
 
 const currentSectionKey = computed(() => {
-  const segments = currentPathWithoutLocale.value.split('/').filter(Boolean)
-  if (!segments.length)
-    return ''
-  return `/${segments[0]}`
-})
+  const segments = currentPathWithoutLocale.value.split("/").filter(Boolean);
+  if (!segments.length) return "";
+  return `/${segments[0]}`;
+});
 
 const sectionTitle = computed(() => {
-  const locale = appStore.locale === LOCALE_EN_US ? LOCALE_EN_US : LOCALE_ZH_CN
-  const section = currentSectionKey.value
-  if (!section)
-    return ''
-  return headerLocales?.[section]?.[locale] || formatSegmentLabel(section.slice(1))
-})
+  const locale = appStore.locale === LOCALE_EN_US ? LOCALE_EN_US : LOCALE_ZH_CN;
+  const section = currentSectionKey.value;
+  if (!section) return "";
+  return (
+    headerLocales?.[section]?.[locale] || formatSegmentLabel(section.slice(1))
+  );
+});
 
 const siderItems = computed<SiderItem[]>(() => {
-  const section = currentSectionKey.value
-  if (!section)
-    return []
+  const section = currentSectionKey.value;
+  if (!section) return [];
 
-  const locale = appStore.locale
+  const locale = appStore.locale;
   const routesInSection = docsRoutes
-    .filter((item) => {
-      if (item.meta?.locale !== locale)
-        return false
-      const normalizedPath = stripLocaleSuffix(normalizePath(item.path))
-      return normalizedPath === section || normalizedPath.startsWith(`${section}/`)
+    .filter(item => {
+      if (item.meta?.locale !== locale) return false;
+      const normalizedPath = stripLocaleSuffix(normalizePath(item.path));
+      return (
+        normalizedPath === section || normalizedPath.startsWith(`${section}/`)
+      );
     })
     .sort((left, right) => {
-      const leftPath = stripLocaleSuffix(normalizePath(left.path))
-      const rightPath = stripLocaleSuffix(normalizePath(right.path))
-      if (leftPath === section)
-        return -1
-      if (rightPath === section)
-        return 1
-      return leftPath.localeCompare(rightPath)
-    })
+      const leftPath = stripLocaleSuffix(normalizePath(left.path));
+      const rightPath = stripLocaleSuffix(normalizePath(right.path));
+      if (leftPath === section) return -1;
+      if (rightPath === section) return 1;
+      return leftPath.localeCompare(rightPath);
+    });
 
-  const baseItems = routesInSection.map((item) => {
-    const withoutLocale = stripLocaleSuffix(normalizePath(item.path))
-    const segments = withoutLocale.split('/').filter(Boolean)
-    const lastSegment = segments.at(-1) || ''
-    const isSectionIndex = withoutLocale === section
+  const baseItems = routesInSection.map(item => {
+    const withoutLocale = stripLocaleSuffix(normalizePath(item.path));
+    const segments = withoutLocale.split("/").filter(Boolean);
+    const lastSegment = segments.at(-1) || "";
+    const isSectionIndex = withoutLocale === section;
 
     return {
       key: normalizePath(item.path),
@@ -103,26 +103,33 @@ const siderItems = computed<SiderItem[]>(() => {
       slug: lastSegment,
       isSectionIndex,
       label: isSectionIndex
-        ? (appStore.locale === LOCALE_ZH_CN ? '概览' : 'Overview')
+        ? appStore.locale === LOCALE_ZH_CN
+          ? "概览"
+          : "Overview"
         : formatSegmentLabel(lastSegment),
-    }
-  })
+    };
+  });
 
-  if (section !== '/components')
-    return baseItems.map(({ key, label }) => ({ key, label }))
+  if (section !== "/components")
+    return baseItems.map(({ key, label }) => ({ key, label }));
 
-  const localeKey = appStore.locale === LOCALE_EN_US ? LOCALE_EN_US : LOCALE_ZH_CN
-  const fallbackGroupLabel = localeKey === LOCALE_ZH_CN ? '未分类' : 'Ungrouped'
-  const overviewItem = baseItems.find(item => item.isSectionIndex)
+  const localeKey =
+    appStore.locale === LOCALE_EN_US ? LOCALE_EN_US : LOCALE_ZH_CN;
+  const fallbackGroupLabel =
+    localeKey === LOCALE_ZH_CN ? "未分类" : "Ungrouped";
+  const overviewItem = baseItems.find(item => item.isSectionIndex);
 
-  const groups = new Map<string, { key: string, label: string, order: number, children: SiderLeafItem[] }>()
+  const groups = new Map<
+    string,
+    { key: string; label: string; order: number; children: SiderLeafItem[] }
+  >();
   baseItems
     .filter(item => !item.isSectionIndex)
-    .forEach((item) => {
-      const meta = componentOverviewItems.find(info => info.slug === item.slug)
-      const groupLabel = meta?.group?.[localeKey] ?? fallbackGroupLabel
-      const groupOrder = meta?.groupOrder ?? Number.MAX_SAFE_INTEGER
-      const groupKey = `${groupOrder}-${groupLabel}`
+    .forEach(item => {
+      const meta = componentOverviewItems.find(info => info.slug === item.slug);
+      const groupLabel = meta?.group?.[localeKey] ?? fallbackGroupLabel;
+      const groupOrder = meta?.groupOrder ?? Number.MAX_SAFE_INTEGER;
+      const groupKey = `${groupOrder}-${groupLabel}`;
 
       if (!groups.has(groupKey)) {
         groups.set(groupKey, {
@@ -130,40 +137,43 @@ const siderItems = computed<SiderItem[]>(() => {
           label: groupLabel,
           order: groupOrder,
           children: [],
-        })
+        });
       }
 
       groups.get(groupKey)!.children.push({
         key: item.key,
         label: meta?.title ?? item.label,
-      })
-    })
+      });
+    });
 
   const groupedItems: SiderGroupItem[] = Array.from(groups.values())
     .sort((left, right) => {
-      if (left.order !== right.order)
-        return left.order - right.order
-      return left.label.localeCompare(right.label)
+      if (left.order !== right.order) return left.order - right.order;
+      return left.label.localeCompare(right.label);
     })
     .map(group => ({
       key: group.key,
-      type: 'group',
+      type: "group",
       label: group.label,
-      children: group.children.sort((left, right) => left.label.localeCompare(right.label)),
-    }))
+      children: group.children.sort((left, right) =>
+        left.label.localeCompare(right.label),
+      ),
+    }));
 
   return [
-    ...(overviewItem ? [{ key: overviewItem.key, label: overviewItem.label }] : []),
+    ...(overviewItem
+      ? [{ key: overviewItem.key, label: overviewItem.label }]
+      : []),
     ...groupedItems,
-  ]
-})
+  ];
+});
 
-const selectedSiderKeys = computed(() => [normalizedCurrentPath.value])
-const hasAnchors = computed(() => anchorItems.value.length > 0)
+const selectedSiderKeys = computed(() => [normalizedCurrentPath.value]);
+const hasAnchors = computed(() => anchorItems.value.length > 0);
 
-const handleSiderMenuClick: MenuEmits['click'] = (info) => {
-  router.push(String(info.key))
-}
+const handleSiderMenuClick: MenuEmits["click"] = info => {
+  router.push(String(info.key));
+};
 </script>
 
 <template>
@@ -186,16 +196,27 @@ const handleSiderMenuClick: MenuEmits['click'] = (info) => {
 
       <article class="antdx-doc-layout-content">
         <header
-          v-if="pageData?.frontmatter?.title || pageData?.frontmatter?.description"
+          v-if="
+            pageData?.frontmatter?.title || pageData?.frontmatter?.description
+          "
           class="antdx-doc-layout-content-header"
         >
-          <h1 v-if="pageData?.frontmatter?.title" class="antdx-doc-layout-content-title">
+          <h1
+            v-if="pageData?.frontmatter?.title"
+            class="antdx-doc-layout-content-title"
+          >
             {{ pageData?.frontmatter?.title }}
-            <small v-if="pageData?.frontmatter?.subtitle" class="antdx-doc-layout-content-subtitle">
+            <small
+              v-if="pageData?.frontmatter?.subtitle"
+              class="antdx-doc-layout-content-subtitle"
+            >
               {{ pageData?.frontmatter?.subtitle }}
             </small>
           </h1>
-          <p v-if="pageData?.frontmatter?.description" class="antdx-doc-layout-content-description">
+          <p
+            v-if="pageData?.frontmatter?.description"
+            class="antdx-doc-layout-content-description"
+          >
             {{ pageData?.frontmatter?.description }}
           </p>
         </header>

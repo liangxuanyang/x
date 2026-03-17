@@ -1,41 +1,41 @@
-import type { ClassValue, CSSProperties, PropType, StyleValue, VNodeChild } from 'vue'
-import { CloseCircleOutlined, LoadingOutlined } from '@antdv-next/icons'
-import { Tooltip } from 'antdv-next'
-import {
+import type {
+  ClassValue,
+  CSSProperties,
+  PropType,
+  StyleValue,
+  VNodeChild,
+} from "vue";
 
-  computed,
+import { CloseCircleOutlined, LoadingOutlined } from "@antdv-next/icons";
+import { Tooltip } from "antdv-next";
+import { computed, defineComponent, useAttrs } from "vue";
 
-  defineComponent,
-
-  useAttrs,
-
-} from 'vue'
-import useActionsStyle from './style'
+import useActionsStyle from "./style";
 
 export enum ACTIONS_ITEM_STATUS {
-  LOADING = 'loading',
-  ERROR = 'error',
-  RUNNING = 'running',
-  DEFAULT = 'default',
+  LOADING = "loading",
+  ERROR = "error",
+  RUNNING = "running",
+  DEFAULT = "default",
 }
 
-type SemanticType = 'root' | 'default' | 'running' | 'error' | 'loading'
+type SemanticType = "root" | "default" | "running" | "error" | "loading";
 
 export interface ActionsItemProps {
-  status?: `${ACTIONS_ITEM_STATUS}`
-  defaultIcon: VNodeChild
-  label?: string
-  runningIcon?: VNodeChild
-  prefixCls?: string
-  rootClassName?: string
-  class?: ClassValue
-  style?: StyleValue
-  classes?: Partial<Record<SemanticType, string>>
-  styles?: Partial<Record<SemanticType, CSSProperties>>
+  status?: `${ACTIONS_ITEM_STATUS}`;
+  defaultIcon: VNodeChild;
+  label?: string;
+  runningIcon?: VNodeChild;
+  prefixCls?: string;
+  rootClassName?: string;
+  class?: ClassValue;
+  style?: StyleValue;
+  classes?: Partial<Record<SemanticType, string>>;
+  styles?: Partial<Record<SemanticType, CSSProperties>>;
 }
 
 const ActionsItem = defineComponent({
-  name: 'XActionsItem',
+  name: "XActionsItem",
   inheritAttrs: false,
   props: {
     status: {
@@ -56,11 +56,11 @@ const ActionsItem = defineComponent({
     },
     prefixCls: {
       type: String,
-      default: 'antdx-actions',
+      default: "antdx-actions",
     },
     rootClassName: {
       type: String,
-      default: '',
+      default: "",
     },
     class: {
       type: [String, Array, Object] as PropType<ClassValue>,
@@ -80,14 +80,16 @@ const ActionsItem = defineComponent({
     },
   },
   setup(props) {
-    const attrs = useAttrs()
-    const [hashId, cssVarCls] = useActionsStyle(computed(() => props.prefixCls))
-    const itemCls = `${props.prefixCls}-button-item`
+    const attrs = useAttrs();
+    const [hashId, cssVarCls] = useActionsStyle(
+      computed(() => props.prefixCls),
+    );
+    const itemCls = `${props.prefixCls}-button-item`;
 
     const domAttrs = computed(() => {
-      const { class: _class, style: _style, ...rest } = attrs
-      return rest
-    })
+      const { class: _class, style: _style, ...rest } = attrs;
+      return rest;
+    });
 
     const statusIcon = computed(() => {
       const iconMap = {
@@ -95,10 +97,10 @@ const ActionsItem = defineComponent({
         [ACTIONS_ITEM_STATUS.ERROR]: <CloseCircleOutlined />,
         [ACTIONS_ITEM_STATUS.RUNNING]: props.runningIcon,
         [ACTIONS_ITEM_STATUS.DEFAULT]: props.defaultIcon,
-      }
+      };
 
-      return iconMap[props.status] ?? props.defaultIcon
-    })
+      return iconMap[props.status] ?? props.defaultIcon;
+    });
 
     return () => (
       <Tooltip title={props.label}>
@@ -126,8 +128,8 @@ const ActionsItem = defineComponent({
           {statusIcon.value}
         </div>
       </Tooltip>
-    )
+    );
   },
-})
+});
 
-export default ActionsItem
+export default ActionsItem;

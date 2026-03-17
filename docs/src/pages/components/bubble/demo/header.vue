@@ -1,16 +1,21 @@
 <script setup lang="ts">
-import { UserOutlined } from '@antdv-next/icons'
-import { Bubble } from '@antdv-next/x'
-import { Avatar, Space } from 'antdv-next'
-import { h } from 'vue'
+import { UserOutlined } from "@antdv-next/icons";
+import { Bubble } from "@antdv-next/x";
+import { Avatar, Space } from "antdv-next";
+import { h } from "vue";
 
-const avatarNode = h(Avatar, { size: 'small', icon: h(UserOutlined) })
+const avatarNode = h(Avatar, { size: "small", icon: h(UserOutlined) });
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;" :size="10">
+  <Space direction="vertical" style="display: flex; width: 100%" :size="10">
     <Bubble content="align left" header="header" :avatar="avatarNode" />
-    <Bubble content="align right" placement="end" header="header" :avatar="avatarNode" />
+    <Bubble
+      content="align right"
+      placement="end"
+      header="header"
+      :avatar="avatarNode"
+    />
   </Space>
 </template>
 

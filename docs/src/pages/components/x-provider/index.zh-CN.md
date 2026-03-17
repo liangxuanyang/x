@@ -49,23 +49,23 @@ import zhCN from 'antdv-next/dist/locale/zh_CN'
 
 ### 组件配置
 
-| 属性 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| `bubble` | 气泡组件的全局配置 | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string> }` | - |
-| `conversations` | 会话组件的全局配置 | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string>; shortcutKeys?: { creation?: ShortcutKeys<number>; items?: ShortcutKeys<'number'> \| ShortcutKeys<number>[] } }` | - |
-| `actions` | 操作列表组件的全局配置 | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string> }` | - |
+| 属性            | 说明                   | 类型                                                                                                                                                                                                                                    | 默认值 |
+| --------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| `bubble`        | 气泡组件的全局配置     | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string> }`                                                                                                               | -      |
+| `conversations` | 会话组件的全局配置     | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string>; shortcutKeys?: { creation?: ShortcutKeys<number>; items?: ShortcutKeys<'number'> \| ShortcutKeys<number>[] } }` | -      |
+| `actions`       | 操作列表组件的全局配置 | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string> }`                                                                                                               | -      |
 
 #### ShortcutKeys
 
 ```ts
 type SignKeysType = {
-  Ctrl: keyof KeyboardEvent
-  Alt: keyof KeyboardEvent
-  Meta: keyof KeyboardEvent
-  Shift: keyof KeyboardEvent
-}
+  Ctrl: keyof KeyboardEvent;
+  Alt: keyof KeyboardEvent;
+  Meta: keyof KeyboardEvent;
+  Shift: keyof KeyboardEvent;
+};
 
-type ShortcutKeys<CustomKey = number | 'number'> =
+type ShortcutKeys<CustomKey = number | "number"> =
   | [keyof SignKeysType, keyof SignKeysType, CustomKey]
-  | [keyof SignKeysType, CustomKey]
+  | [keyof SignKeysType, CustomKey];
 ```

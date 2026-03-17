@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import DocHeader from '@/layouts/docs/components/doc-header.vue'
-import PreviewBanner from './components/preview-banner/index.vue'
+import DocHeader from "@/layouts/docs/components/doc-header.vue";
+
+import PreviewBanner from "./components/preview-banner/index.vue";
 </script>
 
 <template>

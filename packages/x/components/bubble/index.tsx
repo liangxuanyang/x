@@ -1,7 +1,7 @@
-import Bubble, { XBubble } from './Bubble'
-import BubbleList, { XBubbleList } from './BubbleList'
-import BubbleDivider, { XBubbleDivider } from './Divider'
-import BubbleSystem, { XBubbleSystem } from './System'
+import Bubble, { XBubble } from "./Bubble";
+import BubbleList, { XBubbleList } from "./BubbleList";
+import BubbleDivider, { XBubbleDivider } from "./Divider";
+import BubbleSystem, { XBubbleSystem } from "./System";
 
 export type {
   BubbleItemType,
@@ -9,18 +9,18 @@ export type {
   BubbleListRef,
   BubbleProps,
   BubbleRef,
-} from './interface'
+} from "./interface";
 
 type BubbleType = typeof Bubble & {
-  List: typeof BubbleList
-  System: typeof BubbleSystem
-  Divider: typeof BubbleDivider
-}
+  List: typeof BubbleList;
+  System: typeof BubbleSystem;
+  Divider: typeof BubbleDivider;
+};
 
-const BubbleWithSub = Bubble as BubbleType
-BubbleWithSub.List = BubbleList
-BubbleWithSub.System = BubbleSystem
-BubbleWithSub.Divider = BubbleDivider
+const BubbleWithSub = Bubble as BubbleType;
+BubbleWithSub.List = BubbleList;
+BubbleWithSub.System = BubbleSystem;
+BubbleWithSub.Divider = BubbleDivider;
 
 export {
   BubbleDivider,
@@ -30,6 +30,6 @@ export {
   XBubbleDivider,
   XBubbleList,
   XBubbleSystem,
-}
+};
 
-export default BubbleWithSub
+export default BubbleWithSub;

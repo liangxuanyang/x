@@ -1,32 +1,36 @@
-import type { ClassValue, CSSProperties, PropType, StyleValue, VNodeChild } from 'vue'
-import { Typography } from 'antdv-next'
-import {
-  computed,
-  defineComponent,
-  useAttrs,
-} from 'vue'
-import useActionsStyle from './style'
+import type {
+  ClassValue,
+  CSSProperties,
+  PropType,
+  StyleValue,
+  VNodeChild,
+} from "vue";
 
-type SemanticType = 'root'
+import { Typography } from "antdv-next";
+import { computed, defineComponent, useAttrs } from "vue";
+
+import useActionsStyle from "./style";
+
+type SemanticType = "root";
 
 export interface ActionsCopyProps {
-  text?: string
-  icon?: VNodeChild
-  prefixCls?: string
-  rootClassName?: string
-  class?: ClassValue
-  style?: StyleValue
-  classes?: Partial<Record<SemanticType, string>>
-  styles?: Partial<Record<SemanticType, CSSProperties>>
+  text?: string;
+  icon?: VNodeChild;
+  prefixCls?: string;
+  rootClassName?: string;
+  class?: ClassValue;
+  style?: StyleValue;
+  classes?: Partial<Record<SemanticType, string>>;
+  styles?: Partial<Record<SemanticType, CSSProperties>>;
 }
 
 const ActionsCopy = defineComponent({
-  name: 'XActionsCopy',
+  name: "XActionsCopy",
   inheritAttrs: false,
   props: {
     text: {
       type: String,
-      default: '',
+      default: "",
     },
     icon: {
       type: [String, Number, Object, Array, Function] as PropType<VNodeChild>,
@@ -34,11 +38,11 @@ const ActionsCopy = defineComponent({
     },
     prefixCls: {
       type: String,
-      default: 'antdx-actions',
+      default: "antdx-actions",
     },
     rootClassName: {
       type: String,
-      default: '',
+      default: "",
     },
     class: {
       type: [String, Array, Object] as PropType<ClassValue>,
@@ -58,14 +62,16 @@ const ActionsCopy = defineComponent({
     },
   },
   setup(props) {
-    const attrs = useAttrs()
-    const [hashId, cssVarCls] = useActionsStyle(computed(() => props.prefixCls))
-    const copyCls = `${props.prefixCls}-copy`
+    const attrs = useAttrs();
+    const [hashId, cssVarCls] = useActionsStyle(
+      computed(() => props.prefixCls),
+    );
+    const copyCls = `${props.prefixCls}-copy`;
 
     const domAttrs = computed(() => {
-      const { class: _class, style: _style, ...rest } = attrs
-      return rest
-    })
+      const { class: _class, style: _style, ...rest } = attrs;
+      return rest;
+    });
 
     return () => (
       <Typography.Text
@@ -81,19 +87,15 @@ const ActionsCopy = defineComponent({
           attrs.class,
           props.class,
         ]}
-        style={[
-          props.styles?.root,
-          attrs.style as StyleValue,
-          props.style,
-        ]}
+        style={[props.styles?.root, attrs.style as StyleValue, props.style]}
         prefixCls={copyCls}
         copyable={{
           text: props.text,
           icon: props.icon as any,
         }}
       />
-    )
+    );
   },
-})
+});
 
-export default ActionsCopy
+export default ActionsCopy;

@@ -1,21 +1,18 @@
-import type { CSSProperties, PropType, StyleValue, TransitionProps } from 'vue'
+import type { CSSProperties, PropType, StyleValue, TransitionProps } from "vue";
+
+import { useConfig } from "antdv-next/dist/config-provider/context";
+import { computed, defineComponent, ref, Transition, useAttrs } from "vue";
+
 import type {
   ActionsProps,
   ActionsRef,
   ItemType,
   SemanticType,
-} from './interface'
-import { useConfig } from 'antdv-next/dist/config-provider/context'
-import {
-  computed,
-  defineComponent,
-  ref,
-  Transition,
-  useAttrs,
-} from 'vue'
-import Item from './Item'
-import useActionsStyle from './style'
-import useXComponentConfig from '../x-provider/hooks/use-x-component-config'
+} from "./interface";
+
+import useXComponentConfig from "../x-provider/hooks/use-x-component-config";
+import Item from "./Item";
+import useActionsStyle from "./style";
 
 function getMotionTransitionProps(motionName: string): TransitionProps {
   return {
@@ -27,11 +24,11 @@ function getMotionTransitionProps(motionName: string): TransitionProps {
     leaveFromClass: `${motionName} ${motionName}-leave`,
     leaveActiveClass: `${motionName} ${motionName}-leave ${motionName}-leave-active`,
     leaveToClass: `${motionName} ${motionName}-leave ${motionName}-leave-active`,
-  }
+  };
 }
 
 export const XActions = defineComponent({
-  name: 'XActions',
+  name: "XActions",
   inheritAttrs: false,
   props: {
     items: {
@@ -39,27 +36,27 @@ export const XActions = defineComponent({
       default: () => [],
     },
     onClick: {
-      type: Function as PropType<ActionsProps['onClick']>,
+      type: Function as PropType<ActionsProps["onClick"]>,
       default: undefined,
     },
     dropdownProps: {
-      type: Object as PropType<ActionsProps['dropdownProps']>,
+      type: Object as PropType<ActionsProps["dropdownProps"]>,
       default: undefined,
     },
     variant: {
-      type: String as PropType<'borderless' | 'filled' | 'outlined'>,
-      default: 'borderless',
+      type: String as PropType<"borderless" | "filled" | "outlined">,
+      default: "borderless",
     },
     prefixCls: {
       type: String,
-      default: 'antdx-actions',
+      default: "antdx-actions",
     },
     rootClassName: {
       type: String,
-      default: '',
+      default: "",
     },
     class: {
-      type: [String, Array, Object] as PropType<ActionsProps['class']>,
+      type: [String, Array, Object] as PropType<ActionsProps["class"]>,
       default: undefined,
     },
     style: {
@@ -84,47 +81,47 @@ export const XActions = defineComponent({
     },
   },
   setup(props, { expose }) {
-    const configCtx = useConfig()
-    const attrs = useAttrs()
-    const contextConfig = useXComponentConfig('actions')
-    const rootRef = ref<HTMLDivElement>()
-    const [hashId, cssVarCls] = useActionsStyle(computed(() => props.prefixCls))
-    const rootPrefixCls = computed(() => configCtx.value.getPrefixCls())
+    const configCtx = useConfig();
+    const attrs = useAttrs();
+    const contextConfig = useXComponentConfig("actions");
+    const rootRef = ref<HTMLDivElement>();
+    const [hashId, cssVarCls] = useActionsStyle(
+      computed(() => props.prefixCls),
+    );
+    const rootPrefixCls = computed(() => configCtx.value.getPrefixCls());
     const motionName = computed(() => {
-      if (!props.fadeIn && !props.fadeInLeft)
-        return ''
-      return `${rootPrefixCls.value}-x-fade${props.fadeInLeft ? '-left' : ''}`
-    })
+      if (!props.fadeIn && !props.fadeInLeft) return "";
+      return `${rootPrefixCls.value}-x-fade${props.fadeInLeft ? "-left" : ""}`;
+    });
     const transitionProps = computed(() => {
-      if (!motionName.value)
-        return null
-      return getMotionTransitionProps(motionName.value)
-    })
+      if (!motionName.value) return null;
+      return getMotionTransitionProps(motionName.value);
+    });
 
     expose<ActionsRef>({
       get nativeElement() {
-        return rootRef.value as HTMLDivElement
+        return rootRef.value as HTMLDivElement;
       },
-    })
+    });
 
     const domAttrs = computed(() => {
-      const { class: _class, style: _style, ...rest } = attrs
-      return rest
-    })
+      const { class: _class, style: _style, ...rest } = attrs;
+      return rest;
+    });
 
     const mergedClasses = computed(() => {
       return {
-        ...(contextConfig.value.classes ?? {}),
-        ...(props.classes ?? {}),
-      } as Partial<Record<SemanticType, string>>
-    })
+        ...contextConfig.value.classes,
+        ...props.classes,
+      } as Partial<Record<SemanticType, string>>;
+    });
 
     const mergedStyles = computed(() => {
       return {
-        ...(contextConfig.value.styles ?? {}),
-        ...(props.styles ?? {}),
-      } as Partial<Record<SemanticType, CSSProperties>>
-    })
+        ...contextConfig.value.styles,
+        ...props.styles,
+      } as Partial<Record<SemanticType, CSSProperties>>;
+    });
 
     const renderList = () => (
       <div
@@ -145,7 +142,7 @@ export const XActions = defineComponent({
           />
         ))}
       </div>
-    )
+    );
 
     return () => (
       <div
@@ -162,7 +159,7 @@ export const XActions = defineComponent({
           attrs.class,
           props.class,
           {
-            [`${props.prefixCls}-rtl`]: configCtx.value.direction === 'rtl',
+            [`${props.prefixCls}-rtl`]: configCtx.value.direction === "rtl",
           },
         ]}
         style={[
@@ -173,16 +170,14 @@ export const XActions = defineComponent({
           props.style,
         ]}
       >
-        {transitionProps.value
-          ? (
-              <Transition {...transitionProps.value}>
-                {renderList()}
-              </Transition>
-            )
-          : renderList()}
+        {transitionProps.value ? (
+          <Transition {...transitionProps.value}>{renderList()}</Transition>
+        ) : (
+          renderList()
+        )}
       </div>
-    )
+    );
   },
-})
+});
 
-export default XActions
+export default XActions;

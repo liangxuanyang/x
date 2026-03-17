@@ -1,57 +1,60 @@
-import type { PropType } from 'vue'
+import type { PropType } from "vue";
+
+import { Tooltip } from "antdv-next";
+import { computed, defineComponent } from "vue";
+
 import type {
   ActionsItemProps,
   ActionsProps,
   ItemType,
   SemanticType,
-} from './interface'
-import { Tooltip } from 'antdv-next'
-import { computed, defineComponent } from 'vue'
-import ActionsMenu from './ActionsMenu'
+} from "./interface";
 
-let keySeed = 0
+import ActionsMenu from "./ActionsMenu";
+
+let keySeed = 0;
 
 const Item = defineComponent({
-  name: 'XActionsActionItem',
+  name: "XActionsActionItem",
   props: {
     item: {
       type: Object as PropType<ItemType>,
       required: true,
     },
     onClick: {
-      type: Function as PropType<ActionsProps['onClick']>,
+      type: Function as PropType<ActionsProps["onClick"]>,
       default: undefined,
     },
     dropdownProps: {
-      type: Object as PropType<ActionsProps['dropdownProps']>,
+      type: Object as PropType<ActionsProps["dropdownProps"]>,
       default: undefined,
     },
     prefixCls: {
       type: String,
-      default: 'antdx-actions',
+      default: "antdx-actions",
     },
     classes: {
       type: Object as PropType<Partial<Record<SemanticType, string>>>,
       default: () => ({}),
     },
     styles: {
-      type: Object as PropType<ActionsProps['styles']>,
+      type: Object as PropType<ActionsProps["styles"]>,
       default: () => ({}),
     },
   },
   setup(props) {
-    const fallbackKey = `actions-item-${++keySeed}`
+    const fallbackKey = `actions-item-${++keySeed}`;
 
     const itemKey = computed(() => {
       if (props.item?.key === undefined || props.item?.key === null)
-        return fallbackKey
-      return String(props.item.key)
-    })
+        return fallbackKey;
+      return String(props.item.key);
+    });
 
     const onItemClick = (domEvent: MouseEvent) => {
       if (props.item.onItemClick) {
-        props.item.onItemClick(props.item)
-        return
+        props.item.onItemClick(props.item);
+        return;
       }
 
       props.onClick?.({
@@ -59,17 +62,16 @@ const Item = defineComponent({
         item: props.item,
         keyPath: [itemKey.value],
         domEvent,
-      })
-    }
+      });
+    };
 
     return () => {
-      if (!props.item)
-        return null
+      if (!props.item) return null;
 
       if (props.item.actionRender !== undefined) {
-        return typeof props.item.actionRender === 'function'
+        return typeof props.item.actionRender === "function"
           ? props.item.actionRender(props.item)
-          : props.item.actionRender
+          : props.item.actionRender;
       }
 
       if (props.item.subItems?.length) {
@@ -82,7 +84,7 @@ const Item = defineComponent({
             classes={props.classes}
             styles={props.styles}
           />
-        )
+        );
       }
 
       return (
@@ -101,11 +103,11 @@ const Item = defineComponent({
             <div class={`${props.prefixCls}-icon`}>{props.item?.icon}</div>
           </Tooltip>
         </div>
-      )
-    }
+      );
+    };
   },
-})
+});
 
-export default Item
+export default Item;
 
-export type { ActionsItemProps }
+export type { ActionsItemProps };

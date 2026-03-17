@@ -1,20 +1,23 @@
-import type { TokenWithCommonCls } from '@antdv-next/cssinjs/cssinjs-utils'
-import type { AliasToken, GenerateStyle } from '../../theme/interface'
+import type { TokenWithCommonCls } from "@antdv-next/cssinjs/cssinjs-utils";
 
-export const genCollapseMotion: GenerateStyle<TokenWithCommonCls<AliasToken>> = token => ({
+import type { AliasToken, GenerateStyle } from "../../theme/interface";
+
+export const genCollapseMotion: GenerateStyle<
+  TokenWithCommonCls<AliasToken>
+> = token => ({
   [token.componentCls]: {
     [`${token.antCls}-motion-collapse-legacy`]: {
-      overflow: 'hidden',
-      '&-active': {
+      overflow: "hidden",
+      "&-active": {
         transition: `height ${token.motionDurationMid} ${token.motionEaseInOut},
         opacity ${token.motionDurationMid} ${token.motionEaseInOut} !important`,
       },
     },
 
     [`${token.antCls}-motion-collapse`]: {
-      overflow: 'hidden',
+      overflow: "hidden",
       transition: `height ${token.motionDurationMid} ${token.motionEaseInOut},
         opacity ${token.motionDurationMid} ${token.motionEaseInOut} !important`,
     },
   },
-})
+});

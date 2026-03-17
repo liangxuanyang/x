@@ -1,9 +1,9 @@
-import { useConfig } from 'antdv-next/dist/config-provider/context'
+import { useConfig } from "antdv-next/dist/config-provider/context";
 
-export const defaultPrefixCls = 'ant'
+export const defaultPrefixCls = "ant";
 
 export default function useXProviderContext() {
-  const configCtx = useConfig()
+  const configCtx = useConfig();
 
   return {
     theme: configCtx.value.theme,
@@ -11,5 +11,5 @@ export default function useXProviderContext() {
     direction: configCtx.value.direction,
     csp: configCtx.value.csp,
     iconPrefixCls: configCtx.value.iconPrefixCls,
-  }
+  };
 }

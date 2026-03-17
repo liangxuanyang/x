@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Bubble } from '@antdv-next/x'
-import { Space, Switch } from 'antdv-next'
-import { ref } from 'vue'
+import { Bubble } from "@antdv-next/x";
+import { Space, Switch } from "antdv-next";
+import { ref } from "vue";
 
-const loading = ref(true)
+const loading = ref(true);
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;">
+  <Space direction="vertical" style="display: flex; width: 100%">
     <Bubble :loading="loading" content="hello world !" />
     <Space>
       <span>Loading state:</span>

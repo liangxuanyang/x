@@ -1,31 +1,36 @@
 <script setup lang="ts">
-import { CopyOutlined, RedoOutlined, UserOutlined } from '@antdv-next/icons'
-import { Actions, Bubble } from '@antdv-next/x'
-import { Avatar, Space } from 'antdv-next'
-import { h } from 'vue'
+import { CopyOutlined, RedoOutlined, UserOutlined } from "@antdv-next/icons";
+import { Actions, Bubble } from "@antdv-next/x";
+import { Avatar, Space } from "antdv-next";
+import { h } from "vue";
 
-const avatarNode = h(Avatar, { size: 'small', icon: h(UserOutlined) })
+const avatarNode = h(Avatar, { size: "small", icon: h(UserOutlined) });
 const actionItems = [
   {
-    key: 'retry',
+    key: "retry",
     icon: h(RedoOutlined),
-    label: 'Retry',
+    label: "Retry",
   },
   {
-    key: 'copy',
+    key: "copy",
     icon: h(CopyOutlined),
-    label: 'Copy',
+    label: "Copy",
   },
-]
+];
 
 function footerNode() {
-  return h(Actions, { items: actionItems })
+  return h(Actions, { items: actionItems });
 }
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;" :size="10">
-    <Bubble content="outer footer" header="footer" :avatar="avatarNode" :footer="footerNode" />
+  <Space direction="vertical" style="display: flex; width: 100%" :size="10">
+    <Bubble
+      content="outer footer"
+      header="footer"
+      :avatar="avatarNode"
+      :footer="footerNode"
+    />
     <Bubble
       content="inner footer"
       placement="end"

@@ -1,22 +1,28 @@
-import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface'
-import { unit } from '@antdv-next/cssinjs'
-import { mergeToken } from '@antdv-next/cssinjs/cssinjs-utils'
-import { initFadeLeftMotion, initFadeMotion } from '../../style'
-import { genStyleHooks } from '../../theme/genStyleUtils'
-import genActionsAudioStyle from './audio'
-import genActionsCopyStyle from './copy'
-import genActionsFeedbackStyle from './feedback'
+import { unit } from "@antdv-next/cssinjs";
+import { mergeToken } from "@antdv-next/cssinjs/cssinjs-utils";
+
+import type {
+  FullToken,
+  GenerateStyle,
+  GetDefaultToken,
+} from "../../theme/interface";
+
+import { initFadeLeftMotion, initFadeMotion } from "../../style";
+import { genStyleHooks } from "../../theme/genStyleUtils";
+import genActionsAudioStyle from "./audio";
+import genActionsCopyStyle from "./copy";
+import genActionsFeedbackStyle from "./feedback";
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {}
 
-export interface ActionsToken extends FullToken<'Actions'> {}
+export interface ActionsToken extends FullToken<"Actions"> {}
 
-const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
-  const { componentCls, antCls, calc } = token
+const genActionsStyle: GenerateStyle<ActionsToken> = token => {
+  const { componentCls, antCls, calc } = token;
   return {
     [componentCls]: {
       [`&${componentCls}-rtl`]: {
-        direction: 'rtl',
+        direction: "rtl",
       },
       [`${antCls}-pagination-item-link`]: {
         width: token.controlHeightSM,
@@ -36,9 +42,9 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
         [`${componentCls}-item`]: {
           paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
           paddingBlock: token.paddingXXS,
-          '&:hover': {
+          "&:hover": {
             color: token.colorTextSecondary,
-            background: 'transparent',
+            background: "transparent",
           },
         },
       },
@@ -46,45 +52,45 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
         color: token.colorError,
       },
       [`&${componentCls}-item,${componentCls}-item`]: {
-        cursor: 'pointer',
+        cursor: "pointer",
         fontSize: token.fontSize,
         paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
         paddingBlock: token.paddingXXS,
         borderRadius: token.borderRadiusSM,
         height: token.controlHeightSM,
-        boxSizing: 'border-box',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        boxSizing: "border-box",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
         lineHeight: token.lineHeight,
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
         [`${componentCls}-icon`]: {
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
           fontSize: token.fontSize,
         },
-        '&:hover': {
+        "&:hover": {
           background: token.colorBgTextHover,
         },
       },
       [`&${componentCls}-list,${componentCls}-list`]: {
-        display: 'inline-flex',
-        flexDirection: 'row',
-        alignItems: 'center',
+        display: "inline-flex",
+        flexDirection: "row",
+        alignItems: "center",
         color: token.colorText,
         gap: token.paddingXS,
       },
     },
-  }
-}
+  };
+};
 
-export const prepareComponentToken: GetDefaultToken<'Actions'> = () => ({})
+export const prepareComponentToken: GetDefaultToken<"Actions"> = () => ({});
 
 export default genStyleHooks(
-  'Actions',
-  (token) => {
-    const compToken = mergeToken<ActionsToken>(token, {})
+  "Actions",
+  token => {
+    const compToken = mergeToken<ActionsToken>(token, {});
     return [
       genActionsStyle(compToken),
       genActionsCopyStyle(compToken),
@@ -92,7 +98,7 @@ export default genStyleHooks(
       genActionsAudioStyle(compToken),
       initFadeLeftMotion(compToken),
       initFadeMotion(compToken),
-    ]
+    ];
   },
   prepareComponentToken,
-)
+);

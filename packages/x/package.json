@@ -1,15 +1,19 @@
 {
   "name": "@antdv-next/x",
-  "type": "module",
   "version": "0.0.1",
-  "publishConfig": {
-    "access": "public"
-  },
+  "files": [
+    "dist",
+    "global.d.ts"
+  ],
+  "type": "module",
   "sideEffects": [
     "./dist/*.css",
     "./dist/index.esm.js",
     "./dist/index.umd.js"
   ],
+  "main": "dist/index.js",
+  "module": "./dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -27,34 +31,30 @@
     "./dist/index.esm.js": "./dist/index.esm.js",
     "./dist/index.umd.js": "./dist/index.umd.js"
   },
-  "main": "dist/index.js",
-  "module": "./dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "global.d.ts"
-  ],
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "type-check": "vue-tsc --project tsconfig.app.json --noEmit",
-    "build:comp": "vite build --config vite.build.config.ts",
-    "build:esm": "vite build --config vite.esm.config.ts",
-    "build:umd": "vite build --config vite.umd.config.ts",
+    "build:comp": "vp build --config vite.build.config.ts",
+    "build:esm": "vp build --config vite.esm.config.ts",
+    "build:umd": "vp build --config vite.umd.config.ts",
     "build": "pnpm run build:comp && pnpm run build:esm && pnpm run build:umd"
+  },
+  "dependencies": {
+    "@ant-design/fast-color": "catalog:prod",
+    "@antdv-next/cssinjs": "catalog:prod",
+    "@antdv-next/icons": "catalog:prod",
+    "@vueuse/core": "catalog:prod",
+    "antdv-next": "catalog:prod",
+    "dayjs": "catalog:prod",
+    "vue": "catalog:prod"
   },
   "peerDependencies": {
     "antdv-next": ">=1.0.0",
     "vue": ">=3.5.0"
   },
-  "dependencies": {
-    "@antdv-next/icons": "catalog:prod",
-    "@vueuse/core": "catalog:prod",
-    "antdv-next": "catalog:prod",
-    "@antdv-next/cssinjs": "catalog:prod",
-    "@ant-design/fast-color": "catalog:prod",
-    "dayjs": "catalog:prod",
-    "vue": "catalog:prod"
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
   }
 }

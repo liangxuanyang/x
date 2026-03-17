@@ -1,5 +1,4 @@
-import type { CSSInterpolation } from '@antdv-next/cssinjs'
-
+import type { CSSInterpolation } from "@antdv-next/cssinjs";
 import type {
   FullToken as FullTokenTypeUtil,
   GenStyleFn as GenStyleFnTypeUtil,
@@ -7,39 +6,33 @@ import type {
   GlobalToken as GlobalTokenTypeUtil,
   OverrideTokenMap as OverrideTokenTypeUtil,
   TokenMapKey,
-} from '@antdv-next/cssinjs/cssinjs-utils'
-import type { AliasToken } from './alias'
+} from "@antdv-next/cssinjs/cssinjs-utils";
 
-import type { ComponentTokenMap } from './components'
+import type { AliasToken } from "./alias";
+import type { ComponentTokenMap } from "./components";
 
-type AnyObject = Record<string, any>
+type AnyObject = Record<string, any>;
 
 /** Final token which contains the components level override */
-export type GlobalToken = GlobalTokenTypeUtil<ComponentTokenMap, AliasToken>
+export type GlobalToken = GlobalTokenTypeUtil<ComponentTokenMap, AliasToken>;
 
-export type OverrideToken = OverrideTokenTypeUtil<ComponentTokenMap, AliasToken>
-
-export type OverrideComponent = TokenMapKey<ComponentTokenMap>
-
-export type FullToken<C extends TokenMapKey<ComponentTokenMap>> = FullTokenTypeUtil<
+export type OverrideToken = OverrideTokenTypeUtil<
   ComponentTokenMap,
-  AliasToken,
-  C
->
+  AliasToken
+>;
 
-export type GetDefaultToken<C extends TokenMapKey<ComponentTokenMap>> = GetDefaultTokenTypeUtil<
-  ComponentTokenMap,
-  AliasToken,
-  C
->
+export type OverrideComponent = TokenMapKey<ComponentTokenMap>;
 
-export type GenStyleFn<C extends TokenMapKey<ComponentTokenMap>> = GenStyleFnTypeUtil<
-  ComponentTokenMap,
-  AliasToken,
-  C
->
+export type FullToken<C extends TokenMapKey<ComponentTokenMap>> =
+  FullTokenTypeUtil<ComponentTokenMap, AliasToken, C>;
+
+export type GetDefaultToken<C extends TokenMapKey<ComponentTokenMap>> =
+  GetDefaultTokenTypeUtil<ComponentTokenMap, AliasToken, C>;
+
+export type GenStyleFn<C extends TokenMapKey<ComponentTokenMap>> =
+  GenStyleFnTypeUtil<ComponentTokenMap, AliasToken, C>;
 
 export type GenerateStyle<
   ComponentToken extends AnyObject = AliasToken,
   ReturnType = CSSInterpolation,
-> = (token: ComponentToken) => ReturnType
+> = (token: ComponentToken) => ReturnType;

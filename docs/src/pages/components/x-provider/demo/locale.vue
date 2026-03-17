@@ -7,95 +7,96 @@ Components which need localization support are listed here, you can toggle the l
 </docs>
 
 <script setup lang="ts">
-import type { ActionsProps, ConversationsProps, XProviderProps } from '@antdv-next/x'
+import type {
+  ActionsProps,
+  ConversationsProps,
+  XProviderProps,
+} from "@antdv-next/x";
+
 import {
   CodeOutlined,
   FileImageOutlined,
   FileSearchOutlined,
   SignatureOutlined,
-} from '@antdv-next/icons'
-import { Actions, Conversations, XProvider } from '@antdv-next/x'
-import { Card, Flex, Radio, Typography } from 'antdv-next'
-import enUS from 'antdv-next/dist/locale/en_US'
-import zhCN from 'antdv-next/dist/locale/zh_CN'
-import { computed, h, ref } from 'vue'
+} from "@antdv-next/icons";
+import { Actions, Conversations, XProvider } from "@antdv-next/x";
+import { Card, Flex, Radio, Typography } from "antdv-next";
+import enUS from "antdv-next/dist/locale/en_US";
+import zhCN from "antdv-next/dist/locale/zh_CN";
+import { computed, h, ref } from "vue";
 
-const localeType = ref<'zh' | 'en'>('zh')
+const localeType = ref<"zh" | "en">("zh");
 
 const itemsLocale = {
   en: {
-    write: 'Help Me Write',
-    coding: 'AI Coding',
-    createImage: 'Create Image',
-    deepSearch: 'Deep Search',
+    write: "Help Me Write",
+    coding: "AI Coding",
+    createImage: "Create Image",
+    deepSearch: "Deep Search",
   },
   zh: {
-    write: '帮我写作',
-    coding: 'AI编码',
-    createImage: '图片生成',
-    deepSearch: '深度搜索',
+    write: "帮我写作",
+    coding: "AI编码",
+    createImage: "图片生成",
+    deepSearch: "深度搜索",
   },
-}
+};
 
-const locale = computed<XProviderProps['locale']>(() => {
-  return localeType.value === 'zh' ? zhCN : enUS
-})
+const locale = computed<XProviderProps["locale"]>(() => {
+  return localeType.value === "zh" ? zhCN : enUS;
+});
 
-const conversationItems = computed<ConversationsProps['items']>(() => {
-  const t = itemsLocale[localeType.value]
+const conversationItems = computed<ConversationsProps["items"]>(() => {
+  const t = itemsLocale[localeType.value];
 
   return [
     {
-      key: 'write',
+      key: "write",
       label: t.write,
       icon: h(SignatureOutlined),
     },
     {
-      key: 'coding',
+      key: "coding",
       label: t.coding,
       icon: h(CodeOutlined),
     },
     {
-      key: 'createImage',
+      key: "createImage",
       label: t.createImage,
       icon: h(FileImageOutlined),
     },
     {
-      key: 'deepSearch',
+      key: "deepSearch",
       label: t.deepSearch,
       icon: h(FileSearchOutlined),
     },
-  ]
-})
+  ];
+});
 
-const actionItems: ActionsProps['items'] = [
+const actionItems: ActionsProps["items"] = [
   {
-    key: 'feedback',
+    key: "feedback",
     actionRender: () => h(Actions.Feedback),
   },
   {
-    key: 'copy',
-    label: 'copy',
-    actionRender: () => h(Actions.Copy, { text: 'copy value' }),
+    key: "copy",
+    label: "copy",
+    actionRender: () => h(Actions.Copy, { text: "copy value" }),
   },
   {
-    key: 'audio',
-    label: 'audio',
+    key: "audio",
+    label: "audio",
     actionRender: () => h(Actions.Audio),
   },
-]
+];
 </script>
 
 <template>
   <Flex :gap="12" style="margin-bottom: 16px" align="center">
     <Typography.Text>Change locale of components:</Typography.Text>
     <Radio.Group v-model:value="localeType">
-      <Radio.Button value="en">
-        English
-      </Radio.Button>
-      <Radio.Button value="zh">
-        中文
-      </Radio.Button>
+      <Radio.Button value="en"> English </Radio.Button>
+      <Radio.Button value="zh"> 中文 </Radio.Button>
     </Radio.Group>
   </Flex>
 

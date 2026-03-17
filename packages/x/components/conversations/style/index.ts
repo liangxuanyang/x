@@ -1,49 +1,55 @@
-import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface'
-import { unit } from '@antdv-next/cssinjs'
-import { mergeToken } from '@antdv-next/cssinjs/cssinjs-utils'
-import { FastColor } from '@ant-design/fast-color'
-import { genCollapseMotion } from '../../style'
-import { genStyleHooks } from '../../theme/genStyleUtils'
+import { FastColor } from "@ant-design/fast-color";
+import { unit } from "@antdv-next/cssinjs";
+import { mergeToken } from "@antdv-next/cssinjs/cssinjs-utils";
+
+import type {
+  FullToken,
+  GenerateStyle,
+  GetDefaultToken,
+} from "../../theme/interface";
+
+import { genCollapseMotion } from "../../style";
+import { genStyleHooks } from "../../theme/genStyleUtils";
 
 export interface ComponentToken {
-  creationBgColor: string
-  creationBorderColor: string
-  creationHoverColor: string
-  shortcutKeyTextColor: string
+  creationBgColor: string;
+  creationBorderColor: string;
+  creationHoverColor: string;
+  shortcutKeyTextColor: string;
 }
 
-export interface ConversationsToken extends FullToken<'Conversations'> {}
+export interface ConversationsToken extends FullToken<"Conversations"> {}
 
-const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
-  const { componentCls, calc } = token
+const genConversationsStyle: GenerateStyle<ConversationsToken> = token => {
+  const { componentCls, calc } = token;
 
   return {
     [componentCls]: {
-      display: 'flex',
-      flexDirection: 'column',
+      display: "flex",
+      flexDirection: "column",
       gap: token.paddingXXS,
-      overflowY: 'auto',
+      overflowY: "auto",
       padding: token.paddingSM,
       margin: 0,
-      listStyle: 'none',
-      'ul, ol': {
+      listStyle: "none",
+      "ul, ol": {
         margin: 0,
         padding: 0,
-        listStyle: 'none',
+        listStyle: "none",
       },
       [`&${componentCls}-rtl`]: {
-        direction: 'rtl',
+        direction: "rtl",
       },
       [`${componentCls}-creation`]: {
         backgroundColor: token.creationBgColor,
         color: token.colorPrimary,
-        border: 'none',
+        border: "none",
         fontWeight: 500,
         paddingBlock: token.paddingXS,
         paddingInline: token.paddingSM,
         fontSize: token.fontSize,
-        cursor: 'pointer',
-        display: 'flex',
+        cursor: "pointer",
+        display: "flex",
         gap: token.paddingXS,
         marginBlockEnd: token.marginSM,
         lineHeight: token.lineHeight,
@@ -56,43 +62,43 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         [`&:not(${componentCls}-creation-disabled)`]: {
           border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
         },
-        '&-start': {
-          justifyContent: 'flex-start',
+        "&-start": {
+          justifyContent: "flex-start",
         },
-        '&-center': {
-          justifyContent: 'center',
+        "&-center": {
+          justifyContent: "center",
         },
-        '&-end': {
-          justifyContent: 'flex-end',
+        "&-end": {
+          justifyContent: "flex-end",
         },
-        '&-label': {
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+        "&-label": {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         },
-        '&-label-shortcut-keys-show': {
+        "&-label-shortcut-keys-show": {
           flex: 1,
         },
-        '&-label-shortcut-keys': {
+        "&-label-shortcut-keys": {
           height: token.controlHeightXS,
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
           gap: unit(4),
         },
-        '&-label-shortcut-key': {
+        "&-label-shortcut-key": {
           borderRadius: token.borderRadiusSM,
-          height: '100%',
-          boxSizing: 'border-box',
+          height: "100%",
+          boxSizing: "border-box",
           fontSize: token.fontSizeIcon,
           paddingInline: `${unit(calc(token.paddingXXS).sub(1).equal())}`,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           color: token.shortcutKeyTextColor,
           border: `${unit(token.lineWidth)} ${token.lineType}, ${token.creationBorderColor}`,
         },
-        '&-disabled': {
-          cursor: 'not-allowed',
+        "&-disabled": {
+          cursor: "not-allowed",
           background: token.colorBgContainerDisabled,
           [`& ${componentCls}-creation-label, ${componentCls}-creation-icon`]: {
             color: token.colorTextDisabled,
@@ -107,31 +113,32 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         marginBlock: token.marginXXS,
       },
       [`${componentCls}-item`]: {
-        display: 'flex',
+        display: "flex",
         height: token.controlHeightLG,
         minHeight: token.controlHeightLG,
         gap: token.paddingXS,
         padding: `0 ${unit(token.paddingXS)}`,
-        alignItems: 'center',
+        alignItems: "center",
         borderRadius: token.borderRadiusLG,
-        cursor: 'pointer',
+        cursor: "pointer",
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
         [`&:not(${componentCls}-item-disabled):hover`]: {
           backgroundColor: token.colorBgTextHover,
         },
-        '&-active': {
+        "&-active": {
           backgroundColor: token.colorBgTextHover,
           [`& ${componentCls}-label, ${componentCls}-menu-icon`]: {
             color: token.colorText,
           },
         },
-        '&-disabled': {
-          cursor: 'not-allowed',
-          [`& ${componentCls}-label, ${componentCls}-icon, ${componentCls}-menu-icon`]: {
-            color: token.colorTextDisabled,
-          },
+        "&-disabled": {
+          cursor: "not-allowed",
+          [`& ${componentCls}-label, ${componentCls}-icon, ${componentCls}-menu-icon`]:
+            {
+              color: token.colorTextDisabled,
+            },
         },
-        '&:hover, &-active': {
+        "&:hover, &-active": {
           [`& ${componentCls}-menu-icon`]: {
             opacity: 0.6,
           },
@@ -141,23 +148,23 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         },
       },
       [`${componentCls}-content-hidden`]: {
-        display: 'none',
+        display: "none",
       },
       [`${componentCls}-label`]: {
         flex: 1,
         color: token.colorText,
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
       },
       [`${componentCls}-menu-icon`]: {
         opacity: 0,
         fontSize: token.fontSizeXL,
       },
       [`${componentCls}-list`]: {
-        display: 'flex',
+        display: "flex",
         gap: token.paddingXXS,
-        flexDirection: 'column',
+        flexDirection: "column",
       },
       [`${componentCls}-group-collapsible-list`]: {
         paddingBlockStart: token.paddingXXS,
@@ -166,58 +173,60 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         },
       },
       [`${componentCls}-group-title`]: {
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
         color: token.colorTextDescription,
         height: token.controlHeightLG,
         minHeight: token.controlHeightLG,
         padding: `0 ${unit(token.paddingXS)}`,
       },
       [`${componentCls}-group-title-collapsible`]: {
-        justifyContent: 'space-between',
-        cursor: 'pointer',
+        justifyContent: "space-between",
+        cursor: "pointer",
         color: token.colorText,
         borderRadius: token.borderRadiusLG,
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
-        '&:hover': {
+        "&:hover": {
           backgroundColor: token.colorBgTextHover,
         },
       },
       [`${componentCls}-group-collapse-trigger`]: {
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
-        transform: 'rotate(0deg)',
-        transformOrigin: 'center center',
+        transform: "rotate(0deg)",
+        transformOrigin: "center center",
       },
       [`${componentCls}-group-collapse-trigger-open`]: {
-        transform: 'rotate(90deg)',
+        transform: "rotate(90deg)",
       },
       [`${componentCls}-group-collapse-trigger-close`]: {
-        transform: 'rotate(0deg)',
+        transform: "rotate(0deg)",
       },
     },
-  }
-}
+  };
+};
 
-export const prepareComponentToken: GetDefaultToken<'Conversations'> = (token) => {
-  const creationBgColor = new FastColor(token.colorPrimary).setA(0.15)
-  const creationBorderColor = new FastColor(token.colorPrimary).setA(0.22)
-  const creationHoverColor = new FastColor(token.colorPrimary).setA(0.25)
-  const shortcutKeyTextColor = new FastColor(token.colorPrimary).setA(0.65)
+export const prepareComponentToken: GetDefaultToken<
+  "Conversations"
+> = token => {
+  const creationBgColor = new FastColor(token.colorPrimary).setA(0.15);
+  const creationBorderColor = new FastColor(token.colorPrimary).setA(0.22);
+  const creationHoverColor = new FastColor(token.colorPrimary).setA(0.25);
+  const shortcutKeyTextColor = new FastColor(token.colorPrimary).setA(0.65);
 
   return {
     creationBgColor: creationBgColor.toRgbString(),
     creationBorderColor: creationBorderColor.toRgbString(),
     creationHoverColor: creationHoverColor.toRgbString(),
     shortcutKeyTextColor: shortcutKeyTextColor.toRgbString(),
-  }
-}
+  };
+};
 
 export default genStyleHooks(
-  'Conversations',
-  (token) => {
-    const compToken = mergeToken<ConversationsToken>(token, {})
+  "Conversations",
+  token => {
+    const compToken = mergeToken<ConversationsToken>(token, {});
 
-    return [genConversationsStyle(compToken), genCollapseMotion(compToken)]
+    return [genConversationsStyle(compToken), genCollapseMotion(compToken)];
   },
   prepareComponentToken,
-)
+);

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { BubbleListProps } from '@antdv-next/x'
+import type { BubbleListProps } from "@antdv-next/x";
+
 import {
   AntDesignOutlined,
   ArrowDownOutlined,
@@ -7,96 +8,99 @@ import {
   CopyOutlined,
   RedoOutlined,
   UserOutlined,
-} from '@antdv-next/icons'
-import { Actions, Bubble } from '@antdv-next/x'
-import { Avatar, Button, Space } from 'antdv-next'
-import { h, ref } from 'vue'
+} from "@antdv-next/icons";
+import { Actions, Bubble } from "@antdv-next/x";
+import { Avatar, Button, Space } from "antdv-next";
+import { h, ref } from "vue";
 
-let seed = 0
-const nextKey = () => `bubble_${seed++}`
+let seed = 0;
+const nextKey = () => `bubble_${seed++}`;
 
 function genItem(isAI: boolean, repeat = 20): any {
   return {
     key: nextKey(),
-    role: isAI ? 'ai' : 'user',
-    content: `${seed}: ${isAI ? 'Mock AI content '.repeat(repeat) : 'Mock user content.'}`,
+    role: isAI ? "ai" : "user",
+    content: `${seed}: ${isAI ? "Mock AI content ".repeat(repeat) : "Mock user content."}`,
     typing: false,
-  }
+  };
 }
 
-const listRef = ref<any>(null)
-const items = ref<any[]>(Array.from({ length: 11 }, (_, index) => genItem(index % 2 === 1)))
+const listRef = ref<any>(null);
+const items = ref<any[]>(
+  Array.from({ length: 11 }, (_, index) => genItem(index % 2 === 1)),
+);
 const actionItems = [
   {
-    key: 'retry',
+    key: "retry",
     icon: h(RedoOutlined),
-    label: 'Retry',
+    label: "Retry",
   },
   {
-    key: 'copy',
+    key: "copy",
     icon: h(CopyOutlined),
-    label: 'Copy',
+    label: "Copy",
   },
-]
+];
 
-const role: BubbleListProps['role'] = {
+const role: BubbleListProps["role"] = {
   ai: {
     typing: true,
-    header: 'AI',
-    avatar: () => h(Avatar, { size: 'small', icon: h(AntDesignOutlined) }),
+    header: "AI",
+    avatar: () => h(Avatar, { size: "small", icon: h(AntDesignOutlined) }),
     footer: () => h(Actions, { items: actionItems }),
   },
   user: {
-    placement: 'end',
+    placement: "end",
     typing: false,
-    header: 'User',
-    avatar: () => h(Avatar, { size: 'small', icon: h(UserOutlined) }),
+    header: "User",
+    avatar: () => h(Avatar, { size: "small", icon: h(UserOutlined) }),
   },
-}
+};
 
 function addLongBubble() {
-  const isAI = !!(items.value.length % 2)
-  items.value = [...items.value, genItem(isAI, 100)]
+  const isAI = !!(items.value.length % 2);
+  items.value = [...items.value, genItem(isAI, 100)];
 }
 
 function scrollTop() {
-  listRef.value?.scrollTo({ top: 'top' })
+  listRef.value?.scrollTo({ top: "top" });
 }
 
 function scrollBottomSmooth() {
-  listRef.value?.scrollTo({ top: 'bottom', behavior: 'smooth' })
+  listRef.value?.scrollTo({ top: "bottom", behavior: "smooth" });
 }
 
 function scrollBottomInstant() {
-  listRef.value?.scrollTo({ top: 'bottom', behavior: 'instant' })
+  listRef.value?.scrollTo({ top: "bottom", behavior: "instant" });
 }
 
 function scrollRandom() {
-  const native = listRef.value?.scrollBoxNativeElement
-  if (!native)
-    return
+  const native = listRef.value?.scrollBoxNativeElement;
+  if (!native) return;
 
   listRef.value?.scrollTo({
     top: Math.random() * native.scrollHeight,
-  })
+  });
 }
 
 function scrollSecond() {
-  if (items.value.length < 2)
-    return
-  listRef.value?.scrollTo({ key: items.value[1]?.key, block: 'nearest' })
+  if (items.value.length < 2) return;
+  listRef.value?.scrollTo({ key: items.value[1]?.key, block: "nearest" });
 }
 
 function scrollLast() {
-  const last = items.value.at(-1)
-  if (!last)
-    return
-  listRef.value?.scrollTo({ key: last.key, block: 'end' })
+  const last = items.value.at(-1);
+  if (!last) return;
+  listRef.value?.scrollTo({ key: last.key, block: "end" });
 }
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%; height: 720px;" :size="10">
+  <Space
+    direction="vertical"
+    style="display: flex; width: 100%; height: 720px"
+    :size="10"
+  >
     <Space wrap>
       <Button type="primary" @click="addLongBubble">
         <RedoOutlined />
@@ -114,18 +118,12 @@ function scrollLast() {
         <ArrowDownOutlined />
         Scroll To Bottom instant
       </Button>
-      <Button @click="scrollRandom">
-        Scroll To Random
-      </Button>
-      <Button @click="scrollSecond">
-        Scroll To Second Bubble
-      </Button>
-      <Button @click="scrollLast">
-        Scroll To Last Bubble
-      </Button>
+      <Button @click="scrollRandom"> Scroll To Random </Button>
+      <Button @click="scrollSecond"> Scroll To Second Bubble </Button>
+      <Button @click="scrollLast"> Scroll To Last Bubble </Button>
     </Space>
 
-    <div style="display: flex; flex: 1; min-height: 0;">
+    <div style="display: flex; flex: 1; min-height: 0">
       <Bubble.List ref="listRef" :role="role" :items="items" />
     </div>
   </Space>

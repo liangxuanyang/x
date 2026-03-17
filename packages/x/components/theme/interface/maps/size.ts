@@ -3,45 +3,45 @@ export interface SizeMapToken {
    * @nameZH XXL
    * @default 48
    */
-  sizeXXL: number
+  sizeXXL: number;
   /**
    * @nameZH XL
    * @default 32
    */
-  sizeXL: number
+  sizeXL: number;
   /**
    * @nameZH LG
    * @default 24
    */
-  sizeLG: number
+  sizeLG: number;
   /**
    * @nameZH MD
    * @default 20
    */
-  sizeMD: number
+  sizeMD: number;
   /** Same as size by default, but could be larger in compact mode */
-  sizeMS: number
+  sizeMS: number;
   /**
    * @nameZH 默认
    * @desc 默认尺寸
    * @default 16
    */
-  size: number
+  size: number;
   /**
    * @nameZH SM
    * @default 12
    */
-  sizeSM: number
+  sizeSM: number;
   /**
    * @nameZH XS
    * @default 8
    */
-  sizeXS: number
+  sizeXS: number;
   /**
    * @nameZH XXS
    * @default 4
    */
-  sizeXXS: number
+  sizeXXS: number;
 }
 
 export interface HeightMapToken {
@@ -54,7 +54,7 @@ export interface HeightMapToken {
    * @desc 更小的组件高度
    * @descEN XS component height
    */
-  controlHeightXS: number
+  controlHeightXS: number;
 
   /**
    * @nameZH 较小的组件高度
@@ -62,7 +62,7 @@ export interface HeightMapToken {
    * @desc 较小的组件高度
    * @descEN SM component height
    */
-  controlHeightSM: number
+  controlHeightSM: number;
 
   /**
    * @nameZH 较高的组件高度
@@ -70,5 +70,5 @@ export interface HeightMapToken {
    * @desc 较高的组件高度
    * @descEN LG component height
    */
-  controlHeightLG: number
+  controlHeightLG: number;
 }

@@ -7,45 +7,46 @@ Modify shortcut keys by `shortcutKeys` prop.
 </docs>
 
 <script setup lang="ts">
-import type { ConversationsProps, XProviderProps } from '@antdv-next/x'
+import type { ConversationsProps, XProviderProps } from "@antdv-next/x";
+
 import {
   CodeOutlined,
   FileImageOutlined,
   FileSearchOutlined,
   SignatureOutlined,
-} from '@antdv-next/icons'
-import { Conversations, XProvider } from '@antdv-next/x'
-import { Card, Flex, Tag, Typography } from 'antdv-next'
-import { h } from 'vue'
+} from "@antdv-next/icons";
+import { Conversations, XProvider } from "@antdv-next/x";
+import { Card, Flex, Tag, Typography } from "antdv-next";
+import { h } from "vue";
 
-const providerConversationsConfig: XProviderProps['conversations'] = {
+const providerConversationsConfig: XProviderProps["conversations"] = {
   shortcutKeys: {
-    items: ['Alt', 'number'],
+    items: ["Alt", "number"],
   },
-}
+};
 
-const items: ConversationsProps['items'] = [
+const items: ConversationsProps["items"] = [
   {
-    key: 'write',
-    label: 'Help Me Write',
+    key: "write",
+    label: "Help Me Write",
     icon: h(SignatureOutlined),
   },
   {
-    key: 'coding',
-    label: 'AI Coding',
+    key: "coding",
+    label: "AI Coding",
     icon: h(CodeOutlined),
   },
   {
-    key: 'createImage',
-    label: 'Create Image',
+    key: "createImage",
+    label: "Create Image",
     icon: h(FileImageOutlined),
   },
   {
-    key: 'deepSearch',
-    label: 'Deep Search',
+    key: "deepSearch",
+    label: "Deep Search",
     icon: h(FileSearchOutlined),
   },
-]
+];
 </script>
 
 <template>

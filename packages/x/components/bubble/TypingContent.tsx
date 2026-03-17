@@ -1,10 +1,13 @@
-import type { PropType } from 'vue'
-import type { BubbleAnimationOption, BubbleProps } from './interface'
-import { computed, defineComponent } from 'vue'
-import { useTyping } from './hooks/useTyping'
+import type { PropType } from "vue";
+
+import { computed, defineComponent } from "vue";
+
+import type { BubbleAnimationOption, BubbleProps } from "./interface";
+
+import { useTyping } from "./hooks/useTyping";
 
 export const TypingContent = defineComponent({
-  name: 'XBubbleTypingContent',
+  name: "XBubbleTypingContent",
   props: {
     prefixCls: {
       type: String,
@@ -23,11 +26,11 @@ export const TypingContent = defineComponent({
       required: true,
     },
     onTyping: {
-      type: Function as PropType<BubbleProps['onTyping']>,
+      type: Function as PropType<BubbleProps["onTyping"]>,
       default: undefined,
     },
     onTypingComplete: {
-      type: Function as PropType<BubbleProps['onTypingComplete']>,
+      type: Function as PropType<BubbleProps["onTypingComplete"]>,
       default: undefined,
     },
   },
@@ -38,25 +41,31 @@ export const TypingContent = defineComponent({
       typing: () => props.typing,
       onTyping: props.onTyping,
       onTypingComplete: props.onTypingComplete,
-    })
+    });
 
-    const isTyping = computed(() => animationCfg.value?.effect === 'typing')
+    const isTyping = computed(() => animationCfg.value?.effect === "typing");
 
     return () => (
       <div
         class={[
-          isTyping.value && animating.value ? `${props.prefixCls}-typing` : null,
-          animationCfg.value?.effect === 'fade-in' ? `${props.prefixCls}-fade-in` : null,
+          isTyping.value && animating.value
+            ? `${props.prefixCls}-typing`
+            : null,
+          animationCfg.value?.effect === "fade-in"
+            ? `${props.prefixCls}-fade-in`
+            : null,
         ]}
       >
-        {renderedData.value.map(item => (
-          animationCfg.value?.effect === 'fade-in' && !item.done
-            ? (
-                <span key={item.id} class="fade-in">{item.text}</span>
-              )
-            : item.text
-        ))}
+        {renderedData.value.map(item =>
+          animationCfg.value?.effect === "fade-in" && !item.done ? (
+            <span key={item.id} class="fade-in">
+              {item.text}
+            </span>
+          ) : (
+            item.text
+          ),
+        )}
       </div>
-    )
+    );
   },
-})
+});

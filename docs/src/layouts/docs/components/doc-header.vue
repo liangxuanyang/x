@@ -1,59 +1,62 @@
 <script setup lang="ts">
-import type { MenuEmits } from 'antdv-next'
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import logoUrl from '@/assets/x.png'
-import { useLocale } from '@/composables/use-locale'
-import { headerItems, headerLocales } from '@/config/header'
-import { resolveDocRoutePath } from '@/router/docs'
-import { useAppStore } from '@/stores/app'
-import SwitchBtn from './switch-btn.vue'
-import ThemeBtn from './theme-btn.vue'
-import 'antdv-next/dist/antd.css'
+import type { MenuEmits } from "antdv-next";
 
-const route = useRoute()
-const router = useRouter()
-const appStore = useAppStore()
-const { locale, t } = useLocale()
+import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-const itemKeys = headerItems.map((item) => item.key).filter(Boolean) as string[]
-const headerPrefixes = [...itemKeys].sort((a, b) => b.length - a.length)
+import logoUrl from "@/assets/x.png";
+import { useLocale } from "@/composables/use-locale";
+import { headerItems, headerLocales } from "@/config/header";
+import { resolveDocRoutePath } from "@/router/docs";
+import { useAppStore } from "@/stores/app";
+
+import SwitchBtn from "./switch-btn.vue";
+import ThemeBtn from "./theme-btn.vue";
+import "antdv-next/dist/antd.css";
+
+const route = useRoute();
+const router = useRouter();
+const appStore = useAppStore();
+const { locale, t } = useLocale();
+
+const itemKeys = headerItems.map(item => item.key).filter(Boolean) as string[];
+const headerPrefixes = [...itemKeys].sort((a, b) => b.length - a.length);
 
 function normalizeHeaderMatchPath(path: string) {
-  if (path.endsWith('-en')) return path.slice(0, -3) || '/'
-  if (path.endsWith('-cn')) return path.slice(0, -3) || '/'
-  return path
+  if (path.endsWith("-en")) return path.slice(0, -3) || "/";
+  if (path.endsWith("-cn")) return path.slice(0, -3) || "/";
+  return path;
 }
 
 const selectedKeys = computed(() => {
-  const normalizedPath = normalizeHeaderMatchPath(route.path)
+  const normalizedPath = normalizeHeaderMatchPath(route.path);
   const matchedHeaderPrefix = headerPrefixes.find(
-    (prefix) =>
+    prefix =>
       normalizedPath === prefix || normalizedPath.startsWith(`${prefix}/`),
-  )
-  return matchedHeaderPrefix ? [matchedHeaderPrefix] : []
-})
+  );
+  return matchedHeaderPrefix ? [matchedHeaderPrefix] : [];
+});
 
-const handleHeaderChange: MenuEmits['click'] = (info) => {
-  router.push(String(info.key))
-}
+const handleHeaderChange: MenuEmits["click"] = info => {
+  router.push(String(info.key));
+};
 
-const localeValue = computed(() => (appStore.locale === 'zh-CN' ? 1 : 2))
+const localeValue = computed(() => (appStore.locale === "zh-CN" ? 1 : 2));
 
 function changeLocale(value: 1 | 2) {
-  const nextLocale = value === 1 ? 'zh-CN' : 'en-US'
-  if (appStore.locale === nextLocale) return
+  const nextLocale = value === 1 ? "zh-CN" : "en-US";
+  if (appStore.locale === nextLocale) return;
 
-  appStore.setLocale(nextLocale)
+  appStore.setLocale(nextLocale);
 
-  const localizedPath = resolveDocRoutePath(route.path, nextLocale)
-  if (!localizedPath || localizedPath === route.path) return
+  const localizedPath = resolveDocRoutePath(route.path, nextLocale);
+  if (!localizedPath || localizedPath === route.path) return;
 
   router.replace({
     path: localizedPath,
     query: route.query,
     hash: route.hash,
-  })
+  });
 }
 </script>
 
@@ -80,7 +83,7 @@ function changeLocale(value: 1 | 2) {
           @click="handleHeaderChange"
         >
           <template #labelRender="{ key, label }">
-            {{ headerLocales?.[key]?.[locale as 'zh-CN' | 'en-US'] ?? label }}
+            {{ headerLocales?.[key]?.[locale as "zh-CN" | "en-US"] ?? label }}
           </template>
         </a-menu>
 

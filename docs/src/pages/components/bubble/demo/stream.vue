@@ -1,62 +1,65 @@
 <script setup lang="ts">
-import { RedoOutlined, UserOutlined } from '@antdv-next/icons'
-import { Bubble } from '@antdv-next/x'
-import { Avatar, Button, Divider, Space, Switch, Typography } from 'antdv-next'
-import { computed, h, onBeforeUnmount, ref } from 'vue'
+import { RedoOutlined, UserOutlined } from "@antdv-next/icons";
+import { Bubble } from "@antdv-next/x";
+import { Avatar, Button, Divider, Space, Switch, Typography } from "antdv-next";
+import { computed, h, onBeforeUnmount, ref } from "vue";
 
-const text = 'Ant Design X - Better UI toolkit for your AI Chat WebApp. '.repeat(5)
-const loading = ref(true)
-const source = ref('')
-const streamContent = ref('')
-const streaming = ref(false)
-const typing = ref(false)
-const disableStreaming = ref(false)
-const count = ref(0)
-let timer: ReturnType<typeof setInterval> | null = null
+const text =
+  "Ant Design X - Better UI toolkit for your AI Chat WebApp. ".repeat(5);
+const loading = ref(true);
+const source = ref("");
+const streamContent = ref("");
+const streaming = ref(false);
+const typing = ref(false);
+const disableStreaming = ref(false);
+const count = ref(0);
+let timer: ReturnType<typeof setInterval> | null = null;
 
-const bubbleStreaming = computed(() => (disableStreaming.value ? false : streaming.value))
+const bubbleStreaming = computed(() =>
+  disableStreaming.value ? false : streaming.value,
+);
 
 function clearTimer() {
   if (timer) {
-    clearInterval(timer)
-    timer = null
+    clearInterval(timer);
+    timer = null;
   }
 }
 
 function clear() {
-  clearTimer()
-  loading.value = false
-  source.value = ''
-  streamContent.value = ''
-  streaming.value = false
+  clearTimer();
+  loading.value = false;
+  source.value = "";
+  streamContent.value = "";
+  streaming.value = false;
 }
 
 function start(step: number, interval: number) {
-  clearTimer()
-  loading.value = false
-  count.value = 0
-  source.value = `${Math.floor(Math.random() * 10)} - ${text}`
-  streamContent.value = ''
-  streaming.value = true
+  clearTimer();
+  loading.value = false;
+  count.value = 0;
+  source.value = `${Math.floor(Math.random() * 10)} - ${text}`;
+  streamContent.value = "";
+  streaming.value = true;
 
   timer = setInterval(() => {
-    const nextLen = streamContent.value.length + step
+    const nextLen = streamContent.value.length + step;
     if (nextLen < source.value.length) {
-      streamContent.value = source.value.slice(0, nextLen)
-      return
+      streamContent.value = source.value.slice(0, nextLen);
+      return;
     }
 
-    streamContent.value = source.value
-    streaming.value = false
-    clearTimer()
-  }, interval)
+    streamContent.value = source.value;
+    streaming.value = false;
+    clearTimer();
+  }, interval);
 }
 
-onBeforeUnmount(() => clearTimer())
+onBeforeUnmount(() => clearTimer());
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;" :size="10">
+  <Space direction="vertical" style="display: flex; width: 100%" :size="10">
     <Space align="center" wrap>
       <span>Streaming data:</span>
       <Button type="primary" @click="start(2, 100)">
@@ -67,9 +70,7 @@ onBeforeUnmount(() => clearTimer())
         <RedoOutlined />
         load quickly
       </Button>
-      <Button type="link" @click="clear">
-        clear
-      </Button>
+      <Button type="link" @click="clear"> clear </Button>
     </Space>
 
     <Space align="center">
@@ -89,16 +90,24 @@ onBeforeUnmount(() => clearTimer())
       </Typography.Text>
     </Space>
 
-    <Divider style="margin: 4px 0;" />
+    <Divider style="margin: 4px 0" />
 
     <Bubble
       :loading="loading"
       :content="streamContent"
       :streaming="bubbleStreaming"
-      :typing="typing ? { effect: 'typing', step: 5, interval: 50, keepPrefix: true } : false"
+      :typing="
+        typing
+          ? { effect: 'typing', step: 5, interval: 50, keepPrefix: true }
+          : false
+      "
       header="ADX"
       :avatar="h(Avatar, { size: 'small', icon: h(UserOutlined) })"
-      :on-typing-complete="() => { count += 1 }"
+      :on-typing-complete="
+        () => {
+          count += 1;
+        }
+      "
     />
   </Space>
 </template>

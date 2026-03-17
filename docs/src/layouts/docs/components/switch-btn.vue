@@ -1,19 +1,23 @@
 <script setup lang="ts">
 defineProps<{
-  pure?: boolean
-  value: 1 | 2
-  tooltip1?: string
-  tooltip2?: string
-}>()
+  pure?: boolean;
+  value: 1 | 2;
+  tooltip1?: string;
+  tooltip2?: string;
+}>();
 
 const emit = defineEmits<{
-  click: [value: 1 | 2]
-}>()
+  click: [value: 1 | 2];
+}>();
 </script>
 
 <template>
   <a-tooltip :title="value === 1 ? tooltip1 : tooltip2">
-    <a-button type="text" class="ant-switch-btn" @click="emit('click', value === 1 ? 2 : 1)">
+    <a-button
+      type="text"
+      class="ant-switch-btn"
+      @click="emit('click', value === 1 ? 2 : 1)"
+    >
       <div class="btn-inner">
         <template v-if="pure">
           <template v-if="value === 1">
@@ -25,10 +29,16 @@ const emit = defineEmits<{
         </template>
         <template v-else>
           <div class="inner-div">
-            <span class="label-style" :class="value === 1 ? 'label1-style' : 'label2-style'">
+            <span
+              class="label-style"
+              :class="value === 1 ? 'label1-style' : 'label2-style'"
+            >
               <slot name="label1" />
             </span>
-            <span class="label-style" :class="value === 1 ? 'label2-style' : 'label1-style'">
+            <span
+              class="label-style"
+              :class="value === 1 ? 'label2-style' : 'label1-style'"
+            >
               <slot name="label2" />
             </span>
           </div>

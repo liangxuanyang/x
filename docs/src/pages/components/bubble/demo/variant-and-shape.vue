@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Bubble } from '@antdv-next/x'
-import { Space } from 'antdv-next'
+import { Bubble } from "@antdv-next/x";
+import { Space } from "antdv-next";
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;" :size="10">
+  <Space direction="vertical" style="display: flex; width: 100%" :size="10">
     <Space wrap>
       <Bubble content="filled - default" />
       <Bubble content="filled - round" shape="round" />
@@ -15,15 +15,29 @@ import { Space } from 'antdv-next'
     <Space wrap>
       <Bubble content="outlined - default" variant="outlined" />
       <Bubble content="outlined - round" variant="outlined" shape="round" />
-      <Bubble content="outlined - corner left" variant="outlined" shape="corner" />
-      <Bubble content="outlined - corner right" variant="outlined" shape="corner" placement="end" />
+      <Bubble
+        content="outlined - corner left"
+        variant="outlined"
+        shape="corner"
+      />
+      <Bubble
+        content="outlined - corner right"
+        variant="outlined"
+        shape="corner"
+        placement="end"
+      />
     </Space>
 
     <Space wrap>
       <Bubble content="shadow - default" variant="shadow" />
       <Bubble content="shadow - round" variant="shadow" shape="round" />
       <Bubble content="shadow - corner left" variant="shadow" shape="corner" />
-      <Bubble content="shadow - corner right" variant="shadow" shape="corner" placement="end" />
+      <Bubble
+        content="shadow - corner right"
+        variant="shadow"
+        shape="corner"
+        placement="end"
+      />
     </Space>
 
     <Space wrap>

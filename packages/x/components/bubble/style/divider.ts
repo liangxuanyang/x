@@ -1,18 +1,18 @@
-import type { GenerateStyle } from '../../theme/interface'
-import type { BubbleToken } from './bubble'
+import type { GenerateStyle } from "../../theme/interface";
+import type { BubbleToken } from "./bubble";
 
-export const genDividerBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls } = token
+export const genDividerBubbleStyle: GenerateStyle<BubbleToken> = token => {
+  const { componentCls } = token;
   return {
     [componentCls]: {
-      '&-divider': {
-        width: '100%',
-        justifyContent: 'center',
+      "&-divider": {
+        width: "100%",
+        justifyContent: "center",
 
         [`& ${componentCls}-body`]: {
-          width: '100%',
+          width: "100%",
         },
       },
     },
-  }
-}
+  };
+};

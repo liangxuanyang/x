@@ -1,20 +1,32 @@
-import type { GenerateStyle } from '../../theme/interface'
-import type { BubbleToken } from './bubble'
-import { unit } from '@antdv-next/cssinjs'
+import { unit } from "@antdv-next/cssinjs";
 
-export const genSystemBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
-  const { componentCls, paddingSM, paddingXS, lineHeight, fontSize, fontSizeSM, calc } = token
+import type { GenerateStyle } from "../../theme/interface";
+import type { BubbleToken } from "./bubble";
+
+export const genSystemBubbleStyle: GenerateStyle<BubbleToken> = token => {
+  const {
+    componentCls,
+    paddingSM,
+    paddingXS,
+    lineHeight,
+    fontSize,
+    fontSizeSM,
+    calc,
+  } = token;
   return {
     [componentCls]: {
       [`&${componentCls}-system`]: {
-        width: '100%',
-        justifyContent: 'center',
+        width: "100%",
+        justifyContent: "center",
 
         [`${componentCls}-content`]: {
-          display: 'flex',
+          display: "flex",
           gap: `${unit(fontSizeSM)}`,
-          alignItems: 'center',
-          minHeight: calc(paddingXS).mul(2).add(calc(lineHeight).mul(fontSize)).equal(),
+          alignItems: "center",
+          minHeight: calc(paddingXS)
+            .mul(2)
+            .add(calc(lineHeight).mul(fontSize))
+            .equal(),
           fontSize: `${unit(fontSize)}`,
           paddingInline: `${unit(paddingSM)}`,
           paddingBlock: `${unit(paddingXS)}`,
@@ -25,5 +37,5 @@ export const genSystemBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         [`${componentCls}-system-extra`]: {},
       },
     },
-  }
-}
+  };
+};

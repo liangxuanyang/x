@@ -1,5 +1,5 @@
 /* 图标库引用（如果需要） */
-@import url('https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css');
+@import url("https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css");
 
 .site-button-ghost-wrapper {
   padding: 16px;
@@ -20,7 +20,12 @@ body {
     background-color var(--ant-motion-duration-slow),
     color var(--ant-motion-duration-slow);
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--ant-color-text-tertiary), transparent 25%) transparent;
+  scrollbar-color: color-mix(
+      in srgb,
+      var(--ant-color-text-tertiary),
+      transparent 25%
+    )
+    transparent;
 }
 
 html.dark,
@@ -37,7 +42,10 @@ html.dark body {
   background: #364d79;
 }
 
-.grid-demo-box .ant-doc-demo-box-demo .ant-row > div:not(.gutter-row):nth-child(2n + 1) {
+.grid-demo-box
+  .ant-doc-demo-box-demo
+  .ant-row
+  > div:not(.gutter-row):nth-child(2n + 1) {
   background: #1677ffbf;
 }
 
@@ -68,23 +76,28 @@ html.dark body {
   }
 }
 
-.ant-doc-main-sider-menu.ant-menu-inline > .ant-menu-item-group > .ant-menu-item-group-title::after {
+.ant-doc-main-sider-menu.ant-menu-inline
+  > .ant-menu-item-group
+  > .ant-menu-item-group-title::after {
   position: relative;
   top: 12px;
   display: block;
   width: calc(100% - 20px);
   height: 1px;
   background: var(--ant-color-split);
-  content: '';
+  content: "";
 }
 
-.ant-doc-main-sider-menu.ant-menu-inline > .ant-menu-item-group > .ant-menu-item-group-title {
+.ant-doc-main-sider-menu.ant-menu-inline
+  > .ant-menu-item-group
+  > .ant-menu-item-group-title {
   margin-top: var(--ant-margin);
   margin-bottom: var(--ant-margin);
   font-size: var(--ant-font-size);
 }
 
-.ant-doc-main-sider-menu.ant-menu-inline.ant-menu-inline .ant-menu-item-group-title {
+.ant-doc-main-sider-menu.ant-menu-inline.ant-menu-inline
+  .ant-menu-item-group-title {
   margin-left: var(--ant-margin-xxs);
   padding-inline: 28px 12px !important;
 }

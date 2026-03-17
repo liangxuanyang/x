@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { useLocale } from '@/composables/use-locale'
-import GroupMaskLayer from './group-mask-layer.vue'
-import LuminousBg from './luminous-bg.vue'
+import { useLocale } from "@/composables/use-locale";
 
-const { t } = useLocale()
+import GroupMaskLayer from "./group-mask-layer.vue";
+import LuminousBg from "./luminous-bg.vue";
+
+const { t } = useLocale();
 </script>
 
 <template>
@@ -11,21 +12,26 @@ const { t } = useLocale()
     <div class="antdv-home-preview-banner-holder">
       <LuminousBg />
 
-      <a-typography component="article" class="antdv-home-preview-banner-typography">
-        <h1 class="antdv-home-preview-banner-title">
-          Antd Next X
-        </h1>
+      <a-typography
+        component="article"
+        class="antdv-home-preview-banner-typography"
+      >
+        <h1 class="antdv-home-preview-banner-title">Antd Next X</h1>
         <p class="antdv-home-preview-banner-desc">
-          {{ t('home.desc') }}
+          {{ t("home.desc") }}
         </p>
       </a-typography>
 
       <a-flex gap="large" class="antdv-home-preview-banner-buttons">
         <a-button class="antdv-home-banner-btn start-btn" href="/docs">
-          {{ t('home.start') }}
+          {{ t("home.start") }}
         </a-button>
-        <a-button class="antdv-home-banner-btn design-btn" href="https://github.com/antdv-next/antdv-next-x" target="_blank">
-          {{ t('home.design') }}
+        <a-button
+          class="antdv-home-banner-btn design-btn"
+          href="https://github.com/antdv-next/antdv-next-x"
+          target="_blank"
+        >
+          {{ t("home.design") }}
         </a-button>
       </a-flex>
 
@@ -50,16 +56,16 @@ const { t } = useLocale()
     AlibabaPuHuiTi,
     -apple-system,
     BlinkMacSystemFont,
-    'Segoe UI',
+    "Segoe UI",
     Roboto,
-    'Helvetica Neue',
+    "Helvetica Neue",
     Arial,
-    'Noto Sans',
+    "Noto Sans",
     sans-serif,
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    'Noto Color Emoji';
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
 }
 
 .antdv-home-preview-banner-typography {

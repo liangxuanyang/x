@@ -1,64 +1,70 @@
 <script setup lang="ts">
-import type { ActionsProps } from '@antdv-next/x'
-import { DeleteOutlined, EditOutlined, RedoOutlined, ShareAltOutlined } from '@antdv-next/icons'
-import { Actions } from '@antdv-next/x'
-import { message, Modal } from 'antdv-next'
-import { h } from 'vue'
+import type { ActionsProps } from "@antdv-next/x";
 
-const items: ActionsProps['items'] = [
+import {
+  DeleteOutlined,
+  EditOutlined,
+  RedoOutlined,
+  ShareAltOutlined,
+} from "@antdv-next/icons";
+import { Actions } from "@antdv-next/x";
+import { message, Modal } from "antdv-next";
+import { h } from "vue";
+
+const items: ActionsProps["items"] = [
   {
-    key: 'retry',
-    label: 'Retry',
+    key: "retry",
+    label: "Retry",
     icon: h(RedoOutlined),
   },
   {
-    key: 'edit',
+    key: "edit",
     icon: h(EditOutlined),
-    label: 'Edit',
+    label: "Edit",
   },
   {
-    key: 'more',
+    key: "more",
     subItems: [
       {
-        key: 'share',
-        label: 'Share',
+        key: "share",
+        label: "Share",
         icon: h(ShareAltOutlined),
       },
       {
-        key: 'import',
-        label: 'Import',
+        key: "import",
+        label: "Import",
       },
       {
-        key: 'delete',
-        label: 'Delete',
+        key: "delete",
+        label: "Delete",
         icon: h(DeleteOutlined),
         danger: true,
         onItemClick: () => {
           Modal.confirm({
-            title: 'Are you sure want to delete?',
-            content: 'Some descriptions',
+            title: "Are you sure want to delete?",
+            content: "Some descriptions",
             onOk() {
-              message.success('Delete successfully')
+              message.success("Delete successfully");
             },
             onCancel() {
-              message.info('Cancel')
+              message.info("Cancel");
             },
-          })
+          });
         },
       },
     ],
   },
   {
-    key: 'clear',
-    label: 'Clear',
+    key: "clear",
+    label: "Clear",
     icon: h(DeleteOutlined),
     danger: true,
   },
-]
+];
 
-const onClick: ActionsProps['onClick'] = ({ keyPath }) => {
-  message.success(`you clicked ${keyPath.join(',')}`)
-}
+const onClick: ActionsProps["onClick"] = ({ keyPath }) => {
+  message.success(`you clicked ${keyPath.join(",")}`);
+};
 </script>
 
 <template>

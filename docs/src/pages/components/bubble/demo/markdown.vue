@@ -1,43 +1,42 @@
 <script setup lang="ts">
-import { RedoOutlined } from '@antdv-next/icons'
-import { Bubble } from '@antdv-next/x'
-import { Button, Space, Typography } from 'antdv-next'
-import MarkdownIt from 'markdown-it'
-import { computed, h, ref } from 'vue'
+import { RedoOutlined } from "@antdv-next/icons";
+import { Bubble } from "@antdv-next/x";
+import { Button, Space, Typography } from "antdv-next";
+import MarkdownIt from "markdown-it";
+import { computed, h, ref } from "vue";
 
 const source = `
 > Render as markdown content to show rich text!
 
 Link: [Ant Design X](https://x.ant.design)
-`.trim()
+`.trim();
 
-const index = ref(source.length)
-const md = new MarkdownIt({ html: false, linkify: true, typographer: true })
+const index = ref(source.length);
+const md = new MarkdownIt({ html: false, linkify: true, typographer: true });
 
-const content = computed(() => source.slice(0, index.value))
+const content = computed(() => source.slice(0, index.value));
 
 function renderMarkdown(value: string) {
-  return h('div', {
+  return h("div", {
     style: {
-      whiteSpace: 'normal',
+      whiteSpace: "normal",
       lineHeight: 1.7,
     },
     innerHTML: md.render(value),
-  })
+  });
 }
 
 function rerender() {
-  index.value = 1
+  index.value = 1;
   const timer = setInterval(() => {
-    index.value += 5
-    if (index.value >= source.length)
-      clearInterval(timer)
-  }, 20)
+    index.value += 5;
+    if (index.value >= source.length) clearInterval(timer);
+  }, 20);
 }
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;" :size="10">
+  <Space direction="vertical" style="display: flex; width: 100%" :size="10">
     <Space>
       <Button type="primary" @click="rerender">
         <RedoOutlined />

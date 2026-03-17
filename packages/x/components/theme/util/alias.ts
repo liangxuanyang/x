@@ -1,42 +1,51 @@
-import type { AliasToken, MapToken, OverrideToken, SeedToken } from '../interface'
+import { FastColor } from "@ant-design/fast-color";
 
-import { FastColor } from '@ant-design/fast-color'
-import seedToken from '../themes/seed'
-import getAlphaColor from './getAlphaColor'
+import type {
+  AliasToken,
+  MapToken,
+  OverrideToken,
+  SeedToken,
+} from "../interface";
 
-type RawMergedToken = MapToken & OverrideToken & { override: Partial<AliasToken> }
+import seedToken from "../themes/seed";
+import getAlphaColor from "./getAlphaColor";
+
+type RawMergedToken = MapToken &
+  OverrideToken & { override: Partial<AliasToken> };
 
 /**
  * Seed (designer) > Derivative (designer) > Alias (developer).
  *
  * Merge seed & derivative & override token and generate alias token for developer.
  */
-export default function formatToken(derivativeToken: RawMergedToken): AliasToken {
-  const { override, ...restToken } = derivativeToken
-  const overrideTokens = { ...override }
+export default function formatToken(
+  derivativeToken: RawMergedToken,
+): AliasToken {
+  const { override, ...restToken } = derivativeToken;
+  const overrideTokens = { ...override };
 
-  Object.keys(seedToken).forEach((token) => {
-    delete overrideTokens[token as keyof SeedToken]
-  })
+  Object.keys(seedToken).forEach(token => {
+    delete overrideTokens[token as keyof SeedToken];
+  });
 
   const mergedToken = {
     ...restToken,
     ...overrideTokens,
-  }
+  };
 
-  const screenXS = 480
-  const screenSM = 576
-  const screenMD = 768
-  const screenLG = 992
-  const screenXL = 1200
-  const screenXXL = 1600
+  const screenXS = 480;
+  const screenSM = 576;
+  const screenMD = 768;
+  const screenLG = 992;
+  const screenXL = 1200;
+  const screenXXL = 1600;
 
   // Motion
   if (mergedToken.motion === false) {
-    const fastDuration = '0s'
-    mergedToken.motionDurationFast = fastDuration
-    mergedToken.motionDurationMid = fastDuration
-    mergedToken.motionDurationSlow = fastDuration
+    const fastDuration = "0s";
+    mergedToken.motionDurationFast = fastDuration;
+    mergedToken.motionDurationMid = fastDuration;
+    mergedToken.motionDurationSlow = fastDuration;
   }
 
   // Generate alias token
@@ -51,7 +60,10 @@ export default function formatToken(derivativeToken: RawMergedToken): AliasToken
 
     // ============== Split ============== //
     colorBorderBg: mergedToken.colorBgContainer,
-    colorSplit: getAlphaColor(mergedToken.colorBorderSecondary, mergedToken.colorBgContainer),
+    colorSplit: getAlphaColor(
+      mergedToken.colorBorderSecondary,
+      mergedToken.colorBgContainer,
+    ),
 
     // ============== Text ============== //
     colorTextPlaceholder: mergedToken.colorTextQuaternary,
@@ -67,8 +79,14 @@ export default function formatToken(derivativeToken: RawMergedToken): AliasToken
     colorIcon: mergedToken.colorTextTertiary,
     colorIconHover: mergedToken.colorText,
 
-    colorErrorOutline: getAlphaColor(mergedToken.colorErrorBg, mergedToken.colorBgContainer),
-    colorWarningOutline: getAlphaColor(mergedToken.colorWarningBg, mergedToken.colorBgContainer),
+    colorErrorOutline: getAlphaColor(
+      mergedToken.colorErrorBg,
+      mergedToken.colorBgContainer,
+    ),
+    colorWarningOutline: getAlphaColor(
+      mergedToken.colorWarningBg,
+      mergedToken.colorBgContainer,
+    ),
 
     // Font
     fontSizeIcon: mergedToken.fontSizeSM,
@@ -87,7 +105,10 @@ export default function formatToken(derivativeToken: RawMergedToken): AliasToken
     controlItemBgActiveHover: mergedToken.colorPrimaryBgHover,
     controlItemBgActiveDisabled: mergedToken.colorFill,
     controlTmpOutline: mergedToken.colorFillQuaternary,
-    controlOutline: getAlphaColor(mergedToken.colorPrimaryBg, mergedToken.colorBgContainer),
+    controlOutline: getAlphaColor(
+      mergedToken.colorPrimaryBg,
+      mergedToken.colorBgContainer,
+    ),
 
     lineType: mergedToken.lineType,
     borderRadius: mergedToken.borderRadius,
@@ -99,9 +120,9 @@ export default function formatToken(derivativeToken: RawMergedToken): AliasToken
 
     opacityLoading: 0.65,
 
-    linkDecoration: 'none',
-    linkHoverDecoration: 'none',
-    linkFocusDecoration: 'none',
+    linkDecoration: "none",
+    linkHoverDecoration: "none",
+    linkFocusDecoration: "none",
 
     controlPaddingHorizontal: 12,
     controlPaddingHorizontalSM: 8,
@@ -164,11 +185,11 @@ export default function formatToken(derivativeToken: RawMergedToken): AliasToken
     screenXXL,
     screenXXLMin: screenXXL,
 
-    boxShadowPopoverArrow: '2px 2px 5px rgba(0, 0, 0, 0.05)',
+    boxShadowPopoverArrow: "2px 2px 5px rgba(0, 0, 0, 0.05)",
     boxShadowCard: `
-      0 1px 2px -2px ${new FastColor('rgba(0, 0, 0, 0.16)').toRgbString()},
-      0 3px 6px 0 ${new FastColor('rgba(0, 0, 0, 0.12)').toRgbString()},
-      0 5px 12px 4px ${new FastColor('rgba(0, 0, 0, 0.09)').toRgbString()}
+      0 1px 2px -2px ${new FastColor("rgba(0, 0, 0, 0.16)").toRgbString()},
+      0 3px 6px 0 ${new FastColor("rgba(0, 0, 0, 0.12)").toRgbString()},
+      0 5px 12px 4px ${new FastColor("rgba(0, 0, 0, 0.09)").toRgbString()}
     `,
     boxShadowDrawerRight: `
       -6px 0 16px 0 rgba(0, 0, 0, 0.08),
@@ -190,14 +211,14 @@ export default function formatToken(derivativeToken: RawMergedToken): AliasToken
       0 -3px 6px -4px rgba(0, 0, 0, 0.12),
       0 -9px 28px 8px rgba(0, 0, 0, 0.05)
     `,
-    boxShadowTabsOverflowLeft: 'inset 10px 0 8px -8px rgba(0, 0, 0, 0.08)',
-    boxShadowTabsOverflowRight: 'inset -10px 0 8px -8px rgba(0, 0, 0, 0.08)',
-    boxShadowTabsOverflowTop: 'inset 0 10px 8px -8px rgba(0, 0, 0, 0.08)',
-    boxShadowTabsOverflowBottom: 'inset 0 -10px 8px -8px rgba(0, 0, 0, 0.08)',
+    boxShadowTabsOverflowLeft: "inset 10px 0 8px -8px rgba(0, 0, 0, 0.08)",
+    boxShadowTabsOverflowRight: "inset -10px 0 8px -8px rgba(0, 0, 0, 0.08)",
+    boxShadowTabsOverflowTop: "inset 0 10px 8px -8px rgba(0, 0, 0, 0.08)",
+    boxShadowTabsOverflowBottom: "inset 0 -10px 8px -8px rgba(0, 0, 0, 0.08)",
 
     // Override AliasToken
     ...overrideTokens,
-  }
+  };
 
-  return aliasToken
+  return aliasToken;
 }

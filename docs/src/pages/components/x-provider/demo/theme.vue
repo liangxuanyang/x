@@ -7,71 +7,75 @@ Modify theme by `theme` prop.
 </docs>
 
 <script setup lang="ts">
-import type { ActionsProps, ConversationsProps, XProviderProps } from '@antdv-next/x'
-import { CommentOutlined, FireOutlined, ReadOutlined } from '@antdv-next/icons'
-import { Actions, Conversations, XProvider } from '@antdv-next/x'
-import { Card, ColorPicker, Flex, Space, Typography } from 'antdv-next'
-import { computed, h, ref } from 'vue'
+import type {
+  ActionsProps,
+  ConversationsProps,
+  XProviderProps,
+} from "@antdv-next/x";
 
-const colorPrimary = ref('#d10eef')
+import { CommentOutlined, FireOutlined, ReadOutlined } from "@antdv-next/icons";
+import { Actions, Conversations, XProvider } from "@antdv-next/x";
+import { Card, ColorPicker, Flex, Space, Typography } from "antdv-next";
+import { computed, h, ref } from "vue";
 
-const theme = computed<XProviderProps['theme']>(() => {
+const colorPrimary = ref("#d10eef");
+
+const theme = computed<XProviderProps["theme"]>(() => {
   return {
     token: {
       colorPrimary: colorPrimary.value,
     },
-  }
-})
+  };
+});
 
-const conversationItems: ConversationsProps['items'] = [
+const conversationItems: ConversationsProps["items"] = [
   {
-    key: '1',
-    label: 'Conversation - 1',
-    icon: h(FireOutlined, { style: { color: '#FF4D4F' } }),
+    key: "1",
+    label: "Conversation - 1",
+    icon: h(FireOutlined, { style: { color: "#FF4D4F" } }),
   },
   {
-    key: '2',
-    label: 'Conversation - 2',
-    icon: h(ReadOutlined, { style: { color: '#1890FF' } }),
+    key: "2",
+    label: "Conversation - 2",
+    icon: h(ReadOutlined, { style: { color: "#1890FF" } }),
   },
-]
+];
 
-const actionItems: ActionsProps['items'] = [
+const actionItems: ActionsProps["items"] = [
   {
-    key: 'feedback',
+    key: "feedback",
     actionRender: () => h(Actions.Feedback),
   },
   {
-    key: 'copy',
-    label: 'copy',
-    actionRender: () => h(Actions.Copy, { text: 'Theme token demo' }),
+    key: "copy",
+    label: "copy",
+    actionRender: () => h(Actions.Copy, { text: "Theme token demo" }),
   },
   {
-    key: 'audio',
-    label: 'audio',
+    key: "audio",
+    label: "audio",
     actionRender: () => h(Actions.Audio),
   },
-]
+];
 
 function onColorChange(value: { toHexString?: () => string } | string) {
-  if (typeof value === 'string') {
-    colorPrimary.value = value
-    return
+  if (typeof value === "string") {
+    colorPrimary.value = value;
+    return;
   }
 
-  const nextColor = value.toHexString?.()
-  if (nextColor)
-    colorPrimary.value = nextColor
+  const nextColor = value.toHexString?.();
+  if (nextColor) colorPrimary.value = nextColor;
 }
 
 function renderTitle() {
   return h(
     Space,
-    { align: 'center' },
+    { align: "center" },
     {
-      default: () => [h(CommentOutlined), h('span', 'Themed Actions')],
+      default: () => [h(CommentOutlined), h("span", "Themed Actions")],
     },
-  )
+  );
 }
 </script>
 

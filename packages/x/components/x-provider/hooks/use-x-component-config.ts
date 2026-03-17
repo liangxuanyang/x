@@ -1,13 +1,17 @@
-import type { XComponentConfig, XComponentsConfig } from '../context'
-import { computed } from 'vue'
-import { useXProviderContextData } from '../context'
+import { computed } from "vue";
 
-export default function useXComponentConfig(component: keyof XComponentsConfig) {
-  const xProviderContext = useXProviderContextData()
+import type { XComponentConfig, XComponentsConfig } from "../context";
+
+import { useXProviderContextData } from "../context";
+
+export default function useXComponentConfig(
+  component: keyof XComponentsConfig,
+) {
+  const xProviderContext = useXProviderContextData();
 
   return computed<XComponentConfig>(() => {
-    const componentConfig = xProviderContext.value?.[component] ?? {}
-    const typedConfig = componentConfig as XComponentConfig
+    const componentConfig = xProviderContext.value?.[component] ?? {};
+    const typedConfig = componentConfig as XComponentConfig;
 
     return {
       style: (typedConfig as any).style,
@@ -15,6 +19,6 @@ export default function useXComponentConfig(component: keyof XComponentsConfig) 
       className: typedConfig.className ?? (typedConfig as any).class,
       classes: typedConfig.classes ?? {},
       shortcutKeys: typedConfig.shortcutKeys ?? {},
-    }
-  })
+    };
+  });
 }

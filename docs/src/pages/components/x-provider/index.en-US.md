@@ -48,23 +48,23 @@ import zhCN from 'antdv-next/dist/locale/zh_CN'
 
 ### Component Config
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| `bubble` | Global configuration for Bubble | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string> }` | - |
-| `conversations` | Global configuration for Conversations | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string>; shortcutKeys?: { creation?: ShortcutKeys<number>; items?: ShortcutKeys<'number'> \| ShortcutKeys<number>[] } }` | - |
-| `actions` | Global configuration for Actions | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string> }` | - |
+| Property        | Description                            | Type                                                                                                                                                                                                                                    | Default |
+| --------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `bubble`        | Global configuration for Bubble        | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string> }`                                                                                                               | -       |
+| `conversations` | Global configuration for Conversations | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string>; shortcutKeys?: { creation?: ShortcutKeys<number>; items?: ShortcutKeys<'number'> \| ShortcutKeys<number>[] } }` | -       |
+| `actions`       | Global configuration for Actions       | `{ style?: CSSProperties; styles?: Record<string, CSSProperties>; className?: string; classes?: Record<string, string> }`                                                                                                               | -       |
 
 #### ShortcutKeys
 
 ```ts
 type SignKeysType = {
-  Ctrl: keyof KeyboardEvent
-  Alt: keyof KeyboardEvent
-  Meta: keyof KeyboardEvent
-  Shift: keyof KeyboardEvent
-}
+  Ctrl: keyof KeyboardEvent;
+  Alt: keyof KeyboardEvent;
+  Meta: keyof KeyboardEvent;
+  Shift: keyof KeyboardEvent;
+};
 
-type ShortcutKeys<CustomKey = number | 'number'> =
+type ShortcutKeys<CustomKey = number | "number"> =
   | [keyof SignKeysType, keyof SignKeysType, CustomKey]
-  | [keyof SignKeysType, CustomKey]
+  | [keyof SignKeysType, CustomKey];
 ```

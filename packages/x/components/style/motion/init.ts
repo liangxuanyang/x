@@ -1,22 +1,28 @@
-import type { CSSObject, Keyframes } from '@antdv-next/cssinjs'
+import type { CSSObject, Keyframes } from "@antdv-next/cssinjs";
 
 function initMotionCommon(duration: string): CSSObject {
   return {
     animationDuration: duration,
-    animationFillMode: 'both',
-  }
+    animationFillMode: "both",
+  };
 }
 
 // FIXME: origin less code seems same as initMotionCommon. Maybe we can safe remove
 function initMotionCommonLeave(duration: string): CSSObject {
   return {
     animationDuration: duration,
-    animationFillMode: 'both',
-  }
+    animationFillMode: "both",
+  };
 }
 
-export function initMotion(motionCls: string, inKeyframes: Keyframes, outKeyframes: Keyframes, duration: string, sameLevel = false): CSSObject {
-  const sameLevelPrefix = sameLevel ? '&' : ''
+export function initMotion(
+  motionCls: string,
+  inKeyframes: Keyframes,
+  outKeyframes: Keyframes,
+  duration: string,
+  sameLevel = false,
+): CSSObject {
+  const sameLevelPrefix = sameLevel ? "&" : "";
 
   return {
     [`
@@ -24,12 +30,12 @@ export function initMotion(motionCls: string, inKeyframes: Keyframes, outKeyfram
       ${sameLevelPrefix}${motionCls}-appear
     `]: {
       ...initMotionCommon(duration),
-      animationPlayState: 'paused',
+      animationPlayState: "paused",
     },
 
     [`${sameLevelPrefix}${motionCls}-leave`]: {
       ...initMotionCommonLeave(duration),
-      animationPlayState: 'paused',
+      animationPlayState: "paused",
     },
 
     [`
@@ -37,13 +43,13 @@ export function initMotion(motionCls: string, inKeyframes: Keyframes, outKeyfram
       ${sameLevelPrefix}${motionCls}-appear${motionCls}-appear-active
     `]: {
       animationName: inKeyframes,
-      animationPlayState: 'running',
+      animationPlayState: "running",
     },
 
     [`${sameLevelPrefix}${motionCls}-leave${motionCls}-leave-active`]: {
       animationName: outKeyframes,
-      animationPlayState: 'running',
-      pointerEvents: 'none',
+      animationPlayState: "running",
+      pointerEvents: "none",
     },
-  }
+  };
 }

@@ -1,11 +1,11 @@
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'XBubbleLoading',
+  name: "XBubbleLoading",
   props: {
     prefixCls: {
       type: String,
-      default: 'antdx-bubble',
+      default: "antdx-bubble",
     },
   },
   setup(props) {
@@ -15,6 +15,6 @@ export default defineComponent({
         <i class={`${props.prefixCls}-dot-item`} />
         <i class={`${props.prefixCls}-dot-item`} />
       </span>
-    )
+    );
   },
-})
+});

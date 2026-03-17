@@ -7,72 +7,73 @@ Components which support `rtl` direction are listed here, you can toggle the dir
 </docs>
 
 <script setup lang="ts">
-import type { ActionsProps, BubbleListProps, ConversationsProps } from '@antdv-next/x'
+import type {
+  ActionsProps,
+  BubbleListProps,
+  ConversationsProps,
+} from "@antdv-next/x";
+import type { ConfigProviderProps } from "antdv-next";
+
 import {
   AlipayCircleOutlined,
   GithubOutlined,
   RobotOutlined,
   UserOutlined,
-} from '@antdv-next/icons'
-import { Actions, Bubble, Conversations, XProvider } from '@antdv-next/x'
-import type { ConfigProviderProps } from 'antdv-next'
-import { Card, Divider, Flex, Radio, Typography } from 'antdv-next'
-import { h, ref } from 'vue'
+} from "@antdv-next/icons";
+import { Actions, Bubble, Conversations, XProvider } from "@antdv-next/x";
+import { Card, Divider, Flex, Radio, Typography } from "antdv-next";
+import { h, ref } from "vue";
 
-const direction = ref<ConfigProviderProps['direction']>('ltr')
+const direction = ref<ConfigProviderProps["direction"]>("ltr");
 
-const conversationItems: ConversationsProps['items'] = [
+const conversationItems: ConversationsProps["items"] = [
   {
-    key: '1',
-    label: 'Conversation - 1',
+    key: "1",
+    label: "Conversation - 1",
     icon: h(GithubOutlined),
   },
   {
-    key: '2',
-    label: 'Conversation - 2',
+    key: "2",
+    label: "Conversation - 2",
     icon: h(AlipayCircleOutlined),
   },
-]
+];
 
-const bubbleItems: BubbleListProps['items'] = [
+const bubbleItems: BubbleListProps["items"] = [
   {
-    key: '1',
-    role: 'user',
-    placement: 'end',
-    content: 'Hello Ant Design X!',
+    key: "1",
+    role: "user",
+    placement: "end",
+    content: "Hello Ant Design X!",
     avatar: h(UserOutlined),
   },
   {
-    key: '2',
-    role: 'ai',
-    content: 'Hello World!',
+    key: "2",
+    role: "ai",
+    content: "Hello World!",
     avatar: h(RobotOutlined),
   },
-]
+];
 
-const actionItems: ActionsProps['items'] = [
+const actionItems: ActionsProps["items"] = [
   {
-    key: 'copy',
-    label: 'copy',
-    actionRender: () => h(Actions.Copy, { text: 'Hello Ant Design X!' }),
+    key: "copy",
+    label: "copy",
+    actionRender: () => h(Actions.Copy, { text: "Hello Ant Design X!" }),
   },
   {
-    key: 'feedback',
+    key: "feedback",
     actionRender: () => h(Actions.Feedback),
   },
-]
+];
 </script>
 
 <template>
   <Flex :gap="12" style="margin-bottom: 16px" align="center">
     <Typography.Text>Direction:</Typography.Text>
     <Radio.Group v-model:value="direction">
-      <Radio.Button value="ltr">
-        LTR
-      </Radio.Button>
-      <Radio.Button value="rtl">
-        RTL
-      </Radio.Button>
+      <Radio.Button value="ltr"> LTR </Radio.Button>
+      <Radio.Button value="rtl"> RTL </Radio.Button>
     </Radio.Group>
   </Flex>
 

@@ -1,23 +1,19 @@
 <script setup lang="ts">
-import { Bubble } from '@antdv-next/x'
-import { Space, Typography } from 'antdv-next'
-import { h } from 'vue'
+import { Bubble } from "@antdv-next/x";
+import { Space, Typography } from "antdv-next";
+import { h } from "vue";
 
-const text = 'Hello, this is a system message'
+const text = "Hello, this is a system message";
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;" :size="14">
+  <Space direction="vertical" style="display: flex; width: 100%" :size="14">
     <Bubble.System :content="text" />
 
     <Bubble.System
       variant="outlined"
       shape="round"
-      :content="[
-        text,
-        ' ',
-        h(Typography.Link, null, { default: () => 'ok' }),
-      ]"
+      :content="[text, ' ', h(Typography.Link, null, { default: () => 'ok' })]"
     />
 
     <Bubble.System

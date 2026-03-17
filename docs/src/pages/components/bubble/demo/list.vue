@@ -7,135 +7,143 @@ import {
   LinkOutlined,
   RedoOutlined,
   UserOutlined,
-} from '@antdv-next/icons'
-import { Actions, Bubble } from '@antdv-next/x'
-import { Avatar, Button, Space, Switch, Typography } from 'antdv-next'
-import { computed, h, ref } from 'vue'
+} from "@antdv-next/icons";
+import { Actions, Bubble } from "@antdv-next/x";
+import { Avatar, Button, Space, Switch, Typography } from "antdv-next";
+import { computed, h, ref } from "vue";
 
-let seed = 0
-const nextKey = () => `bubble_${seed++}`
+let seed = 0;
+const nextKey = () => `bubble_${seed++}`;
 
 function genItem(isAI: boolean, config: Partial<any> = {}): any {
   return {
     key: nextKey(),
-    role: isAI ? 'ai' : 'user',
-    content: `${seed}: ${isAI ? 'Mock AI content '.repeat(8) : 'Mock user content.'}`,
+    role: isAI ? "ai" : "user",
+    content: `${seed}: ${isAI ? "Mock AI content ".repeat(8) : "Mock user content."}`,
     ...config,
-  }
+  };
 }
 
-const listRef = ref<any>(null)
-const enableLocate = ref(true)
-const autoScroll = ref(true)
+const listRef = ref<any>(null);
+const enableLocate = ref(true);
+const autoScroll = ref(true);
 const actionItems = [
   {
-    key: 'retry',
+    key: "retry",
     icon: h(RedoOutlined),
-    label: 'Retry',
+    label: "Retry",
   },
   {
-    key: 'copy',
+    key: "copy",
     icon: h(CopyOutlined),
-    label: 'Copy',
+    label: "Copy",
   },
-]
+];
 const items = ref<any[]>([
-  { key: nextKey(), role: 'system', content: 'Welcome to use Ant Design X' },
+  { key: nextKey(), role: "system", content: "Welcome to use Ant Design X" },
   genItem(false, { typing: false }),
   genItem(true, { typing: false }),
-  { key: nextKey(), role: 'divider', content: 'divider' },
+  { key: nextKey(), role: "divider", content: "divider" },
   genItem(false, { typing: false }),
   genItem(true, { typing: false, loading: true }),
-])
+]);
 
 const role = computed<any>(() => ({
   ai: {
     typing: true,
-    header: 'AI',
-    avatar: () => h(Avatar, { size: 'small', icon: h(AntDesignOutlined) }),
+    header: "AI",
+    avatar: () => h(Avatar, { size: "small", icon: h(AntDesignOutlined) }),
     footer: () => h(Actions, { items: actionItems }),
   },
   user: (data: any) => ({
-    placement: 'end',
+    placement: "end",
     typing: false,
     header: `User-${data.key}`,
-    avatar: () => h(Avatar, { size: 'small', icon: h(UserOutlined) }),
-    footer: () => h(Actions, {
-      items: [
-        data.editable
-          ? { key: 'done', icon: h(CheckOutlined), label: 'done' }
-          : { key: 'edit', icon: h(EditOutlined), label: 'edit' },
-      ],
-      onClick: ({ key }) => {
-        items.value = items.value.map((item) => {
-          if (item.key !== data.key)
-            return item
-          return { ...item, editable: key === 'edit' }
-        })
-      },
-    }),
+    avatar: () => h(Avatar, { size: "small", icon: h(UserOutlined) }),
+    footer: () =>
+      h(Actions, {
+        items: [
+          data.editable
+            ? { key: "done", icon: h(CheckOutlined), label: "done" }
+            : { key: "edit", icon: h(EditOutlined), label: "edit" },
+        ],
+        onClick: ({ key }) => {
+          items.value = items.value.map(item => {
+            if (item.key !== data.key) return item;
+            return { ...item, editable: key === "edit" };
+          });
+        },
+      }),
     onEditConfirm: (content: any) => {
-      items.value = items.value.map((item) => {
-        if (item.key !== data.key)
-          return item
-        return { ...item, content, editable: false }
-      })
+      items.value = items.value.map(item => {
+        if (item.key !== data.key) return item;
+        return { ...item, content, editable: false };
+      });
     },
     onEditCancel: () => {
-      items.value = items.value.map((item) => {
-        if (item.key !== data.key)
-          return item
-        return { ...item, editable: false }
-      })
+      items.value = items.value.map(item => {
+        if (item.key !== data.key) return item;
+        return { ...item, editable: false };
+      });
     },
   }),
   reference: {
-    variant: 'borderless',
-    avatar: () => '',
-    contentRender: (content: { name: string, size?: string }) => h(Typography.Text, { type: 'secondary' }, {
-      default: () => [
-        h(LinkOutlined),
-        'Reference:',
-        content.name,
-        content.size ? ` (${content.size})` : '',
-      ],
-    }),
+    variant: "borderless",
+    avatar: () => "",
+    contentRender: (content: { name: string; size?: string }) =>
+      h(
+        Typography.Text,
+        { type: "secondary" },
+        {
+          default: () => [
+            h(LinkOutlined),
+            "Reference:",
+            content.name,
+            content.size ? ` (${content.size})` : "",
+          ],
+        },
+      ),
   },
-}))
+}));
 
 function scrollTo(option: any) {
-  listRef.value?.scrollTo({ ...option, behavior: 'smooth' })
+  listRef.value?.scrollTo({ ...option, behavior: "smooth" });
 }
 
 function append(item: any) {
-  items.value = [...items.value, item]
+  items.value = [...items.value, item];
 }
 
-function maybeLocate(position: 'top' | 'bottom') {
-  if (enableLocate.value)
-    scrollTo({ top: position })
+function maybeLocate(position: "top" | "bottom") {
+  if (enableLocate.value) scrollTo({ top: position });
 }
 
 function addBubble() {
-  const chatItems = items.value.filter(item => item.role === 'ai' || item.role === 'user')
-  const isAI = !!(chatItems.length % 2)
-  append(genItem(isAI, { typing: { effect: 'fade-in', step: [20, 50] } }))
-  maybeLocate('bottom')
+  const chatItems = items.value.filter(
+    item => item.role === "ai" || item.role === "user",
+  );
+  const isAI = !!(chatItems.length % 2);
+  append(genItem(isAI, { typing: { effect: "fade-in", step: [20, 50] } }));
+  maybeLocate("bottom");
 }
 
 function addDivider() {
-  append({ key: nextKey(), role: 'divider', content: 'Divider' })
-  maybeLocate('bottom')
+  append({ key: nextKey(), role: "divider", content: "Divider" });
+  maybeLocate("bottom");
 }
 
 function addSystem() {
-  append({ key: nextKey(), role: 'system', content: 'This is a system message' })
-  maybeLocate('bottom')
+  append({
+    key: nextKey(),
+    role: "system",
+    content: "This is a system message",
+  });
+  maybeLocate("bottom");
 }
 
 function addToTop() {
-  items.value = [genItem(false), genItem(true), ...items.value]
-  maybeLocate('top')
+  items.value = [genItem(false), genItem(true), ...items.value];
+  maybeLocate("top");
 }
 
 function addWithReference() {
@@ -143,18 +151,18 @@ function addWithReference() {
     ...items.value,
     {
       key: nextKey(),
-      role: 'reference',
-      placement: 'end',
-      content: { name: 'Ant-Design-X.pdf', size: '2.4MB' },
+      role: "reference",
+      placement: "end",
+      content: { name: "Ant-Design-X.pdf", size: "2.4MB" },
     },
     genItem(false),
-  ]
-  maybeLocate('bottom')
+  ];
+  maybeLocate("bottom");
 }
 </script>
 
 <template>
-  <Space direction="vertical" style="display: flex; width: 100%;" :size="16">
+  <Space direction="vertical" style="display: flex; width: 100%" :size="16">
     <Space direction="vertical">
       <Space align="center">
         <Switch v-model:checked="autoScroll" />
@@ -171,24 +179,16 @@ function addWithReference() {
         <RedoOutlined />
         Add Bubble
       </Button>
-      <Button @click="addDivider">
-        Add Divider
-      </Button>
-      <Button @click="addSystem">
-        Add System
-      </Button>
-      <Button @click="addToTop">
-        Add To Top
-      </Button>
-      <Button @click="addWithReference">
-        Add With Ref
-      </Button>
+      <Button @click="addDivider"> Add Divider </Button>
+      <Button @click="addSystem"> Add System </Button>
+      <Button @click="addToTop"> Add To Top </Button>
+      <Button @click="addWithReference"> Add With Ref </Button>
     </Space>
 
-    <div style="display: flex; flex: 1; min-height: 0;">
+    <div style="display: flex; flex: 1; min-height: 0">
       <Bubble.List
         ref="listRef"
-        style="height: 620px;"
+        style="height: 620px"
         :role="role"
         :items="items"
         :auto-scroll="autoScroll"

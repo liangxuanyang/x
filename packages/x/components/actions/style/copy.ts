@@ -1,23 +1,23 @@
-import type { ActionsToken } from '.'
-import type { GenerateStyle } from '../../theme/interface'
+import type { ActionsToken } from ".";
+import type { GenerateStyle } from "../../theme/interface";
 
-const genActionsCopyStyle: GenerateStyle<ActionsToken> = (token) => {
-  const { componentCls } = token
+const genActionsCopyStyle: GenerateStyle<ActionsToken> = token => {
+  const { componentCls } = token;
 
-  const copyCls = `${componentCls}-copy`
+  const copyCls = `${componentCls}-copy`;
   return {
     [componentCls]: {
       [`&${copyCls}-rtl`]: {
-        direction: 'rtl',
+        direction: "rtl",
       },
       [`${copyCls}-copy`]: {
-        fontSize: 'inherit',
+        fontSize: "inherit",
         [`&:not(${componentCls}-copy-success)`]: {
-          color: 'inherit!important',
+          color: "inherit!important",
         },
       },
     },
-  }
-}
+  };
+};
 
-export default genActionsCopyStyle
+export default genActionsCopyStyle;

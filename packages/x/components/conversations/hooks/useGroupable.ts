@@ -1,4 +1,7 @@
-import type { ComputedRef } from 'vue'
+import type { ComputedRef } from "vue";
+
+import { computed } from "vue";
+
 import type {
   Collapsible,
   CollapsibleOptions,
@@ -7,39 +10,37 @@ import type {
   GroupInfoType,
   GroupableProps,
   ItemType,
-} from '../interface'
-import { computed } from 'vue'
+} from "../interface";
 
 interface GroupConfig {
-  label: GroupableProps['label']
-  collapsibleHandle: Collapsible
-  collapsibleOptions: CollapsibleOptions
+  label: GroupableProps["label"];
+  collapsibleHandle: Collapsible;
+  collapsibleOptions: CollapsibleOptions;
 }
 
-type KeyList = { key: string | number, disabled?: boolean }[]
+type KeyList = { key: string | number; disabled?: boolean }[];
 
 export default function useGroupable(
-  groupable: ComputedRef<ConversationsProps['groupable']>,
+  groupable: ComputedRef<ConversationsProps["groupable"]>,
   items: ComputedRef<ItemType[]>,
 ) {
   const groupConfig = computed<GroupConfig>(() => {
     let baseConfig: GroupConfig = {
-      label: '',
+      label: "",
       collapsibleHandle: false,
       collapsibleOptions: {},
-    }
+    };
 
-    if (!groupable.value)
-      return baseConfig
+    if (!groupable.value) return baseConfig;
 
-    if (typeof groupable.value === 'object') {
+    if (typeof groupable.value === "object") {
       const {
         collapsible,
         defaultExpandedKeys,
         expandedKeys,
         onExpand,
         ...other
-      } = groupable.value
+      } = groupable.value;
 
       baseConfig = {
         ...baseConfig,
@@ -50,42 +51,44 @@ export default function useGroupable(
           expandedKeys,
           onExpand,
         },
-      }
+      };
     }
 
-    return baseConfig
-  })
+    return baseConfig;
+  });
 
   const groupList = computed<GroupInfoType[]>(() => {
     return items.value.reduce<GroupInfoType[]>((currentGroupList, item) => {
       if (
-        item?.type === 'divider'
-        || !(item as ConversationItemType).group
-        || !groupable.value
+        item?.type === "divider" ||
+        !(item as ConversationItemType).group ||
+        !groupable.value
       ) {
         currentGroupList.push({
           data: [item],
-          name: '',
-          label: '',
+          name: "",
+          label: "",
           enableGroup: false,
           collapsible: false,
-        })
-        return currentGroupList
+        });
+        return currentGroupList;
       }
 
-      const baseItem = item as Required<ConversationItemType>
-      const foundIndex = currentGroupList.findIndex(group => group.name === baseItem.group)
+      const baseItem = item as Required<ConversationItemType>;
+      const foundIndex = currentGroupList.findIndex(
+        group => group.name === baseItem.group,
+      );
 
       if (foundIndex > -1) {
-        currentGroupList[foundIndex]?.data.push(baseItem)
-        return currentGroupList
+        currentGroupList[foundIndex]?.data.push(baseItem);
+        return currentGroupList;
       }
 
-      const { collapsibleHandle, label } = groupConfig.value
+      const { collapsibleHandle, label } = groupConfig.value;
       const collapsible =
-        typeof collapsibleHandle === 'function'
+        typeof collapsibleHandle === "function"
           ? collapsibleHandle(baseItem.group)
-          : collapsibleHandle
+          : collapsibleHandle;
 
       currentGroupList.push({
         data: [baseItem],
@@ -93,33 +96,35 @@ export default function useGroupable(
         name: baseItem.group,
         label,
         collapsible,
-      })
+      });
 
-      return currentGroupList
-    }, [])
-  })
+      return currentGroupList;
+    }, []);
+  });
 
   const keyList = computed<KeyList>(() => {
     return groupList.value.reduce<KeyList>((currentKeyList, group) => {
-      group.data.forEach((item) => {
-        if (item.type !== 'divider') {
-          const baseItem = item as ConversationItemType
+      group.data.forEach(item => {
+        if (item.type !== "divider") {
+          const baseItem = item as ConversationItemType;
           currentKeyList.push({
             key: baseItem.key,
             disabled: baseItem.disabled,
-          })
+          });
         }
-      })
+      });
 
-      return currentKeyList
-    }, [])
-  })
+      return currentKeyList;
+    }, []);
+  });
 
-  const collapsibleOptions = computed(() => groupConfig.value.collapsibleOptions)
+  const collapsibleOptions = computed(
+    () => groupConfig.value.collapsibleOptions,
+  );
 
   return {
     groupList,
     keyList,
     collapsibleOptions,
-  }
+  };
 }

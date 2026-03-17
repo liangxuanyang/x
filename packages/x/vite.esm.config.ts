@@ -1,34 +1,34 @@
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import { defineConfig } from 'vite'
-import { tsxResolveTypes } from 'vite-plugin-tsx-resolve-types'
-import vueResolveTypes from 'vite-plugin-vue-resolve-types'
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import { tsxResolveTypes } from "vite-plugin-tsx-resolve-types";
+import vueResolveTypes from "vite-plugin-vue-resolve-types";
+import { defineConfig } from "vite-plus";
 
 export default defineConfig({
-  base: './',
+  base: "./",
   plugins: [
     vueResolveTypes(),
     vue(),
     tsxResolveTypes({
-      defaultPropsToUndefined: ['Boolean'],
+      defaultPropsToUndefined: ["Boolean"],
     }),
     vueJsx(),
   ],
   build: {
     rolldownOptions: {
       external: [
-        'vue',
-        'antdv-next',
+        "vue",
+        "antdv-next",
         /^antdv-next\/.*/,
-        '@antdv-next/icons',
+        "@antdv-next/icons",
         /^dayjs/,
       ],
     },
     emptyOutDir: false,
     lib: {
-      entry: 'components/index.ts',
-      formats: ['es'],
-      fileName: () => 'index.esm.js',
+      entry: "components/index.ts",
+      formats: ["es"],
+      fileName: () => "index.esm.js",
     },
   },
-})
+});

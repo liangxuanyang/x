@@ -1,21 +1,21 @@
-import antd from 'antdv-next/locale/en_US'
+import antd from "antdv-next/locale/en_US";
 
 export default {
   antd,
   ui: {
     themeBtn: {
-      system: 'System',
-      light: 'Light',
-      dark: 'Dark',
+      system: "System",
+      light: "Light",
+      dark: "Dark",
     },
     localeBtn: {
-      tooltip1: '中文 / English',
-      tooltip2: 'English / 中文',
+      tooltip1: "中文 / English",
+      tooltip2: "English / 中文",
     },
   },
   home: {
-    desc: 'A community-driven AI design system for Vue. Build intelligent interfaces with ease.',
-    start: 'Get Started',
-    design: 'Get Design',
+    desc: "A community-driven AI design system for Vue. Build intelligent interfaces with ease.",
+    start: "Get Started",
+    design: "Get Design",
   },
-}
+};

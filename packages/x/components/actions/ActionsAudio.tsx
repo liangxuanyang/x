@@ -1,39 +1,38 @@
-import type { ClassValue, CSSProperties, PropType, StyleValue } from 'vue'
-import type { ActionsItemProps } from './ActionsItem'
-import { MutedOutlined, SoundOutlined } from '@antdv-next/icons'
-import {
+import type { ClassValue, CSSProperties, PropType, StyleValue } from "vue";
 
-  defineComponent,
+import { MutedOutlined, SoundOutlined } from "@antdv-next/icons";
+import { defineComponent } from "vue";
 
-} from 'vue'
-import Item, { ACTIONS_ITEM_STATUS } from './ActionsItem'
+import type { ActionsItemProps } from "./ActionsItem";
 
-type SemanticType = 'root' | 'default' | 'running' | 'error' | 'loading'
+import Item, { ACTIONS_ITEM_STATUS } from "./ActionsItem";
+
+type SemanticType = "root" | "default" | "running" | "error" | "loading";
 
 export interface ActionsAudioProps {
-  status?: ActionsItemProps['status']
-  prefixCls?: string
-  rootClassName?: string
-  class?: ClassValue
-  style?: StyleValue
-  classes?: Partial<Record<SemanticType, string>>
-  styles?: Partial<Record<SemanticType, CSSProperties>>
+  status?: ActionsItemProps["status"];
+  prefixCls?: string;
+  rootClassName?: string;
+  class?: ClassValue;
+  style?: StyleValue;
+  classes?: Partial<Record<SemanticType, string>>;
+  styles?: Partial<Record<SemanticType, CSSProperties>>;
 }
 
 const ActionsAudio = defineComponent({
-  name: 'XActionsAudio',
+  name: "XActionsAudio",
   props: {
     status: {
-      type: String as PropType<ActionsItemProps['status']>,
+      type: String as PropType<ActionsItemProps["status"]>,
       default: ACTIONS_ITEM_STATUS.DEFAULT,
     },
     prefixCls: {
       type: String,
-      default: 'antdx-actions',
+      default: "antdx-actions",
     },
     rootClassName: {
       type: String,
-      default: '',
+      default: "",
     },
     class: {
       type: [String, Array, Object] as PropType<ClassValue>,
@@ -53,14 +52,14 @@ const ActionsAudio = defineComponent({
     },
   },
   setup(props, { attrs }) {
-    const audioCls = `${props.prefixCls}-audio`
+    const audioCls = `${props.prefixCls}-audio`;
 
     const statusLabelMap = {
-      [ACTIONS_ITEM_STATUS.LOADING]: 'Loading audio',
-      [ACTIONS_ITEM_STATUS.ERROR]: 'Audio error',
-      [ACTIONS_ITEM_STATUS.RUNNING]: 'Playing audio',
-      [ACTIONS_ITEM_STATUS.DEFAULT]: 'Audio',
-    }
+      [ACTIONS_ITEM_STATUS.LOADING]: "Loading audio",
+      [ACTIONS_ITEM_STATUS.ERROR]: "Audio error",
+      [ACTIONS_ITEM_STATUS.RUNNING]: "Playing audio",
+      [ACTIONS_ITEM_STATUS.DEFAULT]: "Audio",
+    };
 
     return () => (
       <Item
@@ -77,15 +76,15 @@ const ActionsAudio = defineComponent({
           props.status ? `${audioCls}-${props.status}` : undefined,
         ]
           .filter(Boolean)
-          .join(' ')}
+          .join(" ")}
         classes={props.classes}
         status={props.status}
         defaultIcon={<MutedOutlined />}
         runningIcon={<SoundOutlined class={`${audioCls}-recording-icon`} />}
         prefixCls={props.prefixCls}
       />
-    )
+    );
   },
-})
+});
 
-export default ActionsAudio
+export default ActionsAudio;

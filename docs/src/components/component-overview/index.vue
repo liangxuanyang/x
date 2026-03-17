@@ -1,71 +1,74 @@
 <script setup lang="ts">
-import type { ComponentOverviewItem, OverviewLocale } from './data'
-import { SearchOutlined } from '@antdv-next/icons'
-import { computed, ref } from 'vue'
-import { useDarkMode } from '@/composables/use-dark-mode'
-import { useLocale } from '@/composables/use-locale'
-import { componentOverviewItems } from './data'
+import { SearchOutlined } from "@antdv-next/icons";
+import { computed, ref } from "vue";
 
-defineOptions({ name: 'ComponentOverview' })
+import { useDarkMode } from "@/composables/use-dark-mode";
+import { useLocale } from "@/composables/use-locale";
+
+import type { ComponentOverviewItem, OverviewLocale } from "./data";
+
+import { componentOverviewItems } from "./data";
+
+defineOptions({ name: "ComponentOverview" });
 
 interface OverviewGroup {
-  key: string
-  label: string
-  order: number
-  items: ComponentOverviewItem[]
+  key: string;
+  label: string;
+  order: number;
+  items: ComponentOverviewItem[];
 }
 
-const search = ref('')
-const searchBarAffixed = ref(false)
-const { locale } = useLocale()
-const { isDark } = useDarkMode()
+const search = ref("");
+const searchBarAffixed = ref(false);
+const { locale } = useLocale();
+const { isDark } = useDarkMode();
 
 const currentLocale = computed<OverviewLocale>(() =>
-  locale.value === 'en-US' ? 'en-US' : 'zh-CN',
-)
+  locale.value === "en-US" ? "en-US" : "zh-CN",
+);
 
 const uiText = computed(() => {
-  if (currentLocale.value === 'en-US') {
+  if (currentLocale.value === "en-US") {
     return {
-      searchPlaceholder: 'Search components',
-      empty: 'No matching components found',
-    }
+      searchPlaceholder: "Search components",
+      empty: "No matching components found",
+    };
   }
 
   return {
-    searchPlaceholder: '搜索组件',
-    empty: '没有找到匹配的组件',
-  }
-})
+    searchPlaceholder: "搜索组件",
+    empty: "没有找到匹配的组件",
+  };
+});
 
 const groupedItems = computed<OverviewGroup[]>(() => {
-  const keyword = search.value.trim().toLowerCase()
+  const keyword = search.value.trim().toLowerCase();
   const filtered = componentOverviewItems
-    .filter((item) => {
-      if (!keyword) return true
+    .filter(item => {
+      if (!keyword) return true;
 
       const searchableText = [
         item.title,
         item.slug,
-        item.subtitle[currentLocale.value] ?? '',
+        item.subtitle[currentLocale.value] ?? "",
         item.description[currentLocale.value],
         item.group[currentLocale.value],
       ]
-        .join(' ')
-        .toLowerCase()
+        .join(" ")
+        .toLowerCase();
 
-      return searchableText.includes(keyword)
+      return searchableText.includes(keyword);
     })
     .sort((left, right) => {
       if (left.groupOrder !== right.groupOrder)
-        return left.groupOrder - right.groupOrder
-      return left.title.localeCompare(right.title)
-    })
+        return left.groupOrder - right.groupOrder;
+      return left.title.localeCompare(right.title);
+    });
 
-  const groupsMap = new Map<string, OverviewGroup>()
-  filtered.forEach((item) => {
-    const groupLabel = item.group[currentLocale.value]
-    const key = `${item.groupOrder}-${groupLabel}`
+  const groupsMap = new Map<string, OverviewGroup>();
+  filtered.forEach(item => {
+    const groupLabel = item.group[currentLocale.value];
+    const key = `${item.groupOrder}-${groupLabel}`;
 
     if (!groupsMap.has(key)) {
       groupsMap.set(key, {
@@ -73,33 +76,33 @@ const groupedItems = computed<OverviewGroup[]>(() => {
         label: groupLabel,
         order: item.groupOrder,
         items: [],
-      })
+      });
     }
 
-    groupsMap.get(key)!.items.push(item)
-  })
+    groupsMap.get(key)!.items.push(item);
+  });
 
   return Array.from(groupsMap.values()).sort(
     (left, right) => left.order - right.order,
-  )
-})
+  );
+});
 
 function resolveComponentPath(path: string) {
-  return currentLocale.value === 'en-US' ? `${path}-en` : path
+  return currentLocale.value === "en-US" ? `${path}-en` : path;
 }
 
 function normalizeCover(url: string) {
-  return url.replace(/originaloriginal$/, 'original')
+  return url.replace(/originaloriginal$/, "original");
 }
 
 function resolveCover(item: ComponentOverviewItem) {
-  const preferred = isDark.value ? item.coverDark : item.cover
-  const fallback = isDark.value ? item.cover : item.coverDark
-  return normalizeCover(preferred || fallback)
+  const preferred = isDark.value ? item.coverDark : item.cover;
+  const fallback = isDark.value ? item.cover : item.coverDark;
+  return normalizeCover(preferred || fallback);
 }
 
 function handleAffixChange(affixed?: boolean) {
-  searchBarAffixed.value = affixed ?? false
+  searchBarAffixed.value = affixed ?? false;
 }
 </script>
 

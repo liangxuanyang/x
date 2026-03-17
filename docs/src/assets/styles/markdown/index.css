@@ -1,7 +1,7 @@
-@import 'vars.css';
-@import 'vp-doc.css';
-@import 'vp-code.css';
-@import 'custom-block.css';
+@import "vars.css";
+@import "vp-doc.css";
+@import "vp-code.css";
+@import "custom-block.css";
 
 .markdown {
   line-height: 2;
@@ -39,8 +39,8 @@
     hr,
     pre,
     code,
-    div[class*='language-'],
-    [class*='language-'] *,
+    div[class*="language-"],
+    [class*="language-"] *,
     .custom-block,
     .custom-block *,
     .header-anchor
