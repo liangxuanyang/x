@@ -171,6 +171,76 @@ describe("Bubble", () => {
     expect(onTypingComplete).toHaveBeenCalledWith("Hello");
   });
 
+  it("keeps fade-in chunks before finish and folds to plain text after finish", async () => {
+    vi.useFakeTimers();
+    try {
+      const wrapper = mount(Bubble, {
+        props: {
+          content: "Hello",
+          typing: {
+            effect: "fade-in",
+            interval: 200,
+            step: 2,
+          },
+        },
+      });
+
+      await nextTick();
+
+      const fadeInChunk = wrapper.find(".fade-in");
+      expect(fadeInChunk.exists()).toBe(true);
+      expect(wrapper.text()).toBe("He");
+
+      vi.advanceTimersByTime(1000);
+      await nextTick();
+
+      expect(wrapper.find(".fade-in").exists()).toBe(false);
+      expect(wrapper.text()).toBe("Hello");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("does not restart animation when typing config changes without content change", async () => {
+    vi.useFakeTimers();
+    try {
+      const onTyping = vi.fn();
+      const wrapper = mount(Bubble, {
+        props: {
+          content: "Hello",
+          typing: {
+            effect: "fade-in",
+            interval: 200,
+            step: 2,
+          },
+          onTyping,
+        },
+      });
+
+      await nextTick();
+      vi.advanceTimersByTime(1000);
+      await nextTick();
+
+      const callsBeforeSwitch = onTyping.mock.calls.length;
+
+      await wrapper.setProps({
+        typing: {
+          effect: "typing",
+          interval: 50,
+          step: 1,
+        },
+      });
+      await nextTick();
+      vi.advanceTimersByTime(1000);
+      await nextTick();
+
+      expect(onTyping.mock.calls.length).toBe(callsBeforeSwitch);
+      expect(wrapper.text()).toBe("Hello");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("adds info status class", () => {
     const wrapper = mount(Bubble, {
       props: {

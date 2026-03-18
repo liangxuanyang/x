@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import {
-  AntDesignOutlined,
-  CopyOutlined,
-  RedoOutlined,
-} from "@antdv-next/icons";
+import { CopyOutlined, RedoOutlined, UserOutlined } from "@antdv-next/icons";
 import { Actions, Bubble } from "@antdv-next/x";
-import { Avatar, Button, Divider, Space, Switch, Typography } from "antdv-next";
+import { Avatar, Button, Divider, Space, Switch } from "antdv-next";
 import { computed, h, ref } from "vue";
 
 const textA =
@@ -15,9 +11,9 @@ const textB =
 
 const loading = ref(true);
 const content = ref("");
-const effect = ref<"fade-in" | "typing">("fade-in");
+const effect = ref<"fade-in" | "typing" | "custom-typing">("fade-in");
 const keepPrefix = ref(false);
-const count = ref(0);
+
 const actionItems = [
   {
     key: "retry",
@@ -30,12 +26,18 @@ const actionItems = [
     label: "Copy",
   },
 ];
+
 function footer() {
-  return h(Actions, { items: actionItems });
+  return h(Actions, {
+    items: actionItems,
+    onClick: () => {
+      console.log(content.value);
+    },
+  });
 }
 
 const typingConfig = computed(() => ({
-  effect: effect.value,
+  effect: effect.value === "fade-in" ? "fade-in" : "typing",
   interval: 50,
   step: 3,
   keepPrefix: keepPrefix.value,
@@ -43,13 +45,11 @@ const typingConfig = computed(() => ({
 
 function loadA() {
   loading.value = false;
-  count.value = 0;
   content.value = textA;
 }
 
 function loadB() {
   loading.value = false;
-  count.value = 0;
   content.value = textB;
 }
 </script>
@@ -57,7 +57,7 @@ function loadB() {
 <template>
   <Space direction="vertical" style="display: flex; width: 100%" :size="10">
     <Space align="center" wrap>
-      <span>Non-streaming data:</span>
+      <span>非流式数据 / Non-streaming data:</span>
       <Button type="primary" @click="loadA">
         <RedoOutlined />
         load data-1
@@ -69,23 +69,17 @@ function loadB() {
     </Space>
 
     <Space align="center" wrap>
-      <span>Animation effects:</span>
+      <span>动画效果 / Animation effects:</span>
       <a-radio-group v-model:value="effect">
         <a-radio value="fade-in"> fade-in </a-radio>
         <a-radio value="typing"> typing </a-radio>
+        <a-radio value="custom-typing"> typing with 💖 </a-radio>
       </a-radio-group>
     </Space>
 
     <Space align="center">
-      <span>Preserve common prefix:</span>
+      <span>保留公共前缀 / Preserve common prefix:</span>
       <Switch v-model:checked="keepPrefix" />
-    </Space>
-
-    <Space align="center">
-      <span>onTypingComplete trigger times:</span>
-      <Typography.Text type="danger">
-        {{ count }}
-      </Typography.Text>
     </Space>
 
     <Divider style="margin: 4px 0" />
@@ -94,19 +88,21 @@ function loadB() {
       :loading="loading"
       :content="content"
       :typing="typingConfig"
-      header="ADX"
+      :class="{ 'bubble-custom-typing': effect === 'custom-typing' }"
+      :header="h('h5', null, 'ADX')"
       :footer="footer"
-      :avatar="h(Avatar, { size: 'small', icon: h(AntDesignOutlined) })"
+      :avatar="h(Avatar, { icon: h(UserOutlined) })"
       :on-typing="() => console.log('typing')"
-      :on-typing-complete="
-        () => {
-          count += 1;
-          console.log('typing complete');
-        }
-      "
+      :on-typing-complete="() => console.log('typing complete')"
     />
   </Space>
 </template>
+
+<style scoped>
+:deep(.bubble-custom-typing .antdx-bubble-typing:last-child::after) {
+  content: "💖";
+}
+</style>
 
 <docs lang="zh-CN">
 动画效果，仅支持 `content` 是字符串或 `contentRender` 渲染字符串的情况下生效。非字符串场景需要自定义渲染动画。生效时，如果 `content` 不变，而其他配置发生变化，动画不会重新执行。

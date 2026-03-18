@@ -87,18 +87,10 @@ export function useTyping(params: {
     }
   };
 
-  const setDone = () => {
-    if (!renderedData.value.length) return;
-    const last = renderedData.value.at(-1);
-    if (!last || last.done) return;
-    renderedData.value = [
-      ...renderedData.value.slice(0, -1),
-      { ...last, done: true },
-    ];
-  };
-
   const finish = (content: string) => {
-    setDone();
+    renderedData.value = content
+      ? [{ id: toUid(), text: content, done: true }]
+      : [];
     animating.value = false;
     if (!params.streaming()) params.onTypingComplete?.(content);
   };
@@ -160,12 +152,6 @@ export function useTyping(params: {
       renderedData.value = [...renderedData.value, currentEntry];
       params.onTyping?.(renderedText, nextContent);
 
-      if (cfg.effect === "fade-in") {
-        requestAnimationFrame(() => {
-          setDone();
-        });
-      }
-
       timer = setTimeout(stepOnce, cfg.interval);
     };
 
@@ -173,7 +159,7 @@ export function useTyping(params: {
   };
 
   watch(
-    () => [params.content(), animationCfg.value] as const,
+    () => params.content(),
     () => runTyping("content"),
     { immediate: true },
   );
