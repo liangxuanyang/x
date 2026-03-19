@@ -30,7 +30,7 @@ description: 用于 AI 对话场景中展示代码块，提供语法高亮、行
 | language        | 代码语言类型         | `string`                                                                                     | `'text'`  |
 | showLineNumbers | 是否显示行号         | `boolean`                                                                                    | `true`    |
 | showLanguage    | 是否显示语言标识     | `boolean`                                                                                    | `true`    |
-| showThemeToggle | 是否显示主题切换按钮 | `boolean`                                                                                    | `true`    |
+| showThemeToggle | 是否显示主题切换按钮 | `boolean`                                                                                    | `false`   |
 | showCopyButton  | 是否显示复制按钮     | `boolean`                                                                                    | `true`    |
 | theme           | 主题模式             | `'light' \| 'dark'`                                                                          | `'light'` |
 | startLineNumber | 起始行号             | `number`                                                                                     | `1`       |
@@ -61,4 +61,4 @@ description: 用于 AI 对话场景中展示代码块，提供语法高亮、行
 | 名称           | 说明         | 类型     | 默认值                   |
 | -------------- | ------------ | -------- | ------------------------ |
 | codeFontFamily | 代码字体     | `string` | `'Fira Code', monospace` |
-| codeFontSize   | 代码字体大小 | `number` | `13`                     |
+| codeFontSize   | 代码字体大小 | `number` | `14`                     |

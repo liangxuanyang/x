@@ -163,7 +163,7 @@ export const prepareComponentToken: GetDefaultToken<
 > = () => ({
   codeFontFamily:
     "'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', 'Source Code Pro', monospace",
-  codeFontSize: 15,
+  codeFontSize: 14,
 });
 
 export default genStyleHooks<"CodeHighlighter">(

@@ -15,6 +15,7 @@ const theme = ref<"light" | "dark">("light");
   <CodeHighlighter
     :content="code"
     language="typescript"
+    :show-theme-toggle="true"
     :theme="theme"
     @update:theme="theme = $event"
   />

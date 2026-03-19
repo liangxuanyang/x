@@ -30,7 +30,7 @@ description: Display code blocks in AI conversation scenarios with syntax highli
 | language        | Code language                       | `string`                                                                                     | `'text'`  |
 | showLineNumbers | Whether to show line numbers        | `boolean`                                                                                    | `true`    |
 | showLanguage    | Whether to show language label      | `boolean`                                                                                    | `true`    |
-| showThemeToggle | Whether to show theme toggle button | `boolean`                                                                                    | `true`    |
+| showThemeToggle | Whether to show theme toggle button | `boolean`                                                                                    | `false`   |
 | showCopyButton  | Whether to show copy button         | `boolean`                                                                                    | `true`    |
 | theme           | Theme mode                          | `'light' \| 'dark'`                                                                          | `'light'` |
 | startLineNumber | Starting line number                | `number`                                                                                     | `1`       |
@@ -61,4 +61,4 @@ description: Display code blocks in AI conversation scenarios with syntax highli
 | Name           | Description      | Type     | Default                  |
 | -------------- | ---------------- | -------- | ------------------------ |
 | codeFontFamily | Code font family | `string` | `'Fira Code', monospace` |
-| codeFontSize   | Code font size   | `number` | `13`                     |
+| codeFontSize   | Code font size   | `number` | `14`                     |

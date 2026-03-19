@@ -3,7 +3,7 @@ import type { PropType, StyleValue } from "vue";
 import { RightOutlined } from "@antdv-next/icons";
 import { Popover } from "antdv-next";
 import { useConfig } from "antdv-next/dist/config-provider/context";
-import { computed, defineComponent, ref, useAttrs } from "vue";
+import { computed, defineComponent, ref, Transition, useAttrs } from "vue";
 
 import type { SourcesItem, SourcesProps, SourcesRef } from "./interface";
 
@@ -85,6 +85,10 @@ export const XSources = defineComponent({
     const configCtx = useConfig();
     const attrs = useAttrs();
     const contextConfig = useXComponentConfig("sources");
+    const rootPrefixCls = computed(() => configCtx.value.getPrefixCls());
+    const collapseMotionName = computed(
+      () => `${rootPrefixCls.value}-motion-collapse`,
+    );
 
     const rootRef = ref<HTMLDivElement>();
     const [hashId, cssVarCls] = useSourcesStyle(
@@ -109,6 +113,73 @@ export const XSources = defineComponent({
       if (props.expanded === undefined) innerExpanded.value = newExpand;
       props.onExpand?.(newExpand);
       emit("expand", newExpand);
+    };
+
+    const stopTransition = (
+      el: HTMLElement,
+      done?: () => void,
+      timeout = 500,
+    ) => {
+      if (!done) return;
+      let called = false;
+      const clear = () => {
+        if (called) return;
+        called = true;
+        el.removeEventListener("transitionend", onTransitionEnd);
+        done();
+      };
+      const onTransitionEnd = (e: Event) => {
+        if (e.target !== el) return;
+        clear();
+      };
+      el.addEventListener("transitionend", onTransitionEnd);
+      window.setTimeout(clear, timeout);
+    };
+
+    const onBeforeEnter = (el: Element) => {
+      const node = el as HTMLElement;
+      node.classList.add(`${collapseMotionName.value}-legacy`);
+      node.style.height = "0px";
+      node.style.opacity = "0";
+    };
+
+    const onEnter = (el: Element, done: () => void) => {
+      const node = el as HTMLElement;
+      node.classList.add(`${collapseMotionName.value}-legacy-active`);
+      void node.offsetHeight;
+      node.style.height = `${node.scrollHeight}px`;
+      node.style.opacity = "1";
+      stopTransition(node, done);
+    };
+
+    const onAfterEnter = (el: Element) => {
+      const node = el as HTMLElement;
+      node.classList.remove(`${collapseMotionName.value}-legacy`);
+      node.classList.remove(`${collapseMotionName.value}-legacy-active`);
+      node.style.height = "";
+      node.style.opacity = "";
+    };
+
+    const onBeforeLeave = (el: Element) => {
+      const node = el as HTMLElement;
+      node.classList.add(collapseMotionName.value);
+      node.style.height = `${node.scrollHeight}px`;
+      node.style.opacity = "1";
+    };
+
+    const onLeave = (el: Element, done: () => void) => {
+      const node = el as HTMLElement;
+      void node.offsetHeight;
+      node.style.height = "0px";
+      node.style.opacity = "0";
+      stopTransition(node, done);
+    };
+
+    const onAfterLeave = (el: Element) => {
+      const node = el as HTMLElement;
+      node.classList.remove(collapseMotionName.value);
+      node.style.height = "";
+      node.style.opacity = "";
     };
 
     const domAttrs = computed(() => {
@@ -231,16 +302,26 @@ export const XSources = defineComponent({
                 />
                 <span class={`${props.prefixCls}-title`}>{props.title}</span>
               </div>
-              <div
-                class={[
-                  `${props.prefixCls}-content`,
-                  props.classes?.content,
-                  { [`${props.prefixCls}-content-hidden`]: !isExpand.value },
-                ]}
-                style={props.styles?.content}
+              <Transition
+                onBeforeEnter={onBeforeEnter}
+                onEnter={onEnter}
+                onAfterEnter={onAfterEnter}
+                onBeforeLeave={onBeforeLeave}
+                onLeave={onLeave}
+                onAfterLeave={onAfterLeave}
               >
-                {ContentNode}
-              </div>
+                {isExpand.value ? (
+                  <div
+                    class={[
+                      `${props.prefixCls}-content`,
+                      props.classes?.content,
+                    ]}
+                    style={props.styles?.content}
+                  >
+                    {ContentNode}
+                  </div>
+                ) : null}
+              </Transition>
             </>
           )}
         </div>

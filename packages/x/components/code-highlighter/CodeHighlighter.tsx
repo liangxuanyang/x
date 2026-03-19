@@ -66,7 +66,7 @@ export const XCodeHighlighter = defineComponent({
     },
     showThemeToggle: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     showCopyButton: {
       type: Boolean,
