@@ -12,12 +12,12 @@ describe("ActionsCopy", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-actions-copy").exists()).toBe(true);
+    expect(wrapper.find(".antd-actions-copy").exists()).toBe(true);
   });
 
   it("renders with no text", () => {
     const wrapper = mount(ActionsCopy);
-    expect(wrapper.find(".antdx-actions-copy").exists()).toBe(true);
+    expect(wrapper.find(".antd-actions-copy").exists()).toBe(true);
   });
 
   it("accepts icon prop", () => {
@@ -28,7 +28,7 @@ describe("ActionsCopy", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-actions-copy").exists()).toBe(true);
+    expect(wrapper.find(".antd-actions-copy").exists()).toBe(true);
   });
 
   it("supports custom class and prefixCls", () => {

@@ -37,7 +37,7 @@ const File = defineComponent({
     },
     prefixCls: {
       type: String,
-      default: "antdx-file-card",
+      default: "antd-file-card",
     },
     name: {
       type: String,

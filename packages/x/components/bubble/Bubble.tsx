@@ -34,7 +34,7 @@ export const XBubble = defineComponent({
   props: {
     prefixCls: {
       type: String,
-      default: "antdx-bubble",
+      default: "antd-bubble",
     },
     rootClassName: {
       type: String,

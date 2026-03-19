@@ -134,7 +134,7 @@ export const XConversations = defineComponent({
     },
     prefixCls: {
       type: String,
-      default: "antdx-conversations",
+      default: "antd-conversations",
     },
     rootClassName: {
       type: String,

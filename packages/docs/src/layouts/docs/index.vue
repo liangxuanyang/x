@@ -18,7 +18,7 @@ const useStyles = createStyles(({ token }) => ({
     minHeight: "100vh",
     background: token.colorBgLayout,
     transition: `background-color ${token.motionDurationSlow}`,
-    ".antdx-doc-layout-main": {
+    ".antd-doc-layout-main": {
       maxWidth: 1440,
       margin: "0 auto",
       padding: "24px 24px 40px",
@@ -26,7 +26,7 @@ const useStyles = createStyles(({ token }) => ({
       gridTemplateColumns: "240px minmax(0, 1fr) 200px",
       gap: 40,
     },
-    ".antdx-doc-layout-sider": {
+    ".antd-doc-layout-sider": {
       position: "sticky",
       top: 88,
       alignSelf: "start",
@@ -36,16 +36,16 @@ const useStyles = createStyles(({ token }) => ({
       scrollbarGutter: "stable",
       paddingRight: 8,
     },
-    ".antdx-doc-layout-sider:hover": {
+    ".antd-doc-layout-sider:hover": {
       overflowY: "auto",
     },
-    ".antdx-doc-layout-sider-title": {
+    ".antd-doc-layout-sider-title": {
       margin: "0 0 12px",
       fontSize: 16,
       fontWeight: 600,
       color: token.colorText,
     },
-    ".antdx-doc-layout-sider .ant-menu": {
+    ".antd-doc-layout-sider .ant-menu": {
       minHeight: "100%",
       paddingTop: 0,
       paddingBottom: `${token.marginXXL}px !important`,
@@ -53,14 +53,14 @@ const useStyles = createStyles(({ token }) => ({
       borderInlineEnd: "none",
       background: "transparent !important",
     },
-    ".antdx-doc-layout-content": {
+    ".antd-doc-layout-content": {
       minWidth: 0,
       padding: 0,
     },
-    ".antdx-doc-layout-content-header": {
+    ".antd-doc-layout-content-header": {
       marginBottom: 24,
     },
-    ".antdx-doc-layout-content-title": {
+    ".antd-doc-layout-content-title": {
       margin: 0,
       fontSize: 34,
       lineHeight: 1.2,
@@ -68,17 +68,17 @@ const useStyles = createStyles(({ token }) => ({
       alignItems: "baseline",
       gap: 12,
     },
-    ".antdx-doc-layout-content-subtitle": {
+    ".antd-doc-layout-content-subtitle": {
       fontSize: 16,
       color: token.colorTextTertiary,
       fontWeight: 500,
     },
-    ".antdx-doc-layout-content-description": {
+    ".antd-doc-layout-content-description": {
       margin: "12px 0 0",
       fontSize: 16,
       color: token.colorTextSecondary,
     },
-    ".antdx-doc-layout-anchor": {
+    ".antd-doc-layout-anchor": {
       position: "sticky",
       top: 88,
       alignSelf: "start",
@@ -88,27 +88,27 @@ const useStyles = createStyles(({ token }) => ({
       scrollbarGutter: "stable",
       paddingLeft: 8,
     },
-    ".antdx-doc-layout-anchor .ant-anchor-wrapper": {
+    ".antd-doc-layout-anchor .ant-anchor-wrapper": {
       background: "transparent",
     },
     "@media (max-width: 1280px)": {
-      ".antdx-doc-layout-main": {
+      ".antd-doc-layout-main": {
         gridTemplateColumns: "220px minmax(0, 1fr)",
         gap: 32,
       },
-      ".antdx-doc-layout-anchor": {
+      ".antd-doc-layout-anchor": {
         display: "none",
       },
     },
     "@media (max-width: 900px)": {
-      ".antdx-doc-layout-main": {
+      ".antd-doc-layout-main": {
         gridTemplateColumns: "minmax(0, 1fr)",
         padding: 16,
       },
-      ".antdx-doc-layout-sider": {
+      ".antd-doc-layout-sider": {
         display: "none",
       },
-      ".antdx-doc-layout-content-title": {
+      ".antd-doc-layout-content-title": {
         fontSize: 28,
       },
     },
@@ -281,12 +281,12 @@ const handleSiderMenuClick: MenuEmits["click"] = info => {
 </script>
 
 <template>
-  <div class="antdx-doc-layout" :class="styleState.styles.root">
+  <div class="antd-doc-layout" :class="styleState.styles.root">
     <DocHeader />
 
-    <main class="antdx-doc-layout-main">
-      <aside v-if="siderItems.length" class="antdx-doc-layout-sider">
-        <h2 class="antdx-doc-layout-sider-title">
+    <main class="antd-doc-layout-main">
+      <aside v-if="siderItems.length" class="antd-doc-layout-sider">
+        <h2 class="antd-doc-layout-sider-title">
           {{ sectionTitle }}
         </h2>
         <a-menu
@@ -298,28 +298,28 @@ const handleSiderMenuClick: MenuEmits["click"] = info => {
         />
       </aside>
 
-      <article class="antdx-doc-layout-content">
+      <article class="antd-doc-layout-content">
         <header
           v-if="
             pageData?.frontmatter?.title || pageData?.frontmatter?.description
           "
-          class="antdx-doc-layout-content-header"
+          class="antd-doc-layout-content-header"
         >
           <h1
             v-if="pageData?.frontmatter?.title"
-            class="antdx-doc-layout-content-title"
+            class="antd-doc-layout-content-title"
           >
             {{ pageData?.frontmatter?.title }}
             <small
               v-if="pageData?.frontmatter?.subtitle"
-              class="antdx-doc-layout-content-subtitle"
+              class="antd-doc-layout-content-subtitle"
             >
               {{ pageData?.frontmatter?.subtitle }}
             </small>
           </h1>
           <p
             v-if="pageData?.frontmatter?.description"
-            class="antdx-doc-layout-content-description"
+            class="antd-doc-layout-content-description"
           >
             {{ pageData?.frontmatter?.description }}
           </p>
@@ -327,7 +327,7 @@ const handleSiderMenuClick: MenuEmits["click"] = info => {
         <router-view />
       </article>
 
-      <aside v-if="hasAnchors" class="antdx-doc-layout-anchor">
+      <aside v-if="hasAnchors" class="antd-doc-layout-anchor">
         <a-anchor :items="anchorItems" :offset-top="88" :affix="false" />
       </aside>
     </main>

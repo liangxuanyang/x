@@ -20,7 +20,7 @@ const ImageLoading = defineComponent({
   props: {
     prefixCls: {
       type: String,
-      default: "antdx-file-card",
+      default: "antd-file-card",
     },
     style: {
       type: Object as PropType<CSSProperties>,

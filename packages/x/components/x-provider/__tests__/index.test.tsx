@@ -42,7 +42,7 @@ describe("XProvider", () => {
 
     expect(wrapper.find(".test-conversations").exists()).toBe(true);
 
-    await wrapper.get(".antdx-conversations-creation").trigger("click");
+    await wrapper.get(".antd-conversations-creation").trigger("click");
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 

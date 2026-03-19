@@ -46,7 +46,7 @@ const List = defineComponent({
   props: {
     prefixCls: {
       type: String,
-      default: "antdx-file-card",
+      default: "antd-file-card",
     },
     class: {
       type: [String, Array, Object] as PropType<ClassValue>,

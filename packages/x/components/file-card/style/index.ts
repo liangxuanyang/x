@@ -1,3 +1,4 @@
+import { unit } from "@antdv-next/cssinjs";
 import { mergeToken } from "@antdv-next/cssinjs/cssinjs-utils";
 
 import type {
@@ -43,7 +44,7 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = token => {
       [`${componentCls}-file`]: {
         display: "flex",
         alignItems: "center",
-        padding: `${paddingSM}px ${padding}px`,
+        padding: `${unit(paddingSM)} ${unit(padding)}`,
         backgroundColor: colorFillTertiary,
         borderRadius: token.borderRadius,
         position: "relative",
@@ -117,14 +118,14 @@ const genFileCardStyle: GenerateStyle<FileCardToken> = token => {
             overflow: "hidden",
             whiteSpace: "nowrap",
             textOverflow: "ellipsis",
-            padding: `0 ${paddingXXS}px`,
+            padding: `0 ${unit(paddingXXS)}`,
           },
         },
       },
 
       [`${componentCls}-file-small`]: {
         borderRadius: token.borderRadius,
-        padding: `0 ${paddingSM}px`,
+        padding: `0 ${unit(paddingSM)}`,
         height: controlHeightLG,
 
         [`${componentCls}-file-icon`]: {

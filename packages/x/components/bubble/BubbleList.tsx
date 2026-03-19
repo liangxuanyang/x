@@ -36,7 +36,7 @@ export const XBubbleList = defineComponent({
   props: {
     prefixCls: {
       type: String,
-      default: "antdx-bubble",
+      default: "antd-bubble",
     },
     styles: {
       type: Object as PropType<BubbleListProps["styles"]>,

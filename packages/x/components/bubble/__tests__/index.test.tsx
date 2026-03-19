@@ -65,7 +65,7 @@ describe("Bubble", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-bubble-footer-start").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-footer-start").exists()).toBe(true);
   });
 
   it("shows loading state and custom loading render", () => {
@@ -76,10 +76,10 @@ describe("Bubble", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-bubble-loading").exists()).toBe(true);
-    expect(wrapper.find(".antdx-bubble-dot").exists()).toBe(true);
-    expect(wrapper.find(".antdx-bubble-body").exists()).toBe(false);
-    expect(wrapper.find(".antdx-bubble-content").exists()).toBe(false);
+    expect(wrapper.find(".antd-bubble-loading").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-dot").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-body").exists()).toBe(false);
+    expect(wrapper.find(".antd-bubble-content").exists()).toBe(false);
 
     const customLoading = mount(Bubble, {
       props: {
@@ -91,8 +91,8 @@ describe("Bubble", () => {
     });
 
     expect(customLoading.find(".custom-loading").exists()).toBe(true);
-    expect(customLoading.find(".antdx-bubble-body").exists()).toBe(false);
-    expect(customLoading.find(".antdx-bubble-content").exists()).toBe(false);
+    expect(customLoading.find(".antd-bubble-body").exists()).toBe(false);
+    expect(customLoading.find(".antd-bubble-content").exists()).toBe(false);
   });
 
   it("applies variants and shapes", async () => {
@@ -104,21 +104,19 @@ describe("Bubble", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-bubble-content-filled").exists()).toBe(true);
-    expect(wrapper.find(".antdx-bubble-content-default").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-content-filled").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-content-default").exists()).toBe(true);
 
     await wrapper.setProps({ variant: "outlined", shape: "round" });
-    expect(wrapper.find(".antdx-bubble-content-outlined").exists()).toBe(true);
-    expect(wrapper.find(".antdx-bubble-content-round").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-content-outlined").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-content-round").exists()).toBe(true);
 
     await wrapper.setProps({ variant: "shadow", shape: "corner" });
-    expect(wrapper.find(".antdx-bubble-content-shadow").exists()).toBe(true);
-    expect(wrapper.find(".antdx-bubble-content-corner").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-content-shadow").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-content-corner").exists()).toBe(true);
 
     await wrapper.setProps({ variant: "borderless" });
-    expect(wrapper.find(".antdx-bubble-content-borderless").exists()).toBe(
-      true,
-    );
+    expect(wrapper.find(".antd-bubble-content-borderless").exists()).toBe(true);
   });
 
   it("applies placement", async () => {
@@ -129,10 +127,10 @@ describe("Bubble", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-bubble-start").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-start").exists()).toBe(true);
 
     await wrapper.setProps({ placement: "end" });
-    expect(wrapper.find(".antdx-bubble-end").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-end").exists()).toBe(true);
   });
 
   it("supports contentRender with object content", () => {
@@ -272,7 +270,7 @@ describe("Bubble", () => {
       await nextTick();
 
       expect(onTyping.mock.calls.length).toBe(callsBeforeSwitch);
-      expect(wrapper.find(".antdx-bubble-fade-in").exists()).toBe(true);
+      expect(wrapper.find(".antd-bubble-fade-in").exists()).toBe(true);
 
       vi.advanceTimersByTime(200);
       await nextTick();
@@ -323,7 +321,7 @@ describe("Bubble", () => {
       });
       await nextTick();
 
-      expect(wrapper.find(".antdx-bubble-fade-in").exists()).toBe(true);
+      expect(wrapper.find(".antd-bubble-fade-in").exists()).toBe(true);
       expect(wrapper.find(".fade-in").exists()).toBe(true);
     } finally {
       vi.useRealTimers();
@@ -372,7 +370,7 @@ describe("Bubble", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-bubble-error").exists()).toBe(true);
+    expect(wrapper.find(".antd-bubble-error").exists()).toBe(true);
   });
 
   it("throws for non-string content in editable mode", () => {
@@ -396,7 +394,7 @@ describe("Bubble", () => {
     });
 
     expect(
-      wrapper.find(".antdx-bubble-content-editing [contenteditable]").exists(),
+      wrapper.find(".antd-bubble-content-editing [contenteditable]").exists(),
     ).toBe(true);
     expect(wrapper.find("textarea").exists()).toBe(false);
   });
@@ -415,15 +413,15 @@ describe("Bubble", () => {
     });
 
     const editable = wrapper.find(
-      ".antdx-bubble-content-editing [contenteditable]",
+      ".antd-bubble-content-editing [contenteditable]",
     );
     (editable.element as HTMLDivElement).textContent = "Changed text";
 
     await wrapper
-      .find(".antdx-bubble-editing-opts .ant-btn-primary")
+      .find(".antd-bubble-editing-opts .ant-btn-primary")
       .trigger("click");
     await wrapper
-      .find(".antdx-bubble-editing-opts .ant-btn-text")
+      .find(".antd-bubble-editing-opts .ant-btn-text")
       .trigger("click");
 
     expect(onEditConfirm).toHaveBeenCalledWith("Changed text");
@@ -443,13 +441,13 @@ describe("Bubble", () => {
 
     expect(
       wrapper
-        .find(".antdx-bubble-editing-opts .ant-btn-primary")
+        .find(".antd-bubble-editing-opts .ant-btn-primary")
         .text()
         .replace(/\s+/g, ""),
     ).toBe("确认");
     expect(
       wrapper
-        .find(".antdx-bubble-editing-opts .ant-btn-text")
+        .find(".antd-bubble-editing-opts .ant-btn-text")
         .text()
         .replace(/\s+/g, ""),
     ).toBe("取消");
@@ -478,13 +476,13 @@ describe("Bubble", () => {
 
     expect(
       wrapper
-        .find(".antdx-bubble-editing-opts .ant-btn-primary")
+        .find(".antd-bubble-editing-opts .ant-btn-primary")
         .text()
         .replace(/\s+/g, ""),
     ).toBe("保存");
     expect(
       wrapper
-        .find(".antdx-bubble-editing-opts .ant-btn-text")
+        .find(".antd-bubble-editing-opts .ant-btn-text")
         .text()
         .replace(/\s+/g, ""),
     ).toBe("放弃");

@@ -15,7 +15,7 @@ export const XBubbleSystem = defineComponent({
   props: {
     prefixCls: {
       type: String,
-      default: "antdx-bubble",
+      default: "antd-bubble",
     },
     content: {
       type: [String, Number, Object, Array] as PropType<BubbleContentType>,

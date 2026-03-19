@@ -12,8 +12,8 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-file-name-prefix").text()).toBe("");
-    expect(wrapper.find(".antdx-file-card-file-name-suffix").text()).toBe(
+    expect(wrapper.find(".antd-file-card-file-name-prefix").text()).toBe("");
+    expect(wrapper.find(".antd-file-card-file-name-suffix").text()).toBe(
       ".hiddenfile",
     );
   });
@@ -26,7 +26,7 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-file-description").text()).toBe(
+    expect(wrapper.find(".antd-file-card-file-description").text()).toBe(
       "1 KB",
     );
   });
@@ -41,7 +41,7 @@ describe("FileCard", () => {
       },
     });
 
-    await wrapper.find(".antdx-file-card-file").trigger("click");
+    await wrapper.find(".antd-file-card-file").trigger("click");
     expect(onClick).toHaveBeenCalledTimes(1);
     expect(onClick).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -62,7 +62,7 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-file-description").text()).toBe(
+    expect(wrapper.find(".antd-file-card-file-description").text()).toBe(
       "Custom desc",
     );
   });
@@ -76,7 +76,7 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-file-description").exists()).toBe(
+    expect(wrapper.find(".antd-file-card-file-description").exists()).toBe(
       false,
     );
   });
@@ -90,7 +90,7 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-image").exists()).toBe(true);
+    expect(wrapper.find(".antd-file-card-image").exists()).toBe(true);
   });
 
   it("renders audio type", () => {
@@ -102,7 +102,7 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-audio").exists()).toBe(true);
+    expect(wrapper.find(".antd-file-card-audio").exists()).toBe(true);
   });
 
   it("renders video type", () => {
@@ -114,7 +114,7 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-video").exists()).toBe(true);
+    expect(wrapper.find(".antd-file-card-video").exists()).toBe(true);
   });
 
   it("renders default file type", () => {
@@ -125,7 +125,7 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-file").exists()).toBe(true);
+    expect(wrapper.find(".antd-file-card-file").exists()).toBe(true);
   });
 
   it("supports loading state", () => {
@@ -137,7 +137,7 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-loading").exists()).toBe(true);
+    expect(wrapper.find(".antd-file-card-loading").exists()).toBe(true);
   });
 
   it("supports custom semantic class", () => {
@@ -150,7 +150,7 @@ describe("FileCard", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-file-name").classes()).toContain(
+    expect(wrapper.find(".antd-file-card-file-name").classes()).toContain(
       "custom-name",
     );
   });
@@ -200,8 +200,8 @@ describe("FileCard.List", () => {
       },
     });
 
-    expect(wrapper.find(".antdx-file-card-list").exists()).toBe(true);
-    expect(wrapper.findAll(".antdx-file-card")).toHaveLength(2);
+    expect(wrapper.find(".antd-file-card-list").exists()).toBe(true);
+    expect(wrapper.findAll(".antd-file-card")).toHaveLength(2);
   });
 
   it("supports removable", async () => {
@@ -214,11 +214,11 @@ describe("FileCard.List", () => {
       },
     });
 
-    await wrapper.find(".antdx-file-card-list-remove").trigger("click");
+    await wrapper.find(".antd-file-card-list-remove").trigger("click");
     await nextTick();
 
     expect(onRemove).toHaveBeenCalledTimes(1);
-    expect(wrapper.findAll(".antdx-file-card")).toHaveLength(0);
+    expect(wrapper.findAll(".antd-file-card")).toHaveLength(0);
   });
 
   it("supports overflow styles", () => {
@@ -235,7 +235,7 @@ describe("FileCard.List", () => {
       });
 
       expect(
-        wrapper.find(`.antdx-file-card-list-overflow-${overflow}`).exists(),
+        wrapper.find(`.antd-file-card-list-overflow-${overflow}`).exists(),
       ).toBe(true);
     });
   });
@@ -258,7 +258,7 @@ describe("FileCard.List", () => {
       },
     });
 
-    const imageCard = wrapper.find(".antdx-file-card-image");
+    const imageCard = wrapper.find(".antd-file-card-image");
     expect(imageCard.attributes("style")).toContain("width: 230px;");
     expect(imageCard.attributes("style")).toContain("height: 230px;");
   });

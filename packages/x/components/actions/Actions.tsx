@@ -49,7 +49,7 @@ export const XActions = defineComponent({
     },
     prefixCls: {
       type: String,
-      default: "antdx-actions",
+      default: "antd-actions",
     },
     rootClassName: {
       type: String,
