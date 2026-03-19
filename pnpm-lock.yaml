@@ -98,7 +98,13 @@ catalogs:
     '@mdit-vue/types':
       specifier: ^2.1.4
       version: 2.1.4
+    '@shikijs/langs':
+      specifier: ^3.13.0
+      version: 3.23.0
     '@shikijs/markdown-it':
+      specifier: ^3.13.0
+      version: 3.23.0
+    '@shikijs/themes':
       specifier: ^3.13.0
       version: 3.23.0
     '@shikijs/transformers':
@@ -349,9 +355,15 @@ importers:
       '@mdit-vue/types':
         specifier: catalog:docs
         version: 2.1.4
+      '@shikijs/langs':
+        specifier: catalog:docs
+        version: 3.23.0
       '@shikijs/markdown-it':
         specifier: catalog:docs
         version: 3.23.0(markdown-it-async@2.2.0)
+      '@shikijs/themes':
+        specifier: catalog:docs
+        version: 3.23.0
       '@shikijs/transformers':
         specifier: catalog:docs
         version: 3.23.0
