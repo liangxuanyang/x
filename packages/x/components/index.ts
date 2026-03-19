@@ -14,6 +14,7 @@ import Bubble, {
   XBubbleList,
   XBubbleSystem,
 } from "./bubble";
+import CodeHighlighter, { XCodeHighlighter } from "./code-highlighter";
 import Conversations, {
   ConversationsCreation,
   XConversations,
@@ -26,6 +27,7 @@ const components = [
   XBubbleList,
   XBubbleSystem,
   XBubbleDivider,
+  XCodeHighlighter,
   XConversations,
   ConversationsCreation,
   XProvider,
@@ -54,6 +56,7 @@ export {
   ActionsFeedback,
   ActionsItem,
   Bubble,
+  CodeHighlighter,
   Conversations,
   ConversationsCreation,
   FileCard,
@@ -65,6 +68,7 @@ export {
   XBubbleDivider,
   XBubbleList,
   XBubbleSystem,
+  XCodeHighlighter,
   XConversations,
 };
 
@@ -98,5 +102,11 @@ export type {
   GroupableProps,
   ShortcutKeys,
 } from "./conversations";
+
+export type {
+  CodeHighlighterProps,
+  CodeHighlighterRef,
+  CodeHighlighterSemanticType,
+} from "./code-highlighter";
 
 export type { XProviderProps } from "./x-provider";
